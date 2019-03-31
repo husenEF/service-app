@@ -14,3 +14,13 @@
 $router->get('/', function () use ($router) {
     return $router->app->version();
 });
+$router->get("/key", function () { 
+    return str_random(32);
+});
+
+$router->get("/register","AuthController@registerForm");
+
+$router->post("/register","AuthController@register");
+$router->post("/login","AuthController@login");
+
+$router->get("/user/{id}","UserController@show");
