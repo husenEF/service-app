@@ -14,13 +14,22 @@
 $router->get('/', function () use ($router) {
     return $router->app->version();
 });
-$router->get("/key", function () { 
+$router->get("/key", function () {
     return str_random(32);
 });
 
-$router->get("/register","AuthController@registerForm");
+$router->get("/register", "AuthController@registerForm");
 
-$router->post("/register","AuthController@register");
-$router->post("/login","AuthController@login");
+$router->post("/register", "AuthController@register");
+$router->post("/login", "AuthController@login");
 
-$router->get("/user/{id}","UserController@show");
+$router->group(['prefix' => 'user'], function () use ($router) {
+    //post
+    $router->post("/create", "UserController@create");
+    //puth
+    $router->put("/update/{id}", "UserController@update");
+    //get
+    $router->get("/detail/{id}", "UserController@show");
+    //delete
+    $router->delete("/delete/{id}", "UserController@delete");
+});
