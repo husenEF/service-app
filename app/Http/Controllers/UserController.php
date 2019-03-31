@@ -75,4 +75,41 @@ class UserController extends Controller
             );
         }
     }
+
+    public function update(Request $request, $id)
+    {
+        $roles = ["name" => 'required'];
+        if (isset($request->password)) {
+            $roles["password"] = 'required|min:6';
+        }
+
+        $this->validate($request, $roles);
+
+        // dd($roles);
+        $user = User::find($id);
+        $user->name = $request->input("name");
+        if (isset($request->password)) {
+            $user->password = Hash::make($request->password);
+        }
+        if ($user->save()) {
+            return response()->json(
+                [
+                    'success' => true,
+                    'message' => 'Update User Success!',
+                    'data' => $user,
+                    "debug" => $request->all()
+                ],
+                201
+            );
+        } else {
+            return response()->json(
+                [
+                    'success' => false,
+                    'message' => 'Update User gagal!',
+                    'data' => ""
+                ],
+                400
+            );
+        }
+    }
 }
