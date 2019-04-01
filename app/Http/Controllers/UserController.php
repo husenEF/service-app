@@ -43,18 +43,21 @@ class UserController extends Controller
         $this->validate($request, [
             'name' => "required",
             "email" => 'required|email|unique:users',
-            'password' => 'required|min:6'
+            'password' => 'required|min:6',
+            'roles' => 'required'
         ]);
 
         $name = $request->input('name');
         $email = $request->input('email');
         $password = Hash::make($request->input('password'));
+        $roles = $request->input("roles");
 
         $user = new User();
         $user->name = $name;
         $user->email = $email;
         $user->password = $password;
-
+        $user->roles = $roles;
+        // dd($request->all());
         if ($user->save()) {
             return response()->json(
                 [
@@ -78,7 +81,10 @@ class UserController extends Controller
 
     public function update(Request $request, $id)
     {
-        $roles = ["name" => 'required'];
+        $roles = [
+            "name" => 'required',
+            "roles" => "required"
+        ];
         if (isset($request->password)) {
             $roles["password"] = 'required|min:6';
         }
@@ -87,7 +93,10 @@ class UserController extends Controller
 
         // dd($roles);
         $user = User::find($id);
+
         $user->name = $request->input("name");
+        $user->roles = ($id == 1) ? 'admin' : $request->input("roles");
+
         if (isset($request->password)) {
             $user->password = Hash::make($request->password);
         }
@@ -115,6 +124,16 @@ class UserController extends Controller
 
     public function delete($id)
     {
+        if ($id == 1) {
+            return response()->json(
+                [
+                    'success' => false,
+                    'message' => 'Delete User gagal!',
+                    'data' => ""
+                ],
+                404
+            );
+        }
         $user = User::find($id);
         if (!$user) {
             return response()->json(
@@ -126,6 +145,8 @@ class UserController extends Controller
                 404
             );
         }
+
+
         if ($user->delete()) {
             return response()->json(
                 [

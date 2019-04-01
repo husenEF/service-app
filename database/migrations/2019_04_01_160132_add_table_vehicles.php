@@ -20,7 +20,7 @@ class AddTableVehicles extends Migration
             $table->string("platnumber", 15)->nullable();
             $table->integer("update_by")->nullable()->comment("user updater");
             $table->integer("created_by")->nullable()->comment("User creator");
-            -$table->timestamps();
+            $table->timestamps();
             $table->softDeletes();
         });
     }
