@@ -21,18 +21,21 @@ class AuthController extends Controller
             [
                 'name' => "required",
                 "email" => 'required|email|unique:users',
-                'password' => 'required|min:6'
+                'password' => 'required|min:6',
+                'roles' => "required"
             ]
         );
 
         $name = $request->input('name');
         $email = $request->input('email');
         $password = Hash::make($request->input('password'));
+        $roles = $request->input("roles");
 
         $user = new User();
         $user->name = $name;
         $user->email = $email;
         $user->password = $password;
+        $user->roles = $roles;
 
         if ($user->save()) {
             return response()->json(
@@ -55,13 +58,7 @@ class AuthController extends Controller
         }
     }
 
-    /**ord');
-
-        $user = User::where('email', $email)->first();
-
-        if ($user === null) {
-            return response()->json(
-                [
+    /**
      * @name login
      */
     public function login(Request $request)
