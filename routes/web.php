@@ -11,33 +11,45 @@
 |
 */
 
-$router->get('/', function () use ($router) {
+$router->get("/", function () use ($router) {
+    return view('main');
+});
+
+$router->get('/version', function () use ($router) {
     return $router->app->version();
 });
+
 $router->get("/key", function () {
     return str_random(32);
 });
 
-$router->get("/register", "AuthController@registerForm");
+//api routing
+$router->group(["prefix" => "api"], function () use ($router) {
 
-$router->post("/register", "AuthController@register");
-$router->post("/login", "AuthController@login");
+    // $router->get("/register", "AuthController@registerForm");
+    //register login
+    $router->post("/register", "AuthController@register");
+    $router->post("/login", "AuthController@login");
 
-$router->group(['prefix' => 'user'], function () use ($router) {
-    //post
-    $router->post("/create", "UserController@create");
-    //puth
-    $router->put("/update/{id}", "UserController@update");
-    //get
-    $router->get("/detail/{id}", "UserController@show");
-    //delete
-    $router->delete("/delete/{id}", "UserController@delete");
-});
+    //user
+    $router->group(['prefix' => 'user'], function () use ($router) {
+        //post
+        $router->post("/create", "UserController@create");
+        //puth
+        $router->put("/update/{id}", "UserController@update");
+        //get
+        $router->get("/detail/{id}", "UserController@show");
+        //delete
+        $router->delete("/delete/{id}", "UserController@delete");
+    });
 
-$router->group(["prefix"=>"vehicle"],function() use ($router){
-    $router->get("/list","VehicleController@index");
-});
+    //vehicle
+    $router->group(["prefix" => "vehicle"], function () use ($router) {
+        $router->get("/list", "VehicleController@index");
+    });
 
-$router->group(["prefix"=>"tire"],function() use ($router){
-    $router->get("/list","TireController@index");
+    //tire
+    $router->group(["prefix" => "tire"], function () use ($router) {
+        $router->get("/list", "TireController@index");
+    });
 });
