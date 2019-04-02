@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTableTires extends Migration
+class CreateTableHistories extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,11 @@ class CreateTableTires extends Migration
      */
     public function up()
     {
-        Schema::create('tires', function (Blueprint $table) {
+        Schema::create('histories', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer("id_vehicle");
-            $table->integer("created_by");
-            $table->integer("posistion")->default("0");
-            $table->string("merek");
-            $table->date("buy_date");
+            $table->integer("tire_id");
+            $table->text("comment");
+            $table->integer("update_by");
             $table->timestamps();
             $table->softDeletes();
         });
@@ -32,6 +30,6 @@ class CreateTableTires extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tires');
+        Schema::dropIfExists('histories');
     }
 }
