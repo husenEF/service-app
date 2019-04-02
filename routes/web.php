@@ -33,3 +33,11 @@ $router->group(['prefix' => 'user'], function () use ($router) {
     //delete
     $router->delete("/delete/{id}", "UserController@delete");
 });
+
+$router->group(["prefix"=>"vehicle"],function() use ($router){
+    $router->get("/list","VehicleController@index");
+});
+
+$router->group(["prefix"=>"tire"],function() use ($router){
+    $router->get("/list","TireController@index");
+});
