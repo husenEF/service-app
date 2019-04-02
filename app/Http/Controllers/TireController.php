@@ -12,9 +12,10 @@ class TireController extends Controller
         $this->middleware('auth');
     }
 
-    public function index(){
+    public function index()
+    {
         $tire = Tire::paginate(5);
-        
+
         if ($tire) {
             return response()->json([
                 'success' => true,

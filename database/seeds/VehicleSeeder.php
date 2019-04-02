@@ -15,18 +15,18 @@ class VehicleSeeder extends Seeder
      */
     public function run()
     {
-       $user = User::all()->count();
+        $user = User::all()->count();
         $faker = Faker::create();
-        $cars = ["bus","truck","car","trailer"];
-        foreach(range(0,10) as $i){
+        $cars = ["bus", "truck", "car", "trailer"];
+        foreach (range(0, 10) as $i) {
             $fakeId = $faker->randomDigit();
 
             $type = array_rand($cars);
             DB::table('vehicles')->insert([
-                'user_id' => $faker->biasedNumberBetween(1, $user) ,
-                'platnumber'=>"AA".$faker->numberBetween(100,9999)."CF",
-                "created_by"=>$fakeId,
-                "type"=>$cars[$type]
+                'user_id' => $faker->biasedNumberBetween(1, $user),
+                'platnumber' => "AA" . $faker->numberBetween(100, 9999) . "CF",
+                "created_by" => $fakeId,
+                "type" => $cars[$type]
                 // 'email' => $faker->email,
                 // 'password' => Hash::make("123123"),
                 // 'roles' => 'mekanik',

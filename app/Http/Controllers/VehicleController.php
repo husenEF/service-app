@@ -18,9 +18,10 @@ class VehicleController extends Controller
     }
 
 
-    public function index(){
+    public function index()
+    {
         $vehicle = Vehicle::paginate(5);
-        
+
         if ($vehicle) {
             return response()->json([
                 'success' => true,

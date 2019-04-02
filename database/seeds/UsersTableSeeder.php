@@ -15,17 +15,17 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        $admin = User::where(['roles'=>'admin'])->first();
-        if(!$admin){
+        $admin = User::where(['roles' => 'admin'])->first();
+        if (!$admin) {
             DB::table('users')->insert([
-                'name' =>"admin",
+                'name' => "admin",
                 'email' => "admin@mail.com",
                 'password' => Hash::make("admin123"),
                 'roles' => 'admin',
             ]);
         }
         $faker = Faker::create();
-        foreach(range(0,10) as $i){
+        foreach (range(0, 10) as $i) {
             DB::table('users')->insert([
                 'name' => $faker->name,
                 'email' => $faker->email,
@@ -33,6 +33,5 @@ class UsersTableSeeder extends Seeder
                 'roles' => 'mekanik',
             ]);
         }
-
     }
 }
