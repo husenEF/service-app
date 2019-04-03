@@ -1,6 +1,5 @@
 
 require('./bootstrap');
-
 // window.Vue = require('vue');
 
 import Vue from 'vue'
@@ -19,12 +18,10 @@ const router = new VueRouter({
     node: 'history'
 })
 
-initialize(router)
-
 const app = new Vue({
     el: '#app',
     router,
-    components:{
-        MainApp
+    components: {
+        MainApp,
     }
 });

@@ -6251,6 +6251,11 @@ vm-browserify@0.0.4:
   dependencies:
     indexof "0.0.1"
 
+vue-feather-icon@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/vue-feather-icon/-/vue-feather-icon-1.2.0.tgz#3801b8d25f99ea62978a2f0c4042976ede497573"
+  integrity sha1-OAG40l+Z6mKXii8MQEKXbt5JdXM=
+
 vue-hot-reload-api@^2.3.0:
   version "2.3.3"
   resolved "https://registry.yarnpkg.com/vue-hot-reload-api/-/vue-hot-reload-api-2.3.3.tgz#2756f46cb3258054c5f4723de8ae7e87302a1ccf"
@@ -6266,6 +6271,11 @@ vue-loader@^15.4.2:
     loader-utils "^1.1.0"
     vue-hot-reload-api "^2.3.0"
     vue-style-loader "^4.1.0"
+
+vue-material-design-icons@^3.1.0:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/vue-material-design-icons/-/vue-material-design-icons-3.1.0.tgz#1c24752f4a43c40cad08c391d66e6fbd8ffaf2af"
+  integrity sha512-2u+LRzsEKn4SmT35wCmmV0taqd90R1IWtZbHtwx6SUem2qma8SwWYAalr/pjOjATlSiWIQeka4DYYc3lch1Fvw==
 
 vue-router@^3.0.2:
   version "3.0.2"

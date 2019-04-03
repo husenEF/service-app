@@ -1,21 +1,22 @@
 <template>
-  <div id="main-app">
-      <div class="clearfix header">
-          <h1>Header</h1>
-      </div>
-      <div class="content">
-          <router-view></router-view>
-      </div>
+  <div id="main-app" class="container-fluid">
+    <Header/>
+    <div class="container-fluid" id="main-content">
+      <router-view></router-view>
+    </div>
   </div>
 </template>
 
 <script>
-// import Header from "./includes/Header.vue";
+import Header from "./includes/Header.vue";
 // import Sidebar from "./includes/Sidebar.vue"
 
 export default {
   name: "main-app",
-  computed: {}
+  computed: {},
+  components: {
+    Header
+  }
 };
 </script>
 <style scoped>
