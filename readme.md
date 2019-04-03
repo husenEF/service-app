@@ -1,21 +1,24 @@
-# Lumen PHP Framework
+# Tire Management Application
 
-[![Build Status](https://travis-ci.org/laravel/lumen-framework.svg)](https://travis-ci.org/laravel/lumen-framework)
-[![Total Downloads](https://poser.pugx.org/laravel/lumen-framework/d/total.svg)](https://packagist.org/packages/laravel/lumen-framework)
-[![Latest Stable Version](https://poser.pugx.org/laravel/lumen-framework/v/stable.svg)](https://packagist.org/packages/laravel/lumen-framework)
-[![Latest Unstable Version](https://poser.pugx.org/laravel/lumen-framework/v/unstable.svg)](https://packagist.org/packages/laravel/lumen-framework)
-[![License](https://poser.pugx.org/laravel/lumen-framework/license.svg)](https://packagist.org/packages/laravel/lumen-framework)
+## Getting Started
+Do the following command below to start this project
 
-Laravel Lumen is a stunningly fast PHP micro-framework for building web applications with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Lumen attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as routing, database abstraction, queueing, and caching.
+```
+git clone //repo
+composer install
+php artisan key:generate
+```
 
-## Official Documentation
+## Required plugin
+Some required plugin to start the project with Lumen
 
-Documentation for the framework can be found on the [Lumen website](https://lumen.laravel.com/docs).
+### Lumen Generator
+This package is for additional CLI command. Ex: `php artisan key:generate`, `php artisan tinker`. All completes command [https://github.com/flipboxstudio/lumen-generator](https://github.com/flipboxstudio/lumen-generator)
 
-## Security Vulnerabilities
+#### Install additional package
+`composer require flipbox/lumen-generator`
 
-If you discover a security vulnerability within Lumen, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
+#### Configuration
+Just copy paste code below to your `bootstrap/app.php`
 
-## License
-
-The Lumen framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+`$app->register(Flipbox\LumenGenerator\LumenGeneratorServiceProvider::class);`
