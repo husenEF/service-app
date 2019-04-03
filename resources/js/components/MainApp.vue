@@ -1,18 +1,12 @@
 <template>
-    <div id="main">
-        header
-        <!-- <router-view></router-view> -->
-        <div class="container-fluid">
-            <div class="row">
-                <template v-if="currentUser">
-                    sidebar
-                </template>
-                <main role="main" v-bind:class="{'col-md-9 col-lg-10':isLogin}" class="col ml-sm-auto  px-4">
-                    <router-view></router-view>
-                </main>
-            </div>
-        </div>
-    </div>
+  <div id="main-app">
+      <div class="clearfix header">
+          <h1>Header</h1>
+      </div>
+      <div class="content">
+          <router-view></router-view>
+      </div>
+  </div>
 </template>
 
 <script>
@@ -21,15 +15,11 @@
 
 export default {
   name: "main-app",
-  
-  computed:{
-      
-  }
+  computed: {}
 };
 </script>
 <style scoped>
 [role="main"] {
   padding-top: 48px; /* Space for fixed navbar */
 }
-
 </style>
