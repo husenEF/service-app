@@ -1,37 +1,4 @@
 {
-<<<<<<< HEAD
-  "name": "ban-lumen",
-  "version": "1.0.0",
-  "description": "## Getting Started Do the following command below to start this project",
-  "main": "index.js",
-  "directories": {
-    "test": "tests"
-  },
-  "scripts": {
-    "watch": "npm run dev -- --watch",
-    "dev": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
-    "prod": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+ssh://git@gitlab.com/husenef/tire-management-lumen.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://gitlab.com/husenef/tire-management-lumen/issues"
-  },
-  "homepage": "https://gitlab.com/husenef/tire-management-lumen#readme",
-  "devDependencies": {
-    "axios": "^0.18.0",
-    "cross-env": "^5.2.0",
-    "laravel-mix": "^4.0.15",
-    "vue": "^2.6.10",
-    "vue-router": "^3.0.2",
-    "vue-template-compiler": "^2.6.10",
-    "vuex": "^3.1.0"
-  }
-=======
     "private": true,
     "scripts": {
         "dev": "npm run development",
@@ -62,5 +29,4 @@
         "vue-router": "^3.0.2",
         "vuex": "^3.1.0"
     }
->>>>>>> develop
 }
