@@ -1,10 +1,19 @@
 import Home from "./components/Home.vue"
 import Dashboard from './components/view/Dashboard/Index.vue'
+import Login from "./components/view/auth/Login.vue"
+
 
 export const routes = [
     {
+        path: "/login",
+        component: Login
+    },
+    {
         path: "/",
-        component: Dashboard
+        component: Dashboard,
+        meta: {
+            requiresAuth: true
+        }
     },
     {
         path: "/home",

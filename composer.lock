@@ -4,11 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-<<<<<<< HEAD
-    "content-hash": "038eb826a1aa7b85e507e620250d39b1",
-=======
     "content-hash": "58f12bbc09d845c8cb5927352babbf59",
->>>>>>> develop
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -98,8 +94,6 @@
             "time": "2014-10-24T07:27:01+00:00"
         },
         {
-<<<<<<< HEAD
-=======
             "name": "doctrine/cache",
             "version": "v1.8.0",
             "source": {
@@ -331,7 +325,6 @@
             "time": "2018-06-11T11:59:03+00:00"
         },
         {
->>>>>>> develop
             "name": "doctrine/inflector",
             "version": "v1.3.0",
             "source": {
@@ -565,23 +558,23 @@
         },
         {
             "name": "flipbox/lumen-generator",
-            "version": "5.6.5",
+            "version": "5.6.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/flipboxstudio/lumen-generator.git",
-                "reference": "3ec72b1e3ce32455ac18562827c246a2298cd449"
+                "reference": "0357b5f174d2320b696a2ad2a6bd20650c392c12"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/flipboxstudio/lumen-generator/zipball/3ec72b1e3ce32455ac18562827c246a2298cd449",
-                "reference": "3ec72b1e3ce32455ac18562827c246a2298cd449",
+                "url": "https://api.github.com/repos/flipboxstudio/lumen-generator/zipball/0357b5f174d2320b696a2ad2a6bd20650c392c12",
+                "reference": "0357b5f174d2320b696a2ad2a6bd20650c392c12",
                 "shasum": ""
             },
             "require": {
                 "classpreloader/classpreloader": "^3.0",
                 "illuminate/support": "^5.4",
                 "psy/psysh": "0.8.*|0.9.*",
-                "symfony/var-dumper": "^3.1|~4.1"
+                "symfony/var-dumper": "^3.1|^4.1|^4.2"
             },
             "type": "library",
             "autoload": {
@@ -600,11 +593,9 @@
                 }
             ],
             "description": "A Lumen Generator You Are Missing",
-            "time": "2018-07-04T10:41:30+00:00"
+            "time": "2019-03-15T06:53:14+00:00"
         },
         {
-<<<<<<< HEAD
-=======
             "name": "fzaninotto/faker",
             "version": "v1.8.0",
             "source": {
@@ -655,7 +646,6 @@
             "time": "2018-07-12T10:23:15+00:00"
         },
         {
->>>>>>> develop
             "name": "illuminate/auth",
             "version": "v5.8.9",
             "source": {
@@ -4833,16 +4823,16 @@
         },
         {
             "name": "theseer/tokenizer",
-            "version": "1.1.1",
+            "version": "1.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/theseer/tokenizer.git",
-                "reference": "06b6ce404ee574e9c1787fb67bb9980ca4387c34"
+                "reference": "1c42705be2b6c1de5904f8afacef5895cab44bf8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/theseer/tokenizer/zipball/06b6ce404ee574e9c1787fb67bb9980ca4387c34",
-                "reference": "06b6ce404ee574e9c1787fb67bb9980ca4387c34",
+                "url": "https://api.github.com/repos/theseer/tokenizer/zipball/1c42705be2b6c1de5904f8afacef5895cab44bf8",
+                "reference": "1c42705be2b6c1de5904f8afacef5895cab44bf8",
                 "shasum": ""
             },
             "require": {
@@ -4869,7 +4859,7 @@
                 }
             ],
             "description": "A small library for converting tokenized PHP source code into XML and potentially other formats",
-            "time": "2019-04-03T18:37:40+00:00"
+            "time": "2019-04-04T09:56:43+00:00"
         },
         {
             "name": "webmozart/assert",
