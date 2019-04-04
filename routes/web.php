@@ -11,7 +11,6 @@
 |
 */
 
-<<<<<<< HEAD
 $router->get('/', function () use ($router) {
     return view('index');
 });
@@ -31,14 +30,15 @@ $router->group([
     'prefix' => '/api',
 ], function () use ($router) {
     require __DIR__.'/../routes/api.php';
-=======
+
+});
+
 $router->get("/", function () use ($router) {
     return view('main');
 });
 
 $router->get('/version', function () use ($router) {
     return $router->app->version();
->>>>>>> develop
 });
 
 $router->get("/key", function () {
