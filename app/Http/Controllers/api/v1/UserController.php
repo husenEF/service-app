@@ -6,6 +6,8 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\UserCollection as UserResource;
+
 
 class UserController extends Controller
 {
@@ -21,6 +23,7 @@ class UserController extends Controller
     {
         $user = User::find($id);
 
+        $user = new UserResource($user);
         if ($user) {
             return response()->json([
                 'success' => true,
