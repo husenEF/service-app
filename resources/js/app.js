@@ -25,6 +25,7 @@ initialize(store, router)
 const app = new Vue({
     el: '#app',
     router,
+    store,
     components: {
         MainApp,
     }

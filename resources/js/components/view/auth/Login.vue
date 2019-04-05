@@ -4,16 +4,16 @@
       <div class="card">
         <div class="card-header">Login</div>
         <div class="card-body">
-          <form>
-            <div class="form-group ">
+          <form @submit.prevent="authenticate">
+            <div class="form-group">
               <label for="email">Email</label>
               <input type="text" class="form-control" id="email">
             </div>
-            <div class="form-group ">
+            <div class="form-group">
               <label for>Password</label>
-              <input type="text" class="form-control" id="password">
+              <input type="password" class="form-control" id="password">
             </div>
-            <div class="form-group ">
+            <div class="form-group">
               <button type="submit" class="btn btn-primary">Login</button>
             </div>
           </form>
@@ -27,6 +27,15 @@
 import { login } from "../../../helpers/auth";
 
 export default {
-  name: "login"
+  name: "login",
+  methods: {
+    authenticate() {
+      this.$store.dispatch("login");
+
+      login(this.$data.form).then(res => {
+        console.log("res", res);
+      });
+    }
+  }
 };
 </script>
