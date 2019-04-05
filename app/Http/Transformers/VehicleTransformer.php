@@ -9,7 +9,7 @@ class VehicleTransformer extends TransformerAbstract{
     ];
 
     protected $defaultIncludes = [
-        // 'user'
+        'create_user','tire'
     ];
 
     /**
@@ -22,17 +22,18 @@ class VehicleTransformer extends TransformerAbstract{
         return [
             'id' => $vehicle->id,
             'platnumber' => $vehicle->platnumber,
-            'user'=>$vehicle->user_id,
+            // 'user'=>$vehicle->user_id,
             'update_by'=>$vehicle->update_by,
             'created_by'=>$vehicle->created_by,
-            'tires'=>$vehicle->tires
+            // 'userUpdate'=>$vehicle->userUpdate
         ];
     }
 
-    // public function includeUser(Vehicle $vehicle){
-    //     return $this->item($vehicle->user,new UserTransformer());
-    // }
-    // public function includeTire(Vehicle  $vehicle){
-    //     return $this->item($vehicle->tires[], new TireTransformer());
-    // }
+
+    public function includeCreateUser(Vehicle $vehicle){
+        return $this->item($vehicle->user,new UserTransformer());
+    }
+    public function includeTire(Vehicle  $vehicle){
+        return $this->collection($vehicle->tires, new TireTransformer());
+    }
 }

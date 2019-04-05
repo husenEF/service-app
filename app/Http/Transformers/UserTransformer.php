@@ -9,6 +9,7 @@ class UserTransformer extends TransformerAbstract{
     ];
 
     protected $defaultIncludes = [
+
     ];
 
     /**
@@ -20,6 +21,8 @@ class UserTransformer extends TransformerAbstract{
     {
         return [
             'id' => $user->id,
+            "name"=>$user->name,
+            "roles"=>$user->roles
         ];
     }
 }
