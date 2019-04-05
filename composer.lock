@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "58f12bbc09d845c8cb5927352babbf59",
+    "content-hash": "49bc0b20c8a85ebdec03168f4abe21d1",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -644,6 +644,43 @@
                 "fixtures"
             ],
             "time": "2018-07-12T10:23:15+00:00"
+        },
+        {
+            "name": "gergonzalez/lumen-fractal",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/gergonzalez/lumen-fractal.git",
+                "reference": "aa33d30859b9225b33058a8595fed594654a176b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/gergonzalez/lumen-fractal/zipball/aa33d30859b9225b33058a8595fed594654a176b",
+                "reference": "aa33d30859b9225b33058a8595fed594654a176b",
+                "shasum": ""
+            },
+            "require": {
+                "league/fractal": "^0.15.0",
+                "php": ">=5.6.4"
+            },
+            "type": "laravel-package",
+            "autoload": {
+                "psr-4": {
+                    "Gergonzalez\\Fractal\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "German Gonzalez",
+                    "email": "ger@gergonzalez.com"
+                }
+            ],
+            "description": "League Fractal Wrapper",
+            "time": "2018-04-07T20:50:10+00:00"
         },
         {
             "name": "illuminate/auth",
@@ -1944,6 +1981,69 @@
                 "lumen"
             ],
             "time": "2019-03-21T17:35:25+00:00"
+        },
+        {
+            "name": "league/fractal",
+            "version": "0.15.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/thephpleague/fractal.git",
+                "reference": "0546bd5c2aba414ba50c6ac676f507d42c6150a5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/thephpleague/fractal/zipball/0546bd5c2aba414ba50c6ac676f507d42c6150a5",
+                "reference": "0546bd5c2aba414ba50c6ac676f507d42c6150a5",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4"
+            },
+            "require-dev": {
+                "illuminate/contracts": "~5.0",
+                "mockery/mockery": "~0.9",
+                "pagerfanta/pagerfanta": "~1.0.0",
+                "phpunit/phpunit": "~4.0",
+                "squizlabs/php_codesniffer": "~1.5",
+                "zendframework/zend-paginator": "~2.3"
+            },
+            "suggest": {
+                "illuminate/pagination": "The Illuminate Pagination component.",
+                "pagerfanta/pagerfanta": "Pagerfanta Paginator",
+                "zendframework/zend-paginator": "Zend Framework Paginator"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.13-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "League\\Fractal\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Phil Sturgeon",
+                    "email": "me@philsturgeon.uk",
+                    "homepage": "http://philsturgeon.uk/",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Handle the output of complex data structures ready for API output.",
+            "homepage": "http://fractal.thephpleague.com/",
+            "keywords": [
+                "api",
+                "json",
+                "league",
+                "rest"
+            ],
+            "time": "2016-12-28T01:30:30+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -4915,7 +5015,9 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "gergonzalez/lumen-fractal": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {

@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Vehicle;
 use App\Http\Controllers\Controller;
 
+use App\Http\Transformers\VehicleTransformer;
+
 class VehicleController extends Controller
 {
     /**
@@ -22,6 +24,8 @@ class VehicleController extends Controller
     public function index()
     {
         $vehicle = Vehicle::with('tires')->paginate();
+
+        $vehicle = app('fractal')->collection($vehicle, new VehicleTransformer())->getArray();
         if ($vehicle) {
             return response()->json([
                 'success' => true,
