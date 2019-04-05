@@ -9,6 +9,7 @@ class VehicleTransformer extends TransformerAbstract{
     ];
 
     protected $defaultIncludes = [
+        // 'user'
     ];
 
     /**
@@ -27,4 +28,11 @@ class VehicleTransformer extends TransformerAbstract{
             'tires'=>$vehicle->tires
         ];
     }
+
+    // public function includeUser(Vehicle $vehicle){
+    //     return $this->item($vehicle->user,new UserTransformer());
+    // }
+    // public function includeTire(Vehicle  $vehicle){
+    //     return $this->item($vehicle->tires[], new TireTransformer());
+    // }
 }

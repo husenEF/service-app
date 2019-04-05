@@ -23,7 +23,7 @@ class VehicleController extends Controller
 
     public function index()
     {
-        $vehicle = Vehicle::with('tires')->paginate();
+        $vehicle = Vehicle::with('tires')->paginate(5);
 
         $vehicle = app('fractal')->collection($vehicle, new VehicleTransformer())->getArray();
         if ($vehicle) {
