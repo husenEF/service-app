@@ -21,13 +21,12 @@ class VehicleController extends Controller
 
     public function index()
     {
-        $vehicle = Vehicle::paginate(5);
-
+        $vehicle = Vehicle::with('tires')->paginate();
         if ($vehicle) {
             return response()->json([
                 'success' => true,
                 'message' => 'Get Data Success',
-                'data' => $vehicle
+                'data' => $vehicle,
             ], 200);
         } else {
             return response()->json([
