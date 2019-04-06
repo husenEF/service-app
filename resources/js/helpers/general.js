@@ -24,6 +24,7 @@ export function initialize(store, router) {
     });
 
     if (store.getters.currentUser) {
+        console.log("token", store.getters.currentUser.token)
         setAuthorization(store.getters.currentUser.token)
     }
 }

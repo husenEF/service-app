@@ -4,13 +4,11 @@ namespace App\Http\Transformers;
 use League\Fractal\TransformerAbstract;
 use App\User;
 
-class UserTransformer extends TransformerAbstract{
-    protected $availableIncludes = [
-    ];
+class UserTransformer extends TransformerAbstract
+{
+    protected $availableIncludes = [];
 
-    protected $defaultIncludes = [
-
-    ];
+    protected $defaultIncludes = [];
 
     /**
      * Turn User object into a generic array.
@@ -21,8 +19,8 @@ class UserTransformer extends TransformerAbstract{
     {
         return [
             'id' => $user->id,
-            "name"=>$user->name,
-            "roles"=>$user->roles
+            "name" => $user->name,
+            "roles" => $user->roles
         ];
     }
 }

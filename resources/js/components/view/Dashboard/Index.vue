@@ -1,7 +1,7 @@
 <template>
   <div class="container-fluid">
     <div class="row">
-      <Header title="Dashboard" back=""/>
+      <Header title="Dashboard" back/>
     </div>
     <div class="row">
       <div class="col-6">
@@ -10,7 +10,9 @@
         </h1>
       </div>
       <div class="col-6">
-        <h1 class="text-center">Kendaraan</h1>
+        <h1 class="text-center">
+          <router-link to="/vehicle">Kendaraan</router-link>
+        </h1>
       </div>
       <div class="col-6">
         <h1 class="text-center">Ban</h1>

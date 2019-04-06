@@ -4,6 +4,8 @@ import Login from "./components/view/auth/Login.vue"
 
 //user
 import User from "./components/view/User/Index.vue"
+//vehivle
+import Vehicle from "./components/view/Vehicle/Index.vue"
 
 
 export const routes = [
@@ -25,6 +27,13 @@ export const routes = [
     {
         path: "/user",
         component: User,
+        meta: {
+            requiresAuth: true
+        }
+    },
+    {
+        path: "/vehicle",
+        component: Vehicle,
         meta: {
             requiresAuth: true
         }
