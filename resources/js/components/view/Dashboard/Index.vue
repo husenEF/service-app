@@ -3,7 +3,7 @@
     <div class="row">
       <div class="col-6">
         <h1 class="text-center">
-            <router-link to="user">
+            <router-link to="/user">
               Profile
             </router-link>
         </h1>

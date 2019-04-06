@@ -1,9 +1,6 @@
 <template>
-  <div id="main-app" class="container-fluid">
-    <!-- <Header/> -->
-    <div class="container-fluid mt-5" id="main-content">
-      <router-view></router-view>
-    </div>
+  <div id="main-app" class="clearfix">
+    <router-view></router-view>
   </div>
 </template>
 

@@ -3,7 +3,7 @@ import Dashboard from './components/view/Dashboard/Index.vue'
 import Login from "./components/view/auth/Login.vue"
 
 //user
-import User from "./components/view/user/Index.vue"
+import User from "./components/view/User/Index.vue"
 
 
 export const routes = [
@@ -24,7 +24,7 @@ export const routes = [
     },
     {
         path: "/user",
-        commponent: User,
+        component: User,
         meta: {
             requiresAuth: true
         }
