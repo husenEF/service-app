@@ -5,6 +5,7 @@ require('./bootstrap');
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Vuex from 'vuex'
+import VueFeatherIcon from 'vue-feather-icon'
 
 import { routes } from "./routes"
 import MainApp from './components/MainApp.vue'
@@ -13,6 +14,7 @@ import { initialize } from "./helpers/general"
 
 Vue.use(VueRouter)
 Vue.use(Vuex)
+Vue.use(VueFeatherIcon)
 
 const store = new Vuex.Store(StoreData)
 const router = new VueRouter({

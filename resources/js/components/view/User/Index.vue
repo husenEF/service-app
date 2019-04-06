@@ -1,7 +1,7 @@
 <template>
   <div class="container-fluid">
     <div class="row">
-      <Header title="Tes" back="/"/>
+      <Header title="User Profile" back="/"/>
     </div>
     <div class="row current-user justify-content-center">
       <div class="col-8">
@@ -20,8 +20,10 @@
     </div>
   </div>
 </template>
+
 <script>
 import Header from "../../includes/Header.vue";
+
 export default {
   name: "userIndex",
   methods: {
@@ -41,7 +43,7 @@ export default {
   },
   mounted: {},
   components: {
-    Header
+    Header 
   },
   computed: {
     user() {

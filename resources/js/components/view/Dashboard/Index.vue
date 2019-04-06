@@ -1,11 +1,12 @@
 <template>
-  <div class="clearfix mt-5">
+  <div class="container-fluid">
+    <div class="row">
+      <Header title="Dashboard" back=""/>
+    </div>
     <div class="row">
       <div class="col-6">
         <h1 class="text-center">
-            <router-link to="/user">
-              Profile
-            </router-link>
+          <router-link to="/user">Profile</router-link>
         </h1>
       </div>
       <div class="col-6">
@@ -22,9 +23,12 @@
 </template>
 
 <script>
+import Header from "../../includes/Header.vue";
 
 export default {
   name: "dashboard-index",
-
+  components: {
+    Header
+  }
 };
 </script>
