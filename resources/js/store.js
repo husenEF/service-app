@@ -5,7 +5,7 @@ const user = getLocalUser()
 export default {
     state: {
         //default var
-        currentUser: user, 
+        currentUser: user,
         isLoggedIn: !!user,
         loading: false,
         auth_error: null,
@@ -45,10 +45,16 @@ export default {
         },
         loginSuccess(state, payload) {
             state.auth_error = null
-            state.isLoggedIn = true  
+            state.isLoggedIn = true
             state.loading = false
             state.currentUser = Object.assign({}, payload.user, { token: payload.api_token })
 
+            localStorage.setItem("user", JSON.stringify(state.currentUser))
+        },
+        updateUser(state, payload) {
+            // state.currentUser = Object
+            console.log("update", payload)
+            state.currentUser = Object.assign({}, payload.data, { token: user.token })
             localStorage.setItem("user", JSON.stringify(state.currentUser))
         },
         loginFailed(state, payload) {
