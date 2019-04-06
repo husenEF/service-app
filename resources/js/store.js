@@ -4,13 +4,21 @@ const user = getLocalUser()
 
 export default {
     state: {
-        currentUser: user,
+        //default var
+        currentUser: user, 
         isLoggedIn: !!user,
         loading: false,
         auth_error: null,
         customers: [],
     },
     getters: {
+        //pasring default state to component
+        //in component call with 
+        // computer:{
+        //     someMethod(){
+        //      return this.$store.getters.someMethod
+        //     }
+        // }
         isLoading(state) {
             return state.loading
         },
@@ -28,15 +36,18 @@ export default {
         },
     },
     mutations: {
+        //commit from vue component
+        //update state from mutation
+        //this.$store.commit("yourMethod",{yourParsingdata})
         login(state) {
             state.loading = true
             state.auth_error = null
         },
         loginSuccess(state, payload) {
             state.auth_error = null
-            state.isLoggedIn = true
+            state.isLoggedIn = true  
             state.loading = false
-            state.currentUser = Object.assign({}, payload.user, { token: payload.access_token })
+            state.currentUser = Object.assign({}, payload.user, { token: payload.api_token })
 
             localStorage.setItem("user", JSON.stringify(state.currentUser))
         },

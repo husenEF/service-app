@@ -1,6 +1,6 @@
 <template>
   <div id="main-app" class="container-fluid">
-    <Header/>
+    <!-- <Header/> -->
     <div class="container-fluid mt-5" id="main-content">
       <router-view></router-view>
     </div>
@@ -8,14 +8,14 @@
 </template>
 
 <script>
-import Header from "./includes/Header.vue";
+// import Header from "./includes/Header.vue";
 // import Sidebar from "./includes/Sidebar.vue"
 
 export default {
   name: "main-app",
   computed: {},
   components: {
-    Header
+    // Header
   }
 };
 </script>
