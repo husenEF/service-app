@@ -2,6 +2,9 @@ import Home from "./components/Home.vue"
 import Dashboard from './components/view/Dashboard/Index.vue'
 import Login from "./components/view/auth/Login.vue"
 
+//user
+import User from "./components/view/user/Index.vue"
+
 
 export const routes = [
     {
@@ -18,5 +21,12 @@ export const routes = [
     {
         path: "/home",
         component: Home
+    },
+    {
+        path: "/user",
+        commponent: User,
+        meta: {
+            requiresAuth: true
+        }
     }
 ]
