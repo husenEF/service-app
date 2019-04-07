@@ -36,6 +36,9 @@ export const routes = [
         component: Vehicle,
         meta: {
             requiresAuth: true
+        },
+        children:{
+            
         }
     }
 ]

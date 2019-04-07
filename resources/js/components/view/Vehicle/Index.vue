@@ -15,6 +15,16 @@
                 <th>Action</th>
               </tr>
             </thead>
+            <tbody>
+              <tr v-for="(item, index) in vehicle" :key="index">
+                <td>{{item.merek}}</td>
+                <td>{{item.platnumber}}</td>
+                <td>{{Object.keys(item.tire).length}}</td>
+                <td>
+                  <router-link :to="`/vehicle/${item.id}`">Edit</router-link>
+                </td>
+              </tr>
+            </tbody>
           </table>
         </div>
       </div>
@@ -31,17 +41,25 @@ export default {
   components: {
     Header
   },
+  beforeCreate() {
+    // this.getList()
+  },
   created() {
     this.getList();
-    console.log("vehicle", this.vehicle);
   },
   methods: {
     getList() {
       axios.get("api/v1/vehicle/list").then(res => {
+        const { data } = res;
+        // console.log("the data", data);
         // console.log("res beforecreate", res);
-        if (res.status == 200) {
-          this.vehicle = res.data.data;
-          console.log("vehicle", res.data);
+        if (data.success == true) {
+          let vehicleId = Object.keys(data.data).filter(i => i !== "meta");
+          console.log("map vehicle", vehicleId);
+          this.vehicle = vehicleId.map(i => data.data[i]);
+          if (data.data.hasOwnProperty("meta")) {
+            this.meta = data.data.meta;
+          }
         } else {
           alert("error get list vehicle");
         }
@@ -50,7 +68,8 @@ export default {
   },
   data() {
     return {
-      vehicle: {}
+      vehicle: {},
+      meta: {}
     };
   }
 };
