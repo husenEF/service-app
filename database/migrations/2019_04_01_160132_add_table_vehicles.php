@@ -16,7 +16,8 @@ class AddTableVehicles extends Migration
         Schema::create('vehicles', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer("user_id");
-            $table->string("type", 10)->default("bus");
+            $table->string("merek")->nullable();
+            // $table->string("type", 10)->default("bus");
             $table->string("platnumber", 15)->nullable();
             $table->integer("update_by")->nullable()->comment("user updater");
             $table->integer("created_by")->nullable()->comment("User creator");

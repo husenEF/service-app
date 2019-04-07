@@ -24,9 +24,10 @@ class VehicleSeeder extends Seeder
             $type = array_rand($cars);
             DB::table('vehicles')->insert([
                 'user_id' => $faker->biasedNumberBetween(1, $user),
+                'merek' => $faker->name,
                 'platnumber' => "AA" . $faker->numberBetween(100, 9999) . "CF",
                 "created_by" => $fakeId,
-                "type" => $cars[$type]
+                // "type" => $cars[$type]
                 // 'email' => $faker->email,
                 // 'password' => Hash::make("123123"),
                 // 'roles' => 'mekanik',

@@ -5,17 +5,18 @@
     </div>
     <div class="row vehicle-index justify-content-center">
       <div class="col-10 col-md-8">
-        <form @submit.prevent="submitData">
-          <div class="form-group">
-            <label>Name</label>
-            <input type="text" class="form-control">
-          </div>
-          <div class="form-group">
-            <label>Email</label>
-            <input type="text" class="form-control">
-          </div>
-          <button type="submit" class="btn btn-primary">Simpan</button>
-        </form>
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Merek</th>
+                <th>Plat</th>
+                <th>Jumlah Ban</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+          </table>
+        </div>
       </div>
     </div>
   </div>
@@ -30,10 +31,22 @@ export default {
   components: {
     Header
   },
-  beforeCreate() {
-    axios.get("api/v1/vehicle/list").then(res => {
-      console.log("res beforecreate", res);
-    });
+  created() {
+    this.getList();
+    console.log("vehicle", this.vehicle);
+  },
+  methods: {
+    getList() {
+      axios.get("api/v1/vehicle/list").then(res => {
+        // console.log("res beforecreate", res);
+        if (res.status == 200) {
+          this.vehicle = res.data.data;
+          console.log("vehicle", res.data);
+        } else {
+          alert("error get list vehicle");
+        }
+      });
+    }
   },
   data() {
     return {
