@@ -40,4 +40,27 @@ class VehicleController extends Controller
             ], 404);
         }
     }
+
+    public function show($id){
+
+        $vehicle = Vehicle::with(['user','tires'])->find($id);
+        if($vehicle){
+        return response()->json([
+            'success'=>true,
+            'data'=>$vehicle,
+            'message'=>"Success get Data"
+        ]);
+        }else{
+            return response()->json([
+                'success' => false,
+                'message' => 'Get Data failed',
+                'data' => ""
+            ], 404); 
+        }
+    }
+
+    public function update(Request $re,$id)
+    {
+        dd([$re->all(),$id]);
+    }
 }
