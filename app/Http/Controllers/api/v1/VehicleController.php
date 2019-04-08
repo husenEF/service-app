@@ -61,6 +61,20 @@ class VehicleController extends Controller
 
     public function update(Request $re,$id)
     {
-        dd([$re->all(),$id]);
+       $vehicle = Vehicle::with('tires')->find($id);
+       if(!$vehicle){
+        return response()->json([
+            'success' => false,
+            'message' => 'Data not found',
+            'data' => ""
+        ], 404); 
+       }
+
+       $selisihTIres = 0;
+
+       if($vehicle->tires->count()>$re->tirescount){
+
+       }
+       dd([$vehicle->tires->count(),$re->all()]);
     }
 }
