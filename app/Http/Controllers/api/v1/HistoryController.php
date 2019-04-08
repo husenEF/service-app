@@ -62,4 +62,9 @@ class HistoryController extends Controller
     {
         //
     }
+
+    
+    private function insertHistory(){
+
+    }
 }
