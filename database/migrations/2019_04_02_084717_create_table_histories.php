@@ -15,9 +15,10 @@ class CreateTableHistories extends Migration
     {
         Schema::create('histories', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer("tire_id");
-            $table->text("comment");
-            $table->integer("update_by");
+            $table->text("dataname");
+            $table->text("comment")->nullable();
+            $table->text("raw")->nullable();
+            $table->integer("update_by")->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

@@ -3823,6 +3823,11 @@ lru-cache@^5.1.1:
   dependencies:
     yallist "^3.0.2"
 
+luxon@^1.12.1:
+  version "1.12.1"
+  resolved "https://registry.yarnpkg.com/luxon/-/luxon-1.12.1.tgz#924bd61404f70b0cc5168918cb0ac108e52aacc4"
+  integrity sha512-Zv/qJb2X1ESTrlniAViWx2aqGwi2cVpeoZFTbPdPiCu4EsadKsmb/QCH8HQjMUpDZKKJIHKHsJxV5Rwpq47HKQ==
+
 make-dir@^1.0.0:
   version "1.3.0"
   resolved "https://registry.yarnpkg.com/make-dir/-/make-dir-1.3.0.tgz#79c1033b80515bd6d24ec9933e860ca75ee27f0c"
@@ -6251,6 +6256,11 @@ vm-browserify@0.0.4:
   dependencies:
     indexof "0.0.1"
 
+vue-datetime@^1.0.0-beta.10:
+  version "1.0.0-beta.10"
+  resolved "https://registry.yarnpkg.com/vue-datetime/-/vue-datetime-1.0.0-beta.10.tgz#788a1c2deefa3e14fbf549373ec00ebde707596a"
+  integrity sha512-/wJkj95JSzWqH0Ja4JpXX6I+fXo2A34GCtsx00vR5RjNxk3++93rg7G4ZlI3MFo807zH9bIxXfIohbAZgnAWbQ==
+
 vue-feather-icon@^1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/vue-feather-icon/-/vue-feather-icon-1.2.0.tgz#3801b8d25f99ea62978a2f0c4042976ede497573"
@@ -6466,6 +6476,11 @@ websocket-extensions@>=0.1.1:
   version "0.1.3"
   resolved "https://registry.yarnpkg.com/websocket-extensions/-/websocket-extensions-0.1.3.tgz#5d2ff22977003ec687a4b87073dfbbac146ccf29"
   integrity sha512-nqHUnMXmBzT0w570r2JpJxfiSD1IzoI+HGVdd3aZ0yNi3ngvQ4jv1dtHt5VGxfI2yj5yqImPhOK4vmIh2xMbGg==
+
+weekstart@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/weekstart/-/weekstart-1.0.0.tgz#e0aee358d45ad99802254769d7b2a34c9380f539"
+  integrity sha1-4K7jWNRa2ZgCJUdp17KjTJOA9Tk=
 
 which-module@^2.0.0:
   version "2.0.0"

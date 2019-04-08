@@ -6,6 +6,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Vuex from 'vuex'
 import VueFeatherIcon from 'vue-feather-icon'
+import { Datetime } from 'vue-datetime'
 
 import { routes } from "./routes"
 import MainApp from './components/MainApp.vue'
@@ -30,5 +31,6 @@ const app = new Vue({
     store,
     components: {
         MainApp,
+        datetime: Datetime
     }
 });

@@ -20,29 +20,41 @@
           <input type="text" class="form-control" placeholder="Merek Ban" v-model="tire.merek">
         </div>
         <div class="col-md-5">
-          <input
+          <!-- <input
             type="text"
             class="form-control"
             placeholder="Tanggal Beli"
             v-model="tire.buy_date"
-          >
+          >-->
+          <Datetime v-model="tire.buy_date" input-class="form-control"></Datetime>
         </div>
         <div class="col-2">
           <button type="button" class="btn btn-danger btn-block">X</button>
         </div>
       </div>
     </fieldset>
-    <button type="submit" class="btn btn-primary">Update</button>this
-    <pre>{{data.tires}}</pre>
+    <button type="submit" class="btn btn-primary">Update</button>
   </form>
 </template>
 
 <script>
+import { Datetime } from "vue-datetime";
+// You need a specific loader for CSS files
+import "vue-datetime/dist/vue-datetime.css";
+
 export default {
   name: "vehicleDetail",
+  components: {
+    Datetime
+  },
   created() {
     const id = this.$route.params.id;
     this.getDetail(id);
+  },
+  computed: {
+    getUser() {
+      return this.$store.getters.currentUser;
+    }
   },
   data() {
     return {
@@ -61,17 +73,29 @@ export default {
       });
     },
     submitData(e) {
-      console.log("d", this.data);
+      const { tires, id } = this.data;
+      const err = tires.filter(e => e.merek == "" || e.buy_date == "");
+      if (err.length) {
+        alert("Data Harus terisi");
+        return false;
+      }
+      axios.put("api/v1/vehicle/" + id, this.data).then(res => {
+        console.log("update", res);
+      });
     },
     addBan() {
+      const { id } = this.getUser;
       const pos = this.data.tirescount + 1;
+      let { tires } = this.data;
       const newBan = {
         merek: "",
         buy_date: "",
         position: pos,
-        id: 0
+        id: 0,
+        created_by: id,
+        id_vehicle: this.data.id
       };
-      let { tires } = this.data;
+
       tires.push(newBan);
 
       console.log("tire", tires);
