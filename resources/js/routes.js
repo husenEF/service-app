@@ -5,7 +5,9 @@ import Login from "./components/view/auth/Login.vue"
 //user
 import User from "./components/view/User/Index.vue"
 //vehivle
-import Vehicle from "./components/view/Vehicle/Index.vue"
+import VehicleIndex from "./components/view/Vehicle/Index.vue"
+import VehicleList from "./components/view/Vehicle/List.vue"
+import VehicleDetail from "./components/view/Vehicle/Detail.vue"
 
 
 export const routes = [
@@ -33,12 +35,19 @@ export const routes = [
     },
     {
         path: "/vehicle",
-        component: Vehicle,
+        component: VehicleIndex,
         meta: {
             requiresAuth: true
         },
-        children:{
-            
-        }
+        children: [
+            {
+                path: "/",
+                component: VehicleList
+            },
+            {
+                path: ":id",
+                component: VehicleDetail
+            }
+        ]
     }
 ]
