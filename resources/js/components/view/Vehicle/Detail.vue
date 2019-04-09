@@ -29,7 +29,7 @@
           <Datetime v-model="tire.buy_date" input-class="form-control"></Datetime>
         </div>
         <div class="col-2">
-          <button type="button" class="btn btn-danger btn-block">X</button>
+          <button type="button" class="btn btn-danger btn-block" v-on:click="deletBan(tire.id)">X</button>
         </div>
       </div>
     </fieldset>
@@ -81,7 +81,7 @@ export default {
         return false;
       }
 
-      this.data.session_user = userId
+      this.data.session_user = userId;
       axios.put("api/v1/vehicle/" + id, this.data).then(res => {
         console.log("update", res);
       });
@@ -102,6 +102,25 @@ export default {
       tires.push(newBan);
 
       console.log("tire", tires);
+    },
+    deletBan(id) {
+      this.$swal({
+        title: "Anda Yakin?",
+        text: "Anda akan menghapus data ini?",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Hapus!"
+      }).then(res => {
+        if (res.value) {
+          axios.delete("/api/v1/tire/" + id).then(res => {
+            console.log("res", res);
+          });
+        } else {
+          console.log("cancel");
+        }
+      });
     }
   }
 };
