@@ -73,12 +73,15 @@ export default {
       });
     },
     submitData(e) {
+      const userId = this.getUser.id;
       const { tires, id } = this.data;
       const err = tires.filter(e => e.merek == "" || e.buy_date == "");
       if (err.length) {
         alert("Data Harus terisi");
         return false;
       }
+
+      this.data.session_user = userId
       axios.put("api/v1/vehicle/" + id, this.data).then(res => {
         console.log("update", res);
       });

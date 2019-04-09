@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Vehicle;
 use App\Tire;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\api\v1\HistoryController;
 
 use App\Http\Transformers\VehicleTransformer;
 
@@ -16,9 +17,12 @@ class VehicleController extends Controller
      *
      * @return void
      */
+    private $history = null;
+
     public function __construct()
     {
         $this->middleware('auth');
+        $this->history= new HistoryController();
     }
 
 
@@ -64,6 +68,8 @@ class VehicleController extends Controller
     public function update(Request $re, $id)
     {
 
+
+        // dd($re->all());
         $vehicle = Vehicle::with('tires')->find($id);
         if (!$vehicle) {
             return response()->json([
@@ -77,10 +83,12 @@ class VehicleController extends Controller
         //update ban
         $vehicle->merek = $re->merek;
         $vehicle->platnumber = $re->platnumber;
+        $vehicle->update_by = $re->session_user;
         if ($vehicle->save()) {
-            $return['vehicle'] = [
+            $return['vehicle'][] = [
                 'status' => 'update',
-                'data' => $vehicle
+                'data' => $vehicle,
+                'update_by'=> $re->session_user
             ];
         }
 
@@ -96,7 +104,8 @@ class VehicleController extends Controller
                 if ($tireObj->save()) {
                     $return['tires'][] = [
                         'status' => 'update',
-                        'data' => $tireObj
+                        'data' => $tireObj,
+                        'update_by'=> $re->session_user
                     ];
                 }
             } else {
@@ -109,12 +118,14 @@ class VehicleController extends Controller
                 if ($tireObj->save()) {
                     $return['tires'][] = [
                         'status' => 'new',
-                        'data' => $tireObj
+                        'data' => $tireObj,
+                        'update_by'=> $re->session_user
                     ];
                 }
             }
         }
 
+        $this->history->insertHistory($return);
         return response()->json([
             'success' => true,
             'message' => 'Update Done',

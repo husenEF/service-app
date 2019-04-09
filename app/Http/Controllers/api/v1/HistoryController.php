@@ -64,7 +64,24 @@ class HistoryController extends Controller
     }
 
     
-    private function insertHistory(){
-
+    static function insertHistory(array $data){
+       if(is_array($data)){
+        $insertBulk = [];
+        // dd($data);
+        foreach($data as $kd =>$vd){
+            // dd($vd['status']);
+            foreach($vd as $vv){
+                $insertBulk[]=[
+                    "dataname"=>$kd,
+                    "comment"=>$vv['status'],
+                    "raw"=>serialize($vv['data']),
+                    "update_by"=>$vv['update_by']
+                ];
+            }
+            
+        }
+        // dd($insertBulk);
+        History::insert($insertBulk);
+       }
     }
 }
