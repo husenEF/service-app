@@ -13,34 +13,37 @@
       Ban
       <button type="button" class="btn btn-info float-right" v-on:click="addBan()">+ Ban</button>
     </h3>
-    
+
     <fieldset v-for="(tire, index) in master.tire" :key="index" class="border pl-3 pr-3 pb-3 mb-3">
       <legend class="w-auto">Tire {{index +1}}:</legend>
       <div class="row">
-        <div class="col-md-5">
+        <div class="col-md-5 mb-3">
           <input type="text" class="form-control" placeholder="Merek Ban" v-model="tire.merek">
         </div>
-        <div class="col-md-5">
-          <!-- <input
-            type="text"
-            class="form-control"
-            placeholder="Tanggal Beli"
-            v-model="tire.buy_date"
-          >-->
+        <div class="col-md-5 mb-3">
           <Datetime v-model="tire.buy_date" input-class="form-control"></Datetime>
         </div>
-        <div class="col-2">
+        <div class="col-md-2 mb-3">
           <button type="button" class="btn btn-danger btn-block" v-on:click="deletBan(tire.id)">X</button>
         </div>
       </div>
       <div class="row">
-        <div class="col-md-6">
-          
-        </div>
-        <div class="col-md-6">
-          <img v-bind:src="tire.images_path" class="img-responsive" /> 
-          <!-- <img data-original="{{tire.images_path}}" alt="" class="img-responsive"> -->
+        <div class="col-md-5 mb-3">
+          <div class="input-group mb-3">
+            <div class="custom-file">
+              <input
+                type="file"
+                class="custom-file-input"
+                id="myfile"
+              >
+              <label class="custom-file-label" for="myfile">Choose file</label>
+            </div>
           </div>
+        </div>
+        <div class="col-md-5 mb-3">
+          <img v-bind:src="tire.images_path" class="img-fluid">
+          <!-- <img data-original="{{tire.images_path}}" alt="" class="img-responsive"> -->
+        </div>
       </div>
     </fieldset>
     <button type="submit" class="btn btn-primary">Update</button>
