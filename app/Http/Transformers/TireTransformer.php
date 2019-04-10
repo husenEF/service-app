@@ -26,7 +26,7 @@ class TireTransformer extends TransformerAbstract
             "posistion" => $tire->posistion,
             "merek" => $tire->merek,
             "buy_date" => $tire->buy_date,
-            "images_path"=>"/media/tires/".$tire->images
+            "images_path"=>url('media/tires/'.$tire->images),
             // "getUser" => $tire->getUser
         ];
     }

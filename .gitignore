@@ -5,3 +5,5 @@ Homestead.yaml
 .env
 node_modules
 public/media/tires/
+nbproject/
+/nbproject/private/
