@@ -20,6 +20,7 @@ class CreateTableTires extends Migration
             $table->integer("posistion")->default("0");
             $table->string("merek");
             $table->date("buy_date");
+            $table->string("images")->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

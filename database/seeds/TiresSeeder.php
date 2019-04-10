@@ -24,7 +24,8 @@ class TiresSeeder extends Seeder
                 "posistion" => rand(1,15),
                 "merek" => $faker->company(),
                 "buy_date"=>$faker->dateTime("now"),
-                "created_at"=>$faker->dateTime("now")
+                "created_at"=>$faker->dateTime("now"),
+                "images"=>$faker->image("public/media/tires",400,300,'transport',false)
                 // 'email' => $faker->email,
                 // 'password' => Hash::make("123123"),
                 // 'roles' => 'mekanik',
