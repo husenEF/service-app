@@ -12,14 +12,11 @@ use App\Http\Controllers\api\v1\HistoryController;
 
 class AuthController extends Controller
 {
-
-
     /**
      * @name register
      */
     public function register(Request $request)
     {
-
         $this->validate(
             $request,
             [

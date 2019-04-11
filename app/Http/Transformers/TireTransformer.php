@@ -26,12 +26,13 @@ class TireTransformer extends TransformerAbstract
             "posistion" => $tire->posistion,
             "merek" => $tire->merek,
             "buy_date" => $tire->buy_date,
-            "images_path"=>url('media/tires/'.$tire->images),
+            "images_path" => url('media/tires/' . $tire->images),
             // "getUser" => $tire->getUser
         ];
     }
 
-    public function includeUser(Tire $tire){
+    public function includeUser(Tire $tire)
+    {
         return $this->item($tire->getUser, new UserTransformer());
     }
 }

@@ -11,12 +11,12 @@ use App\Http\Resources\UserCollection as UserResource;
 
 class UserController extends Controller
 {
-    public function __construct() {
-    
-    }
+    public function __construct()
+    { }
 
-    public function get() {
-      return response()->json(['success' => true, 'message' => 'Halo']);
+    public function get()
+    {
+        return response()->json(['success' => true, 'message' => 'Halo']);
     }
 
     public function show($id)
