@@ -18,7 +18,9 @@
         <h1 class="text-center">Ban</h1>
       </div>
       <div class="col-6">
-        <h1 class="text-center">Histori Ban</h1>
+        <h1 class="text-center">
+          <router-link to="/history">History Ban</router-link>
+        </h1>
       </div>
     </div>
   </div>

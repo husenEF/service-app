@@ -15,7 +15,20 @@ class HistoryController extends Controller
      */
     public function index()
     {
-        //
+        $history = History::paginate(15);
+        if ($history) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Get Data Success',
+                'data' => $history
+            ], 200);
+        } else {
+            return response()->json([
+                'success' => false,
+                'message' => 'Get Data failed',
+                'data' => ""
+            ], 404);
+        }
     }
 
     /**

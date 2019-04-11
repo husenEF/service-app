@@ -9,6 +9,9 @@ import VehicleIndex from "./components/view/Vehicle/Index.vue"
 import VehicleList from "./components/view/Vehicle/List.vue"
 import VehicleDetail from "./components/view/Vehicle/Detail.vue"
 
+//history
+import HistoryIndex from "./components/view/History/Index.vue"
+import HistoryList from "./components/view/History/List.vue"
 
 export const routes = [
     {
@@ -47,6 +50,19 @@ export const routes = [
             {
                 path: ":id",
                 component: VehicleDetail
+            }
+        ]
+    },
+    {
+        path: "/history",
+        component: HistoryIndex,
+        meta: {
+            requiresAuth: true
+        },
+        children: [
+            {
+                path: "/",
+                component: HistoryList,
             }
         ]
     }
