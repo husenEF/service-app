@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\User;
 
+use App\Http\Controllers\api\v1\HistoryController;
+
+
 class AuthController extends Controller
 {
 
@@ -111,5 +114,13 @@ class AuthController extends Controller
                 400
             );
         }
+    }
+
+    static function getUser($token = null)
+    {
+        if ($token == null)
+            return false;
+        $apiToken = explode(" ", $token);
+        return User::where('api_token', $apiToken[1])->first();
     }
 }

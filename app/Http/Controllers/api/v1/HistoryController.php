@@ -6,9 +6,16 @@ use App\History;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Transformers\HistoryTransformer;
+use App\Http\Controllers\api\v1\AuthController;
 
 class HistoryController extends Controller
 {
+    private $auth = null;
+
+    function __construct()
+    {
+        $this->auth = new AuthController();
+    }
     /**
      * Display a listing of the resource.
      *
@@ -16,7 +23,7 @@ class HistoryController extends Controller
      */
     public function index()
     {
-        $history = History::where('dataname','tires')->paginate(15);
+        $history = History::where('dataname', 'tires')->paginate(15);
         $history = app('fractal')->collection($history, new HistoryTransformer())->getArray();
         if ($history) {
             return response()->json([
@@ -78,25 +85,26 @@ class HistoryController extends Controller
         //
     }
 
-    
-    static function insertHistory(array $data){
-       if(is_array($data)){
-        $insertBulk = [];
-        // dd($data);
-        foreach($data as $kd =>$vd){
-            // dd($vd['status']);
-            foreach($vd as $vv){
-                $insertBulk[]=[
-                    "dataname"=>$kd,
-                    "comment"=>$vv['status'],
-                    "raw"=>serialize($vv['data']),
-                    "update_by"=>$vv['update_by']
-                ];
+
+    static function insertHistory(array $data)
+    {
+        $user = AuthController::getUser($data['token']);
+        if (is_array($data['data'])) {
+            $insertBulk = [];
+            // dd($data);
+            foreach ($data['data'] as $kd => $vd) {
+                // dd($vd['status']);
+                foreach ($vd as $vv) {
+                    $insertBulk[] = [
+                        "dataname" => $kd,
+                        "comment" => $vv['status'],
+                        "raw" => serialize($vv['data']),
+                        "update_by" => $user->id
+                    ];
+                }
             }
-            
+            // dd($insertBulk);
+            History::insert($insertBulk);
         }
-        // dd($insertBulk);
-        History::insert($insertBulk);
-       }
     }
 }

@@ -104,6 +104,7 @@ export default {
       console.log("tire", tire);
     },
     deletBan(id) {
+      const userId = this.getUser.id;
       this.$swal({
         title: "Anda Yakin?",
         text: "Anda akan menghapus data ini?",
