@@ -5,6 +5,7 @@ namespace App\Http\Controllers\api\v1;
 use App\History;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Transformers\HistoryTransformer;
 
 class HistoryController extends Controller
 {
@@ -15,7 +16,8 @@ class HistoryController extends Controller
      */
     public function index()
     {
-        $history = History::paginate(15);
+        $history = History::where('dataname','tires')->paginate(15);
+        $history = app('fractal')->collection($history, new HistoryTransformer())->getArray();
         if ($history) {
             return response()->json([
                 'success' => true,
