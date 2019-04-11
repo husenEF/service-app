@@ -65,7 +65,6 @@ class VehicleController extends Controller {
 
     public function update(Request $re, $id) {
 
-
         // dd($re->all());
         $vehicle = Vehicle::with('tires')->find($id);
         if (!$vehicle) {
@@ -91,7 +90,7 @@ class VehicleController extends Controller {
 
         //update ban
         // dd($re->tires);
-        foreach ($re->tires as $k => $tire) {
+        foreach ($re->tire as $k => $tire) {
             $tire = (object) $tire;
             if ($tire->id > 0) {
                 $tireObj = Tire::find($tire->id);
