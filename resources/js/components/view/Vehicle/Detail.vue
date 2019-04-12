@@ -29,7 +29,10 @@
           <Datetime v-model="theTire.buy_date" input-class="form-control"></Datetime>
         </div>
         <div class="col-2">
-          <button type="button" class="btn btn-danger btn-block" v-on:click="deletBan(theTire.id)">X</button>
+          <div class="btn-group" role="group" aria-label="Basic example">
+            <button type="button" class="btn btn-danger" v-on:click="deletBan(theTire.id)">X</button>
+            <button type="button" class="btn btn-info" v-on:click="historyBand(theTire.id)">a</button>
+          </div>
         </div>
       </div>
     </fieldset>
@@ -122,6 +125,9 @@ export default {
           console.log("cancel");
         }
       });
+    },
+    historyBand(id) {
+      this.$route.push({ path: "history/tires", params: { id: id } });
     }
   }
 };

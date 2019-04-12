@@ -89,19 +89,26 @@ class HistoryController extends Controller
     static function insertHistory(array $data)
     {
         $user = AuthController::getUser($data['token']);
-        dd($data);
+        // dd($data);
         if (is_array($data['data'])) {
             $insertBulk = [];
-            // dd($data);
+
             foreach ($data['data'] as $kd => $vd) {
-                // dd($vd['status']);
-                foreach ($vd as $vv) {
-                    $insertBulk[] = [
-                        "dataname" => $kd,
-                        "comment" => $vv['status'],
-                        "raw" => serialize($vv['data']),
-                        "update_by" => $user->id
-                    ];
+                if ($kd == 'tires') {
+                    foreach ($vd as $vv) {
+                        $object = json_decode($vv['data']);
+                        $insertBulk[] = [
+                            "dataname" => $kd,
+                            "status" => $vv['status'],
+                            'id_tires' => $object->id,
+                            "id_vehicle" => $object->id_vehicle,
+                            "created_by" => $object->created_by,
+                            "posistion" => $object->posistion,
+                            "merek" => $object->merek,
+                            "buy_date" => $object->buy_date,
+                            "images" => (isset($object->images)) ? $object->images : ''
+                        ];
+                    }
                 }
             }
             // dd($insertBulk);

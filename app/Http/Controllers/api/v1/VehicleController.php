@@ -79,7 +79,7 @@ class VehicleController extends Controller
         }
 
         $return = ['token' => $re->header('Authorization')];
-        //update ban
+        //update ban                   // dd($object);
         $vehicle->merek = $re->merek;
         $vehicle->platnumber = $re->platnumber;
         $vehicle->update_by = $re->session_user;
@@ -103,7 +103,7 @@ class VehicleController extends Controller
                 if ($tireObj->save()) {
                     $return['data']['tires'][] = [
                         'status' => 'update',
-                        'data' => $tireObj,
+                        'data' => json_encode($tireObj),
                         'update_by' => $re->session_user
                     ];
                 }
@@ -117,7 +117,7 @@ class VehicleController extends Controller
                 if ($tireObj->save()) {
                     $return['data']['tires'][] = [
                         'status' => 'new',
-                        'data' => $tireObj,
+                        'data' => json_encode($tireObj),
                         'update_by' => $re->session_user
                     ];
                 }
