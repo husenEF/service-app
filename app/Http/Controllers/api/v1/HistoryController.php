@@ -89,6 +89,7 @@ class HistoryController extends Controller
     static function insertHistory(array $data)
     {
         $user = AuthController::getUser($data['token']);
+        dd($data);
         if (is_array($data['data'])) {
             $insertBulk = [];
             // dd($data);

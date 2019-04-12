@@ -40,9 +40,9 @@ class TireController extends Controller
         $return = ["token" => $re->header("Authorization")];
         $delete = Tire::find($id);
         if ($delete) {
-            $return['tires'][] = [
+            $return['data']['tires'][] = [
                 'status' => 'delete',
-                'data' => $delete,
+                'data' => json_encode($delete),
             ];
 
             $this->history->insertHistory($return);
