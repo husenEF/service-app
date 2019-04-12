@@ -15,10 +15,18 @@ class CreateTableHistories extends Migration
     {
         Schema::create('histories', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->text("dataname");
-            $table->text("comment")->nullable();
-            $table->text("raw")->nullable();
-            $table->integer("update_by")->nullable();
+            // $table->text("dataname");
+            // $table->text("comment")->nullable();
+            // $table->text("raw")->nullable();
+            // $table->integer("update_by")->nullable();
+            $table->integer('id_tires')->nullable();
+            $table->integer("id_vehicle")->nullable();
+            $table->integer("created_by")->nullable();
+            $table->integer("posistion")->default("0");
+            $table->string("merek")->nullable();
+            $table->date("buy_date")->nullable();
+            $table->string("images")->nullable();
+            $table->string("statue")->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

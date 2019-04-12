@@ -17,7 +17,7 @@ class TiresSeeder extends Seeder
         $vehicle = Vehicle::all()->count();
         $user = User::all()->count();
         $faker = Faker::create();
-        foreach (range(0, 50) as $i) {
+        foreach (range(0, 25) as $i) {
             DB::table('tires')->insert([
                 'id_vehicle' => $faker->biasedNumberBetween(1, $vehicle),
                 'created_by' => $faker->biasedNumberBetween(1, $user),

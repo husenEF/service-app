@@ -17,11 +17,10 @@ class VehicleSeeder extends Seeder
     {
         $user = User::all()->count();
         $faker = Faker::create();
-        $cars = ["bus", "truck", "car", "trailer"];
+        // $cars = ["bus", "truck", "car", "trailer"];
         foreach (range(0, 10) as $i) {
             $fakeId = $faker->randomDigit();
-
-            $type = array_rand($cars);
+            // $type = array_rand($cars);
             DB::table('vehicles')->insert([
                 'user_id' => $faker->biasedNumberBetween(1, $user),
                 'merek' => $faker->name,
