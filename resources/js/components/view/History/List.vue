@@ -15,6 +15,21 @@
               <th>#</th>
             </tr>
           </thead>
+          <tbody>
+            <tr v-for="(h,i) in list" :key="i">
+              <td>{{i}}</td>
+              <td>{{h.dataname}}</td>
+              <td>{{h.comment}}</td>
+              <td>
+                <p>
+                  <span v-for="(r,o) in h.raw" :key="o" class="clearfix">
+                    <strong>{{o}}</strong>
+                    : {{r}}
+                  </span>
+                </p>
+              </td>
+            </tr>
+          </tbody>
         </table>
       </div>
     </div>
@@ -29,7 +44,8 @@ export default {
   },
   data() {
     return {
-      list: {}
+      list: {},
+      meta: {}
     };
   },
   methods: {
@@ -39,6 +55,7 @@ export default {
         if (res.data.success) {
           const histId = Object.keys(res.data.data).filter(e => e != "meta");
           this.list = histId.map(i => res.data.data[i]);
+          this.meta = res.data.data.meta;
         }
       });
     }

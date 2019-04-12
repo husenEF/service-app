@@ -23,7 +23,7 @@ class HistoryController extends Controller
      */
     public function index()
     {
-        $history = History::where('dataname', 'tires')->paginate(15);
+        $history = History::where('dataname', 'tires')->paginate(2);
         $history = app('fractal')->collection($history, new HistoryTransformer())->getArray();
         if ($history) {
             return response()->json([
