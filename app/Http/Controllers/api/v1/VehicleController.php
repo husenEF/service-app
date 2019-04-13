@@ -83,29 +83,41 @@ class VehicleController extends Controller
         $vehicle->merek = $re->merek;
         $vehicle->platnumber = $re->platnumber;
         $vehicle->update_by = $re->session_user;
-        if ($vehicle->save()) {
-            $return['data']['vehicle'][] = [
-                'status' => 'update',
-                'data' => $vehicle,
-                'update_by' => $re->session_user
-            ];
-        }
+        // if ($vehicle->save()) {
+        //     $return['data']['vehicle'][] = [
+        //         'status' => 'update',
+        //         'data' => $vehicle,
+        //         'update_by' => $re->session_user
+        //     ];
+        // }
 
         //update ban
         // dd($re->tires);
         foreach ($re->tire as $k => $tire) {
             $tire = (object)$tire;
             if ($tire->id > 0) {
+                $update = false;
                 $tireObj = Tire::find($tire->id);
-                $tireObj->merek = $tire->merek;
-                $tireObj->buy_date = date("Y-m-d H:i:s", strtotime($tire->buy_date));
-                $tireObj->posistion = $k + 1;
-                if ($tireObj->save()) {
-                    $return['data']['tires'][] = [
-                        'status' => 'update',
-                        'data' => json_encode($tireObj),
-                        'update_by' => $re->session_user
-                    ];
+                if ($tireObj->merek != $tire->merek) {
+                    $tireObj->merek = $tire->merek;
+                    $update = true;
+                }
+                if (date("Y-m-d H:i:s", strtotime($tireObj->buy_date)) !== date("Y-m-d H:i:s", strtotime($tire->buy_date))) {
+                    $tireObj->buy_date = date("Y-m-d H:i:s", strtotime($tire->buy_date));
+                    $update = true;
+                }
+                if ($tireObj->posistion !== $tire->posistion) {
+                    $update = true;
+                    $tireObj->posistion = $tire->position;
+                }
+                if ($update) {
+                    if ($tireObj->save()) {
+                        $return['data']['tires'][] = [
+                            'status' => 'update',
+                            'data' => json_encode($tireObj),
+                            'update_by' => $re->session_user
+                        ];
+                    }
                 }
             } else {
                 $tireObj = new Tire();

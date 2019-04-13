@@ -20,13 +20,8 @@
           <input type="text" class="form-control" placeholder="Merek Ban" v-model="theTire.merek">
         </div>
         <div class="col-md-5">
-          <!-- <input
-            type="text"
-            class="form-control"
-            placeholder="Tanggal Beli"
-            v-model="theTire.buy_date"
-          >-->
-          <Datetime v-model="theTire.buy_date" input-class="form-control"></Datetime>
+          <!-- <label for="">{{theTire.buy_date}}</label> -->
+          <Datetime v-model="theTire.buy_date" input-class="form-control" value-zone="Asia/Jakarta"></Datetime>
         </div>
         <div class="col-2">
           <div class="btn-group" role="group" aria-label="Basic example">

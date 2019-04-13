@@ -131,7 +131,7 @@ class HistoryController extends Controller
     {
         $user = AuthController::getUser($data['token']);
         // dd($data);
-        if (is_array($data['data'])) {
+        if (isset($data['data']) && is_array($data['data'])) {
             $insertBulk = [];
 
             foreach ($data['data'] as $kd => $vd) {
