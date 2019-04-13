@@ -85,6 +85,29 @@ class HistoryController extends Controller
         //
     }
 
+    public function positionHistory(Request $re, $vehicle, $id)
+    {
+        $history = History::where([
+            "posistion" => $id,
+            "id_vehicle" => $vehicle
+        ])->with('user')->paginate();
+        // dd($history);
+        if ($history) {
+            $history = app('fractal')->collection($history, new HistoryTransformer())->getArray();
+            return response()->json([
+                'success' => true,
+                'message' => 'Get Data Success',
+                'data' => $history
+            ], 200);
+        } else {
+            return response()->json([
+                'success' => false,
+                'message' => 'Get Data failed',
+                'data' => ""
+            ], 404);
+        }
+    }
+
     public function tireHistory(Request $re, $id)
     {
         $history = History::where('id_tires', $id)->paginate(15);
@@ -124,7 +147,8 @@ class HistoryController extends Controller
                             "posistion" => $object->posistion,
                             "merek" => $object->merek,
                             "buy_date" => $object->buy_date,
-                            "images" => (isset($object->images)) ? $object->images : ''
+                            "images" => (isset($object->images)) ? $object->images : '',
+                            'created_at' => date('Y-m-d H:i:s')
                         ];
                     }
                 }

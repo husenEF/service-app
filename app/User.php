@@ -32,4 +32,5 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     ];
 
     protected $dates = ['deleted_at'];
+    public $timestamps = true;
 }

@@ -8,7 +8,9 @@ class HistoryTransformer extends TransformerAbstract
 {
     protected $availableIncludes = [];
 
-    protected $defaultIncludes = [];
+    protected $defaultIncludes = [
+        'user'
+    ];
 
     public function transform(History $history)
     {
@@ -23,6 +25,13 @@ class HistoryTransformer extends TransformerAbstract
             'merek' => $history->merek,
             'buy_date' => $history->buy_date,
             'images' => $history->images,
+            'created_at' => date("Y-m-d H:m:s",strtotime($history->created_at)),
+            // 'user' => $history
         ];
+    }
+
+    public function includeUser(History $history)
+    {
+        return $this->item($history->user, new UserTransformer());
     }
 }

@@ -1069,6 +1069,11 @@ babel-code-frame@^6.26.0:
     esutils "^2.0.2"
     js-tokens "^3.0.2"
 
+babel-helper-vue-jsx-merge-props@^2.0.2:
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/babel-helper-vue-jsx-merge-props/-/babel-helper-vue-jsx-merge-props-2.0.3.tgz#22aebd3b33902328e513293a8e4992b384f9f1b6"
+  integrity sha512-gsLiKK7Qrb7zYJNgiXKpXblxbV5ffSwR0f5whkPAaBAR4fhi6bwRZxX9wBlIc5M/v8CCkXUbXZL4N/nSE97cqg==
+
 babel-loader@^8.0.4:
   version "8.0.5"
   resolved "https://registry.yarnpkg.com/babel-loader/-/babel-loader-8.0.5.tgz#225322d7509c2157655840bba52e46b6c2f2fe33"
@@ -6270,6 +6275,13 @@ vue-feather-icon@^1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/vue-feather-icon/-/vue-feather-icon-1.2.0.tgz#3801b8d25f99ea62978a2f0c4042976ede497573"
   integrity sha1-OAG40l+Z6mKXii8MQEKXbt5JdXM=
+
+vue-feather-icons@^4.10.0:
+  version "4.10.0"
+  resolved "https://registry.yarnpkg.com/vue-feather-icons/-/vue-feather-icons-4.10.0.tgz#84b699fe148b709ff3f609fc94eed44b078f1c27"
+  integrity sha512-fmL/v7DN9HYqnkR7h16PvoMgUk41kxqgqv7yPCAcW4nXRaX1dKgnLwm8m5R2Lpu0NxwpYzRKeTvOs+ti3KaqSg==
+  dependencies:
+    babel-helper-vue-jsx-merge-props "^2.0.2"
 
 vue-hot-reload-api@^2.3.0:
   version "2.3.3"

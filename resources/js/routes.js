@@ -13,6 +13,7 @@ import VehicleDetail from "./components/view/Vehicle/Detail.vue"
 import HistoryIndex from "./components/view/History/Index.vue"
 import HistoryList from "./components/view/History/List.vue"
 import HistoryTire from "./components/view/History/Tire.vue"
+import HistoryPosition from "./components/view/History/Position.vue"
 
 
 export const routes = [
@@ -69,6 +70,9 @@ export const routes = [
             {
                 path: "tires/:id",
                 component: HistoryTire
+            }, {
+                path: "position/:vehicle/:id",
+                component: HistoryPosition
             }
         ]
     }

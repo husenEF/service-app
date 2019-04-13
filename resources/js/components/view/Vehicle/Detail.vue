@@ -30,8 +30,23 @@
         </div>
         <div class="col-2">
           <div class="btn-group" role="group" aria-label="Basic example">
-            <button type="button" class="btn btn-danger" v-on:click="deletBan(theTire.id)">X</button>
-            <button type="button" class="btn btn-info" v-on:click="historyBand(theTire.id)">a</button>
+            <button type="button" class="btn btn-danger btn-sm" v-on:click="deletBan(theTire.id)">X</button>
+            <button
+              type="button"
+              class="btn btn-info btn-sm"
+              v-on:click="historyBand(theTire.id)"
+              title="History Band"
+            >
+              <EyeIcon/>
+            </button>
+            <button
+              type="button"
+              class="btn btn-warning btn-sm"
+              title="History Posisi"
+              v-on:click="historyPosition(data.id,theTire.posistion)"
+            >
+              <EyeIcon/>
+            </button>
           </div>
         </div>
       </div>
@@ -42,13 +57,15 @@
 
 <script>
 import { Datetime } from "vue-datetime";
+import { EyeIcon } from "vue-feather-icons";
 // You need a specific loader for CSS files
 import "vue-datetime/dist/vue-datetime.css";
 
 export default {
   name: "vehicleDetail",
   components: {
-    Datetime
+    Datetime,
+    EyeIcon
   },
   created() {
     const id = this.$route.params.id;
@@ -128,6 +145,9 @@ export default {
     },
     historyBand(id) {
       this.$router.push({ path: "/history/tires/" + id });
+    },
+    historyPosition(v, i) {
+      this.$router.push({ path: "/history/position/" + v + "/" + i });
     }
   }
 };
