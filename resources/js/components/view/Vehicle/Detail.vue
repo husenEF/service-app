@@ -127,7 +127,7 @@ export default {
       });
     },
     historyBand(id) {
-      this.$route.push({ path: "history/tires", params: { id: id } });
+      this.$router.push({ path: "/history/tires/" + id });
     }
   }
 };

@@ -40,5 +40,6 @@ $router->group(['namespace' => 'v1', 'prefix' => '/v1'], function($router) {
   //history
   $router->group(['prefix'=>'history'],function() use ($router){
       $router->get('/list','HistoryController@index');
+      $router->get("/tire/{id}","HistoryController@tireHistory");
   });
 });

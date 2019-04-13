@@ -67,7 +67,7 @@ export const routes = [
                 component: HistoryList,
             },
             {
-                path: "/tires/:id",
+                path: "tires/:id",
                 component: HistoryTire
             }
         ]

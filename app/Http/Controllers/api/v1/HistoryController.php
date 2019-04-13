@@ -23,7 +23,7 @@ class HistoryController extends Controller
      */
     public function index()
     {
-        $history = History::where('dataname', 'tires')->paginate(2);
+        $history = History::paginate(2);
         $history = app('fractal')->collection($history, new HistoryTransformer())->getArray();
         if ($history) {
             return response()->json([
@@ -85,6 +85,24 @@ class HistoryController extends Controller
         //
     }
 
+    public function tireHistory(Request $re, $id)
+    {
+        $history = History::where('id_tires', $id)->paginate(15);
+        if ($history) {
+            $history = app('fractal')->collection($history, new HistoryTransformer())->getArray();
+            return response()->json([
+                'success' => true,
+                'message' => 'Get Data Success',
+                'data' => $history
+            ], 200);
+        } else {
+            return response()->json([
+                'success' => false,
+                'message' => 'Get Data failed',
+                'data' => ""
+            ], 404);
+        }
+    }
 
     static function insertHistory(array $data)
     {

@@ -15,9 +15,14 @@ class HistoryTransformer extends TransformerAbstract
         return [
             'id' => $history->id,
             'dataname' => $history->dataname,
-            'comment' => $history->comment,
-            'raw' => unserialize($history->raw),
-            'user' => $history->update_by
+            'status' => $history->status,
+            'id_tires' => $history->id_tires,
+            'id_vehicle' => $history->id_vehicle,
+            'id_vehicle' => $history->id_vehicle,
+            'posistion' => $history->posistion,
+            'merek' => $history->merek,
+            'buy_date' => $history->buy_date,
+            'images' => $history->images,
         ];
     }
 }
