@@ -5,7 +5,7 @@ require('./bootstrap');
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Vuex from 'vuex'
-import VueFeatherIcon from 'vue-feather-icon'
+// import VueFeatherIcon from 'vue-feather-icon'
 import { Datetime } from 'vue-datetime'
 import VueSweetalert2 from 'vue-sweetalert2';
 
@@ -16,7 +16,7 @@ import { initialize } from "./helpers/general"
 
 Vue.use(VueRouter)
 Vue.use(Vuex)
-Vue.use(VueFeatherIcon)
+// Vue.use(VueFeatherIcon)
 Vue.use(VueSweetalert2)
 
 const store = new Vuex.Store(StoreData)

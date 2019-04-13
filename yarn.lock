@@ -6271,11 +6271,6 @@ vue-datetime@^1.0.0-beta.10:
   resolved "https://registry.yarnpkg.com/vue-datetime/-/vue-datetime-1.0.0-beta.10.tgz#788a1c2deefa3e14fbf549373ec00ebde707596a"
   integrity sha512-/wJkj95JSzWqH0Ja4JpXX6I+fXo2A34GCtsx00vR5RjNxk3++93rg7G4ZlI3MFo807zH9bIxXfIohbAZgnAWbQ==
 
-vue-feather-icon@^1.2.0:
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/vue-feather-icon/-/vue-feather-icon-1.2.0.tgz#3801b8d25f99ea62978a2f0c4042976ede497573"
-  integrity sha1-OAG40l+Z6mKXii8MQEKXbt5JdXM=
-
 vue-feather-icons@^4.10.0:
   version "4.10.0"
   resolved "https://registry.yarnpkg.com/vue-feather-icons/-/vue-feather-icons-4.10.0.tgz#84b699fe148b709ff3f609fc94eed44b078f1c27"
