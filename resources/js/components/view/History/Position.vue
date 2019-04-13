@@ -18,7 +18,7 @@
           </thead>
           <tbody>
             <tr v-for="(h,i) in list" :key="i">
-              <td>{{i}}</td>
+              <td>{{(i+1)+(meta.pagination.per_page*(meta.pagination.current_page-1))}}</td>
               <td>{{h.dataname}}</td>
               <td>{{h.status}}</td>
               <td>
@@ -43,7 +43,7 @@
       <nav aria-label="Page navigation example" v-if="meta.pagination.total_pages>1">
         <ul class="pagination mb-0">
           <li v-for="(link,i) in meta.pagination.links" :key="i" class="page-item">
-            <a href="#" class="page-link" v-on:click="this.updateLink(link)">{{i}}</a>
+            <button type="button " class="page-link" v-on:click="updateLink(link)">{{i}}</button>
           </li>
         </ul>
       </nav>
