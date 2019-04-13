@@ -90,7 +90,7 @@ class HistoryController extends Controller
         $history = History::where([
             "posistion" => $id,
             "id_vehicle" => $vehicle
-        ])->with('user')->paginate();
+        ])->with('user')->paginate(5);
         // dd($history);
         if ($history) {
             $history = app('fractal')->collection($history, new HistoryTransformer())->getArray();

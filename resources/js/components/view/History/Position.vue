@@ -39,6 +39,15 @@
         </table>
       </div>
     </div>
+    <div class="card-footer">
+      <nav aria-label="Page navigation example" v-if="meta.pagination.total_pages>1">
+        <ul class="pagination mb-0">
+          <li v-for="(link,i) in meta.pagination.links" :key="i" class="page-item">
+            <a href="#" class="page-link" v-on:click="this.updateLink(link)">{{i}}</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
   </div>
 </template>
 
@@ -64,6 +73,16 @@ export default {
           this.meta = res.data.data.meta;
         }
       });
+    },
+    updateLink(link) {
+      axios.get(link).then(res => {
+        if (res.data.success) {
+          const listId = Object.keys(res.data.data).filter(e => e !== "meta");
+          this.list = listId.map(e => res.data.data[e]);
+          this.meta = res.data.data.meta;
+        }
+      });
+      return false;
     }
   }
 };
