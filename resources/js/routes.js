@@ -8,6 +8,7 @@ import User from "./components/view/User/Index.vue"
 import VehicleIndex from "./components/view/Vehicle/Index.vue"
 import VehicleList from "./components/view/Vehicle/List.vue"
 import VehicleDetail from "./components/view/Vehicle/Detail.vue"
+import VehicleAdd from "./components/view/Vehicle/Add.vue"
 
 //history
 import HistoryIndex from "./components/view/History/Index.vue"
@@ -49,6 +50,10 @@ export const routes = [
             {
                 path: "/",
                 component: VehicleList
+            },
+            {
+                path: "add",
+                component: VehicleAdd
             },
             {
                 path: ":id",

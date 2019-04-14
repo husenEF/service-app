@@ -1,7 +1,10 @@
 <template>
   <div class="card">
     <div class="card-header">
-      <h2>Daftar Kendaraan</h2>
+      <h2>
+        Daftar Kendaraan
+        <router-link to="/vehicle/add" class="btn btn-info float-right btn-sm"><PlusIcon/></router-link>
+      </h2>
     </div>
     <div class="card-body">
       <div class="table-responsive">
@@ -40,11 +43,13 @@
 </template>
 
 <script>
-import axios from "axios";
+import { PlusIcon } from "vue-feather-icons";
 
 export default {
   name: "vehicleIndex",
-  components: {},
+  components: {
+    PlusIcon
+  },
   beforeCreate() {
     // this.getList()
   },

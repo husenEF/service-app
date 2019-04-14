@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\api\v1\HistoryController;
 use App\Http\Transformers\VehicleTransformer;
 use App\Http\Transformers\VehicleItemTransformer;
+use App\Http\Controllers\api\v1\AuthController;
 
 class VehicleController extends Controller
 {
@@ -142,5 +143,35 @@ class VehicleController extends Controller
             'message' => 'Update Done',
             'data' => $return
         ], 200);
+    }
+
+    public function add(Request $re)
+    {
+        $this->validate($re, [
+            'merek' => 'required',
+            'plat_number' => 'required'
+        ]);
+
+        $user = AuthController::getUser($re->header('authorization'));
+
+        $vehicle = new Vehicle();
+        $vehicle->user_id = $user->id;
+        $vehicle->merek = $re->merek;
+        $vehicle->platnumber = $re->plat_number;
+        $vehicle->update_by = $user->id;
+        $vehicle->created_by = $user->id;
+        if ($vehicle->save()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Add Vehicle Success',
+                'data' => ''
+            ], 201);
+        } else {
+            return response()->json([
+                'success' => false,
+                'message' => 'Save Error',
+                'data' => ""
+            ], 404);
+        }
     }
 }

@@ -29,6 +29,7 @@ $router->group(['namespace' => 'v1', 'prefix' => '/v1'], function ($router) {
         $router->get("/list", "VehicleController@index");
         $router->get("/{id}", "VehicleController@show");
         $router->put("/{id}", "VehicleController@update");
+        $router->post("/add", "VehicleController@add");
     });
 
     //tire
