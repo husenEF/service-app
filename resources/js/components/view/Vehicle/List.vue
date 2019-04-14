@@ -1,37 +1,50 @@
 <template>
-  <div class="table-responsive">
-    <table class="table">
-      <thead>
-        <tr>
-          <th>Merek</th>
-          <th>Plat</th>
-          <th>Jumlah Ban</th>
-          <th>Action</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="(item, index) in vehicle" :key="index">
-          <td>{{item.merek}}</td>
-          <td>{{item.platnumber}}</td>
-          <td>{{Object.keys(item.tire).length}}</td>
-          <td>
-            <router-link :to="`/vehicle/${item.id}`">Edit</router-link>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+  <div class="card">
+    <div class="card-header">
+      <h2>Daftar Kendaraan</h2>
+    </div>
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Merek</th>
+              <th>Plat</th>
+              <th>Jumlah Ban</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="(item, index) in vehicle" :key="index">
+              <td>{{item.merek}}</td>
+              <td>{{item.platnumber}}</td>
+              <td>{{Object.keys(item.tire).length}}</td>
+              <td>
+                <router-link :to="`/vehicle/${item.id}`">Edit</router-link>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="card-footer">
+      <nav aria-label="Page navigation example" v-if="meta.pagination.total_pages>1">
+        <ul class="pagination mb-0">
+          <li v-for="(link,i) in meta.pagination.links" :key="i" class="page-item">
+            <button type="button " class="page-link" v-on:click="updateLink(link)">{{i}}</button>
+          </li>
+        </ul>
+      </nav>
+    </div>
   </div>
 </template>
 
 <script>
-
 import axios from "axios";
 
 export default {
   name: "vehicleIndex",
-  components: {
-    
-  },
+  components: {},
   beforeCreate() {
     // this.getList()
   },
@@ -55,6 +68,16 @@ export default {
           alert("error get list vehicle");
         }
       });
+    },
+    updateLink(link) {
+      axios.get(link).then(res => {
+        if (res.data.success) {
+          const listId = Object.keys(res.data.data).filter(e => e !== "meta");
+          this.vehicle = listId.map(e => res.data.data[e]);
+          this.meta = res.data.data.meta;
+        }
+      });
+      return false;
     }
   },
   data() {
