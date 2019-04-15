@@ -65,6 +65,7 @@ export default {
   created() {
     const id = this.$route.params.id;
     this.getDetail(id);
+    this.$emit("back", "/vehicle");
   },
   computed: {
     getUser() {

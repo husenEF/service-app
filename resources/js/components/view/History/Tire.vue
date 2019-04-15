@@ -16,7 +16,7 @@
           </thead>
           <tbody>
             <tr v-for="(h,i) in list" :key="i">
-              <td>{{i}}</td>
+              <td>{{(i+1)+(meta.pagination.per_page*(meta.pagination.current_page-1))}}</td>
               <td>{{h.dataname}}</td>
               <td>{{h.status}}</td>
               <td>
@@ -34,6 +34,15 @@
           </tbody>
         </table>
       </div>
+    </div>
+    <div class="card-footer">
+      <nav aria-label="Page navigation example" v-if="meta.pagination.total_pages>1">
+        <ul class="pagination mb-0">
+          <li v-for="(link,i) in meta.pagination.links" :key="i" class="page-item">
+            <button type="button " class="page-link" v-on:click="updateLink(link)">{{i}}</button>
+          </li>
+        </ul>
+      </nav>
     </div>
   </div>
 </template>
@@ -64,8 +73,19 @@ export default {
           const listId = Object.keys(res.data.data).filter(e => e !== "meta");
           this.list = listId.map(e => res.data.data[e]);
           this.meta = res.data.data.meta;
+          this.$emit("back", "/vehicle/" + this.list[0].id_vehicle);
         }
       });
+    },
+    updateLink(link) {
+      axios.get(link).then(res => {
+        if (res.data.success) {
+          const listId = Object.keys(res.data.data).filter(e => e !== "meta");
+          this.list = listId.map(e => res.data.data[e]);
+          this.meta = res.data.data.meta;
+        }
+      });
+      return false;
     }
   }
 };

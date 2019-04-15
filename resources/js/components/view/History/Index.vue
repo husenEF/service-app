@@ -1,11 +1,11 @@
 <template>
   <div class="container-fluid">
     <div class="row">
-      <Header title="History" back="/"/>
+      <Header title="History" :back="url"/>
     </div>
     <div class="row vehicle-index justify-content-center">
       <div class="col-10 col-md-8">
-        <router-view></router-view>
+        <router-view @back="onBack"></router-view>
       </div>
     </div>
   </div>
@@ -17,6 +17,16 @@ export default {
   name: "historyMain",
   components: {
     Header
+  },
+  data() {
+    return {
+      url: "/"
+    };
+  },
+  methods: {
+    onBack(back) {
+      this.url = back;
+    }
   }
 };
 </script>

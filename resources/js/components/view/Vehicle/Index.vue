@@ -1,11 +1,11 @@
 <template>
   <div class="container-fluid">
     <div class="row">
-      <Header title="Kendaraan" back="/"/>
+      <Header title="Kendaraan" :back="url"/>
     </div>
     <div class="row vehicle-index justify-content-center">
       <div class="col-10 col-md-8">
-        <router-view></router-view>
+        <router-view @back="onBack"></router-view>
       </div>
     </div>
   </div>
@@ -17,6 +17,17 @@ export default {
   name: "vehicleMain",
   components: {
     Header
+  },
+  data() {
+    return {
+      url: "/"
+    };
+  },
+  methods: {
+    onBack(back) {
+      this.url = back;
+      // console.log("onData vehiclemain", back);
+    }
   }
 };
 </script>

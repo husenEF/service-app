@@ -41,6 +41,7 @@ export default {
   name: "historyList",
   created() {
     this.getList();
+    this.$emit("back", "/history");
   },
   data() {
     return {

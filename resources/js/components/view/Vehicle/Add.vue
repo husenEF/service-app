@@ -36,7 +36,9 @@ export default {
       error: {}
     };
   },
-  created() {},
+  created() {
+    this.$emit("back", "/vehicle");
+  },
   methods: {
     submitData() {
       this.error = {};

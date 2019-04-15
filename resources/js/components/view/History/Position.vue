@@ -57,6 +57,7 @@ export default {
   created() {
     const { vehicle, id } = this.$route.params;
     this.getList(vehicle, id);
+    this.$emit("back", "/vehicle/" + vehicle);
   },
   data() {
     return {

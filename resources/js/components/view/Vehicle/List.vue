@@ -3,7 +3,9 @@
     <div class="card-header">
       <h2>
         Daftar Kendaraan
-        <router-link to="/vehicle/add" class="btn btn-info float-right btn-sm"><PlusIcon/></router-link>
+        <router-link to="/vehicle/add" class="btn btn-info float-right btn-sm">
+          <PlusIcon/>
+        </router-link>
       </h2>
     </div>
     <div class="card-body">
@@ -31,7 +33,7 @@
       </div>
     </div>
     <div class="card-footer">
-      <nav aria-label="Page navigation example" v-if="meta.pagination.total_pages>1">
+      <nav aria-label="Page navigation example" v-if="(meta.pagination.total_pages)>1">
         <ul class="pagination mb-0">
           <li v-for="(link,i) in meta.pagination.links" :key="i" class="page-item">
             <button type="button " class="page-link" v-on:click="updateLink(link)">{{i}}</button>
@@ -55,6 +57,7 @@ export default {
   },
   created() {
     this.getList();
+    this.$emit("back", "/");
   },
   methods: {
     getList() {
@@ -64,7 +67,7 @@ export default {
         // console.log("res beforecreate", res);
         if (data.success == true) {
           let vehicleId = Object.keys(data.data).filter(i => i !== "meta");
-          console.log("map vehicle", vehicleId);
+          // console.log("map vehicle", vehicleId);
           this.vehicle = vehicleId.map(i => data.data[i]);
           if (data.data.hasOwnProperty("meta")) {
             this.meta = data.data.meta;
