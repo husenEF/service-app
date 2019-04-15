@@ -18,7 +18,7 @@ class TireController extends Controller
 
     public function index()
     {
-        $tire = Tire::paginate(5);
+        $tire = Tire::paginate();
 
         if ($tire) {
             return response()->json([
