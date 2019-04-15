@@ -98,7 +98,18 @@ export default {
 
       this.data.session_user = userId;
       axios.put("api/v1/vehicle/" + id, this.data).then(res => {
-        console.log("update", res);
+        if (res.data.success) {
+          this.$swal({
+            title: "Data Save",
+            text: res.data.message,
+            type: "success",
+            confirmButtonColor: "#3085d6"
+          }).then(res => {
+            if (res.value) {
+              window.location.reload();
+            }
+          });
+        }
       });
     },
     addBan() {
