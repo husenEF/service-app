@@ -9,29 +9,47 @@
           <thead>
             <tr>
               <th>No</th>
-              <th>Data Name</th>
+              <th>Merek</th>
               <th>Status</th>
-              <th>Raw</th>
-              <th>#</th>
+              <th>Keterangan</th>
+              <th>Kendaraan</th>
             </tr>
           </thead>
           <tbody>
             <tr v-for="(h,i) in list" :key="i">
-              <td>{{i}}</td>
-              <td>{{h.dataname}}</td>
-              <td>{{h.comment}}</td>
+              <td>{{(i+1)+(meta.pagination.per_page*(meta.pagination.current_page-1))}}</td>
+              <td>{{h.merek}}</td>
+              <td>{{h.status}}</td>
               <td>
                 <p>
-                  <span v-for="(r,o) in h.raw" :key="o" class="clearfix">
-                    <strong>{{o}}</strong>
-                    : {{r}}
-                  </span>
+                  Merek: {{h.merek}}
+                  <br>
+                  Images: {{h.images}}
+                  <br>
+                  Posisi: {{h.posistion}}
+                  <br>
+                  Pembelian: {{h.buy_date}}
+                </p>
+              </td>
+              <td>
+                <router-link :to="'/vehicle/'+h.vehicle.id">{{h.vehicle.merek}}</router-link>
+                <p>
+                  Plat Number : {{h.vehicle.platnumber}}
                 </p>
               </td>
             </tr>
           </tbody>
         </table>
       </div>
+    </div>
+    <div class="card-footer">
+      <nav aria-label="Page navigation example" v-if="meta.pagination.total_pages>1">
+        <ul class="pagination mb-0">
+          <li v-for="(link,i) in meta.pagination.links" :key="i" class="page-item">
+            <button type="button " class="page-link" v-on:click="updateLink(link)">{{i}}</button>
+          </li>
+        </ul>
+      </nav>
     </div>
   </div>
 </template>
@@ -59,6 +77,16 @@ export default {
           this.meta = res.data.data.meta;
         }
       });
+    },
+    updateLink(link) {
+      axios.get(link).then(res => {
+        if (res.data.success) {
+          const listId = Object.keys(res.data.data).filter(e => e !== "meta");
+          this.list = listId.map(e => res.data.data[e]);
+          this.meta = res.data.data.meta;
+        }
+      });
+      return false;
     }
   }
 };

@@ -14,4 +14,8 @@ class History extends Model
     {
         return $this->hasOne('App\User', 'id', 'created_by');
     }
+
+    public function vehicle(){
+        return $this->hasOne("App\Vehicle",'id','id_vehicle');
+    }
 }

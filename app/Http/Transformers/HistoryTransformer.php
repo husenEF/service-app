@@ -25,8 +25,12 @@ class HistoryTransformer extends TransformerAbstract
             'merek' => $history->merek,
             'buy_date' => $history->buy_date,
             'images' => $history->images,
-            'created_at' => date("Y-m-d H:m:s",strtotime($history->created_at)),
-            // 'user' => $history
+            'created_at' => date("Y-m-d H:m:s", strtotime($history->created_at)),
+            'vehicle' => [
+                "merek" => $history->vehicle->merek,
+                "platnumber" => $history->vehicle->platnumber,
+                "id" => $history->vehicle->id
+            ]
         ];
     }
 

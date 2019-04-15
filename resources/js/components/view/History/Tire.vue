@@ -12,22 +12,33 @@
               <th>Data Name</th>
               <th>Status</th>
               <th>Keterangan</th>
+              <th>Kendaraan</th>
+              <th>Update By</th>
             </tr>
           </thead>
           <tbody>
             <tr v-for="(h,i) in list" :key="i">
               <td>{{(i+1)+(meta.pagination.per_page*(meta.pagination.current_page-1))}}</td>
-              <td>{{h.dataname}}</td>
+              <td>{{h.merek}}</td>
               <td>{{h.status}}</td>
               <td>
                 <p>
-                  Merek: {{h.merek}}
-                  <br>
                   Images: {{h.images}}
                   <br>
                   Posisi: {{h.posistion}}
                   <br>
                   Pembelian: {{h.buy_date}}
+                </p>
+              </td>
+              <td>
+                <router-link :to="'/vehicle/'+h.vehicle.id">{{h.vehicle.merek}}</router-link>
+                <p>Plat Number : {{h.vehicle.platnumber}}</p>
+              </td>
+              <td>
+                {{h.user.name}}
+                <p>
+                  <strong>Update at :</strong>
+                  {{h.created_at}}
                 </p>
               </td>
             </tr>
