@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Tire;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\api\v1\HistoryController;
+use App\Http\Transformers\TireTransformer;
 
 class TireController extends Controller
 {
@@ -18,8 +19,9 @@ class TireController extends Controller
 
     public function index()
     {
-        $tire = Tire::paginate();
+        $tire = Tire::with(['getUser', 'getVehicle'])->paginate();
 
+        $tire = app('fractal')->collection($tire, new TireTransformer())->getArray();
         if ($tire) {
             return response()->json([
                 'success' => true,

@@ -9,7 +9,8 @@ class TireTransformer extends TransformerAbstract
     protected $availableIncludes = [];
 
     protected $defaultIncludes = [
-        'user'
+        // 'user', 'vehicle'
+        // 'user'
     ];
 
 
@@ -27,12 +28,17 @@ class TireTransformer extends TransformerAbstract
             "merek" => $tire->merek,
             "buy_date" => $tire->buy_date,
             "images_path" => url('media/tires/' . $tire->images),
-            // "getUser" => $tire->getUser
+            "user" => $tire->getUser,
+            "vehicle" => $tire->getVehicle
         ];
     }
 
     public function includeUser(Tire $tire)
     {
         return $this->item($tire->getUser, new UserTransformer());
+    }
+    public function includeVehicle(Tire $tire)
+    {
+        return $this->item($tire->getVehicle, new VehicleTransformer());
     }
 }

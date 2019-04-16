@@ -16,4 +16,9 @@ class Tire extends Model
     {
         return $this->hasOne('App\User', 'id', 'created_by');
     }
+
+    public function getVehicle()
+    {
+        return $this->hasOne("App\Vehicle", 'id', 'id_vehicle');
+    }
 }
