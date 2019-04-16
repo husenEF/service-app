@@ -11,6 +11,9 @@ import VehicleList from "./components/view/Vehicle/List.vue"
 import VehicleDetail from "./components/view/Vehicle/Detail.vue"
 import VehicleAdd from "./components/view/Vehicle/Add.vue"
 
+//tire
+import TireIndex from "./components/view/Tire/Index.vue"
+import TireList from "./components/view/Tire/List.vue"
 //history
 import HistoryIndex from "./components/view/History/Index.vue"
 import HistoryList from "./components/view/History/List.vue"
@@ -86,6 +89,20 @@ export const routes = [
             }, {
                 path: "position/:vehicle/:id",
                 component: HistoryPosition
+            }
+        ]
+    },
+    {
+        path: "/ban",
+        component: TireIndex,
+        meta: {
+            requiresAuth: true
+        },
+        children: [
+            {
+                path: "/",
+                component: TireList,
+                name: "tireList"
             }
         ]
     }

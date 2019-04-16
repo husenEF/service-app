@@ -16,7 +16,7 @@
       </div>
       <div class="col-6">
         <h1 class="text-center">
-          <router-link to="/user">User</router-link>
+          <router-link to="/ban">Ban</router-link>
         </h1>
       </div>
       <div class="col-6">
