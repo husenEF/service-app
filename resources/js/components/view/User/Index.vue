@@ -1,53 +1,30 @@
 <template>
   <div class="container-fluid">
     <div class="row">
-      <Header title="User Profile" back="/"/>
+      <Header title="User" :back="url"/>
     </div>
-    <div class="row current-user justify-content-center">
+    <div class="row user-index justify-content-center">
       <div class="col-10 col-md-8">
-        <form @submit.prevent="submitData">
-          <div class="form-group">
-            <label>Name</label>
-            <input type="text" class="form-control" v-model="user.name">
-          </div>
-          <div class="form-group">
-            <label>Email</label>
-            <input type="text" class="form-control" v-model="user.email">
-          </div>
-          <button type="submit" class="btn btn-primary">Simpan</button>
-        </form>
+        <router-view @back="onBack"></router-view>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import Header from "../../includes/Header.vue";
-
+import Header from "../../includes/Header";
 export default {
   name: "userIndex",
+  components: { Header },
+  data() {
+    return {
+      url: "/"
+    };
+  },
   methods: {
-    submitData() {
-      const { id, name, roles } = this.user;
-      const send = {
-        name: name,
-        roles: roles
-      };
-
-      axios.put("/api/v1/user/update/" + id, send).then(res => {
-        if(res.data.success){
-          this.$store.commit("updateUser",res.data)
-        }
-      });
-    }
-  },
-  mounted: {},
-  components: {
-    Header 
-  },
-  computed: {
-    user() {
-      return this.$store.getters.currentUser;
+    onBack(back) {
+      this.url = back;
+      // console.log("onData vehiclemain", back);
     }
   }
 };

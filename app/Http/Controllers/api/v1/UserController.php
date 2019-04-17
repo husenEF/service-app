@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\UserCollection as UserResource;
+use App\Http\Transformers\UserTransformer;
 
 
 class UserController extends Controller
@@ -16,7 +17,21 @@ class UserController extends Controller
 
     public function get()
     {
-        return response()->json(['success' => true, 'message' => 'Halo']);
+        $user = User::paginate();
+        $user = app('fractal')->collection($user, new UserTransformer())->getArray();
+        if ($user) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Get Data Success',
+                'data' => $user
+            ], 200);
+        } else {
+            return response()->json([
+                'success' => false,
+                'message' => 'Get Data failed',
+                'data' => ""
+            ], 404);
+        }
     }
 
     public function show($id)
