@@ -19,7 +19,18 @@
               <td>{{u.name}}</td>
               <td>{{u.roles}}</td>
               <td>
-                <router-link :to="'/user/'+u.id" v-if="u.id!==1">Edit</router-link>
+                <div class="btn-group" role="group" aria-label="Button list">
+                  <router-link :to="'/user/'+u.id" class="btn btn-info btn-sm">
+                    <EyeIcon/>
+                  </router-link>
+                  <button
+                    class="btn btn-danger btn-sm"
+                    v-if="u.id!==1"
+                    v-on:click="deleteUser(u.id)"
+                  >
+                    <XIcon/>
+                  </button>
+                </div>
               </td>
             </tr>
           </tbody>
@@ -39,8 +50,13 @@
 </template>
 
 <script>
+import { EyeIcon, XIcon } from "vue-feather-icons";
 export default {
   name: "userList",
+  components: {
+    EyeIcon,
+    XIcon
+  },
   created() {
     this.getData("/api/v1/user");
     this.$emit("back", "/");
@@ -59,6 +75,28 @@ export default {
           const UserKey = Object.keys(data.data).filter(e => e !== "meta");
           this.user = UserKey.map(e => data.data[e]);
           this.meta = data.data.meta;
+        }
+      });
+    },
+    deleteUser(id) {
+      this.$swal({
+        title: "Anda Yakin?",
+        text: "Anda akan menghapus data ini?",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Hapus!"
+      }).then(res => {
+        if (res.value) {
+          axios.delete("/api/v1/user/delete/" + id).then(res => {
+            this.getData(
+              "/api/v1/user?page=" + this.meta.pagination.current_page
+            );
+            
+          });
+        } else {
+          console.log("cancel");
         }
       });
     }
