@@ -2,6 +2,11 @@
   <div class="card">
     <div class="card-header">User Detail</div>
     <div class="card-body">
+      <div class="alert alert-danger" v-if="Object.keys(error).length>0">
+        <p class="mb-0">
+          <span v-for="(e,i) in error" :key="i" class="clearfix">{{e[0]}}</span>
+        </p>
+      </div>
       <form @submit.prevent="submitData">
         <div class="form-group">
           <label>Name</label>
@@ -32,7 +37,8 @@ export default {
   name: "editUser",
   data() {
     return {
-      user: {}
+      user: {},
+      error: {}
     };
   },
   created() {
@@ -50,9 +56,19 @@ export default {
       });
     },
     submitData() {
-      axios.put("/api/v1/user/update/" + this.user.id, this.user).then(res => {
-        console.log("res update", res);
-      });
+      axios
+        .put("/api/v1/user/update/" + this.user.id, this.user)
+        .then(res => {
+          const { data } = res;
+          if (data.success) {
+            this.$swal(data.message).then(val => window.location.reload());
+          } else {
+            this.error = res.response.data;
+          }
+        })
+        .catch(err => {
+          this.error = err.response.data;
+        });
     }
   }
 };
