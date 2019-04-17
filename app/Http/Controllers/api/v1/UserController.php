@@ -13,7 +13,9 @@ use App\Http\Transformers\UserTransformer;
 class UserController extends Controller
 {
     public function __construct()
-    { }
+    {
+        $this->middleware('auth');
+    }
 
     public function get()
     {
@@ -38,7 +40,7 @@ class UserController extends Controller
     {
         $user = User::find($id);
 
-        $user = new UserResource($user);
+        $user = app('fractal')->item($user, new UserTransformer())->getArray();
         if ($user) {
             return response()->json([
                 'success' => true,
@@ -113,6 +115,7 @@ class UserController extends Controller
 
         $user->name = $request->input("name");
         $user->roles = ($id == 1) ? 'admin' : $request->input("roles");
+        $user->active = ($request->input('active')) ? 1 : 0;
 
         if (isset($request->password)) {
             $user->password = Hash::make($request->password);

@@ -20,7 +20,9 @@ class UserTransformer extends TransformerAbstract
         return [
             'id' => $user->id,
             "name" => $user->name,
-            "roles" => $user->roles
+            "roles" => $user->roles,
+            "active" => ($user->active) ? true : false,
+            "email" => $user->email
         ];
     }
 }

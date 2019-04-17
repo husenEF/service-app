@@ -6,6 +6,7 @@ import Login from "./components/view/auth/Login.vue"
 import UserIndex from "./components/view/User/Index.vue"
 import UserList from "./components/view/User/List.vue"
 import UserAdd from "./components/view/User/Add.vue"
+import UserEdit from "./components/view/User/Edit.vue"
 //vehivle
 import VehicleIndex from "./components/view/Vehicle/Index.vue"
 import VehicleList from "./components/view/Vehicle/List.vue"
@@ -53,6 +54,10 @@ export const routes = [
                 path: "add",
                 component: UserAdd,
                 name: "userAdd"
+            }, {
+                path: ":id",
+                component: UserEdit,
+                name: "userEdit"
             }
         ]
     },

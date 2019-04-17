@@ -22,6 +22,7 @@ class UsersTableSeeder extends Seeder
                 'email' => "admin@mail.com",
                 'password' => Hash::make("admin123"),
                 'roles' => 'admin',
+                'active' => 1
             ]);
         }
         $faker = Faker::create();
@@ -31,6 +32,7 @@ class UsersTableSeeder extends Seeder
                 'email' => $faker->email,
                 'password' => Hash::make("123123"),
                 'roles' => 'mekanik',
+                'active' => rand(0, 1)
             ]);
         }
     }
