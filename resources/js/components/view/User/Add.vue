@@ -2,6 +2,11 @@
   <div class="card">
     <div class="card-header">Add New User</div>
     <div class="card-body">
+      <div class="alert alert-danger" v-if="Object.keys(error).length>0">
+        <p class="mb-0">
+          <span v-for="(e,i) in error" :key="i" class="clearfix">{{e[0]}}</span>
+        </p>
+      </div>
       <form @submit.prevent="submitData">
         <div class="row">
           <div class="col-md-6">
@@ -42,6 +47,7 @@
           </div>
         </div>
         <button type="submit" class="btn btn-primary">Simpan</button>
+        <router-link to="/user" class="btn btn-secondary float-right">Back</router-link>
       </form>
     </div>
   </div>
@@ -60,7 +66,8 @@ export default {
         email: "",
         roles: "mekanik",
         active: false
-      }
+      },
+      error: {}
     };
   },
   methods: {
@@ -68,10 +75,15 @@ export default {
       axios
         .post("/api/v1/user/create", this.user)
         .then(res => {
-          console.log("res", res);
+          const { data } = res;
+          if (data.success) {
+            this.$swal(data.message).then(val => {
+              this.$router.push("/user");
+            });
+          }
         })
         .catch(err => {
-          console.log("err", err);
+          this.error = err.response.data;
         });
     }
   }
