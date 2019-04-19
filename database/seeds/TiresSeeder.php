@@ -21,11 +21,11 @@ class TiresSeeder extends Seeder
             DB::table('tires')->insert([
                 'id_vehicle' => $faker->biasedNumberBetween(1, $vehicle),
                 'created_by' => $faker->biasedNumberBetween(1, $user),
-                "posistion" => rand(1,15),
+                "posistion" => rand(1, 15),
                 "merek" => $faker->company(),
-                "buy_date"=>$faker->dateTime("now"),
-                "created_at"=>$faker->dateTime("now"),
-                "images"=>$faker->image("public/media/tires",400,300,'transport',false)
+                "buy_date" => $faker->dateTime("now"),
+                "created_at" => $faker->dateTime("now"),
+                "images" => $faker->image("public/media/tires", 400, 300, 'transport', false)
                 // 'email' => $faker->email,
                 // 'password' => Hash::make("123123"),
                 // 'roles' => 'mekanik',

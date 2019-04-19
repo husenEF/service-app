@@ -75,7 +75,12 @@ class TireController extends Controller
         $name = $re->key;
         $value = $re->value;
 
-        $tire = Tire::where($name, 'LIKE', "%$value%")->get();
+        if ($name !== 'datetime') {
+            $tire = Tire::where($name, 'LIKE', "%$value%")->get();
+        } else { 
+            $tire = Tire::whereDate('buy_date',date('Y-m-d',strtotime($value)))->get();
+        }
+
         if ($tire->count() > 0) {
             $tire = app('fractal')->collection($tire, new TireTransformer())->getArray();
             return response()->json([

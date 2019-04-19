@@ -32,7 +32,7 @@
                     </div>
                   </div>
                   <div class="col-md-5">
-                    <div class="form-group">
+                    <div class="form-group" v-if="filter.key !=='datetime'">
                       <label for>Kata Kunci</label>
                       <input
                         required
@@ -40,7 +40,16 @@
                         class="form-control"
                         v-model="filter.value"
                         placeholder="Kata Kunci"
+                        v-if="filter.key !=='datetime'"
                       >
+                    </div>
+                    <div class="form-group" v-else>
+                      <label for>Pilih Tanggal</label>
+                      <Datetime
+                        v-model="filter.value"
+                        input-class="form-control"
+                        value-zone="Asia/Jakarta"
+                      ></Datetime>
                     </div>
                   </div>
                   <div class="col-md-2">
@@ -113,13 +122,16 @@
 
 <script>
 import { EyeIcon, SearchIcon, FilterIcon } from "vue-feather-icons";
+import { Datetime } from "vue-datetime";
+import "vue-datetime/dist/vue-datetime.css";
 
 export default {
   name: "tireList",
   components: {
     EyeIcon,
     SearchIcon,
-    FilterIcon
+    FilterIcon,
+    Datetime
   },
   created() {
     this.getList("/api/v1/tire/list");
