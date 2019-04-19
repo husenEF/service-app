@@ -9,15 +9,24 @@
       </div>
       <form @submit.prevent="submitData">
         <div class="row mb-3">
-          <div class="col-md-6">
+          <div class="col-md-4">
             <input type="text" class="form-control" v-model="form.merek" placeholder="Merek">
           </div>
-          <div class="col-md-6">
+          <div class="col-md-4">
             <input
               type="text"
               class="form-control"
               v-model="form.plat_number"
               placeholder="Plat number"
+            >
+          </div>
+          <div class="col-md-4">
+            <input
+              type="number"
+              class="form-control"
+              v-model="form.size"
+              min="0"
+              placeholder="Ukuran Ban"
             >
           </div>
         </div>

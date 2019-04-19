@@ -66,6 +66,7 @@
               <th>Merek</th>
               <th>Plat</th>
               <th>Jumlah Ban</th>
+              <th>Ukuran</th>
               <th>Action</th>
             </tr>
           </thead>
@@ -74,6 +75,7 @@
               <td>{{item.merek}}</td>
               <td>{{item.platnumber}}</td>
               <td>{{Object.keys(item.tire).length}}</td>
+              <td>{{item.size}}</td>
               <td>
                 <router-link :to="`/vehicle/${item.id}`">Edit</router-link>
               </td>

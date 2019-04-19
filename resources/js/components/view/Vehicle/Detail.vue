@@ -8,6 +8,10 @@
       <label for>Plat</label>
       <input type="text" class="form-control" v-model="data.platnumber">
     </div>
+    <div class="form-group">
+      <label for>Ukuran</label>
+      <input type="text" class="form-control" v-model="data.size">
+    </div>
 
     <h3>
       Ban

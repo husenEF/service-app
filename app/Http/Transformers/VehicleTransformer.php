@@ -23,7 +23,7 @@ class VehicleTransformer extends TransformerAbstract
             'id' => $vehicle->id,
             'platnumber' => $vehicle->platnumber,
             'merek' => $vehicle->merek,
-            // 'user'=>$vehicle->user,
+            'size' => $vehicle->size,
             'update_by' => $vehicle->update_by,
             'created_by' => $vehicle->created_by,
             // 'tires'=>$vehicle->tires,

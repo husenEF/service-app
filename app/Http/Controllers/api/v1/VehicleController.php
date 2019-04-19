@@ -51,7 +51,7 @@ class VehicleController extends Controller
     {
         $vehicle = Vehicle::with(['user', 'tires'])->where("id", $id)->get()->first();
         //        $vehicle = Vehicle::findOrFail($id);
-        $vehicle = app('fractal')->item($vehicle, new VehicleItemTransformer())->getArray();
+        $vehicle = app('fractal')->item($vehicle, new VehicleTransformer())->getArray();
         if ($vehicle) {
             return response()->json([
                 'success' => true,
@@ -83,7 +83,9 @@ class VehicleController extends Controller
         //update ban                   // dd($object);
         $vehicle->merek = $re->merek;
         $vehicle->platnumber = $re->platnumber;
+        $vehicle->size = $re->size;
         $vehicle->update_by = $re->session_user;
+        $vehicle->save();
         // if ($vehicle->save()) {
         //     $return['data']['vehicle'][] = [
         //         'status' => 'update',
@@ -149,7 +151,8 @@ class VehicleController extends Controller
     {
         $this->validate($re, [
             'merek' => 'required',
-            'plat_number' => 'required'
+            'plat_number' => 'required',
+            'size' => 'required|int'
         ]);
 
         $user = AuthController::getUser($re->header('authorization'));
@@ -158,6 +161,7 @@ class VehicleController extends Controller
         $vehicle->user_id = $user->id;
         $vehicle->merek = $re->merek;
         $vehicle->platnumber = $re->plat_number;
+        $vehicle->size = $re->size;
         $vehicle->update_by = $user->id;
         $vehicle->created_by = $user->id;
         if ($vehicle->save()) {

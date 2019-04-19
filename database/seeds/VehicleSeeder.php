@@ -21,11 +21,13 @@ class VehicleSeeder extends Seeder
         foreach (range(0, 10) as $i) {
             $fakeId = $faker->randomDigit();
             // $type = array_rand($cars);
+            $userId =  $faker->biasedNumberBetween(1, $user);
             DB::table('vehicles')->insert([
-                'user_id' => $faker->biasedNumberBetween(1, $user),
+                'user_id' => $userId,
                 'merek' => $faker->name,
+                'size' => $faker->numberBetween(9, 30),
                 'platnumber' => "AA" . $faker->numberBetween(100, 9999) . "CF",
-                "created_by" => $fakeId,
+                "created_by" => $userId,
                 // "type" => $cars[$type]
                 // 'email' => $faker->email,
                 // 'password' => Hash::make("123123"),

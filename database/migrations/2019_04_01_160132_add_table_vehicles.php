@@ -17,7 +17,7 @@ class AddTableVehicles extends Migration
             $table->bigIncrements('id');
             $table->integer("user_id");
             $table->string("merek")->nullable();
-            // $table->string("type", 10)->default("bus");
+            $table->integer("size")->nullable();
             $table->string("platnumber", 15)->nullable();
             $table->integer("update_by")->nullable()->comment("user updater");
             $table->integer("created_by")->nullable()->comment("User creator");
