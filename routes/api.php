@@ -22,6 +22,8 @@ $router->group(['namespace' => 'v1', 'prefix' => '/v1'], function ($router) {
         $router->get("/detail/{id}", "UserController@show");
         //delete
         $router->delete("/delete/{id}", "UserController@delete");
+        //filter
+        $router->post("/filter", 'UserController@filter');
     });
 
     //vehicle

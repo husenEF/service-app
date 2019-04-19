@@ -187,4 +187,27 @@ class UserController extends Controller
             );
         }
     }
+
+    public function filter(Request $re)
+    {
+        $name = $re->input('key');
+        $value = $re->input('value');
+        $user = User::where($name, 'LIKE', "%$value%")->get();
+        // dd($user->count());
+        // $user = app('fractal')->item($user, new UserTransformer())->getArray();
+        if ($user->count() > 0) {
+            $user = app('fractal')->collection($user, new UserTransformer())->getArray();
+            return response()->json([
+                'success' => true,
+                'message' => 'Data Pencarian ditemukan',
+                'data' => $user
+            ], 200);
+        } else {
+            return response()->json([
+                'success' => false,
+                'message' => 'Data Pencarion Kosong',
+                'data' => ""
+            ], 404);
+        }
+    }
 }
