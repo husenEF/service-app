@@ -69,4 +69,26 @@ class TireController extends Controller
             ], 404);
         }
     }
+
+    public function filter(Request $re)
+    {
+        $name = $re->key;
+        $value = $re->value;
+
+        $tire = Tire::where($name, 'LIKE', "%$value%")->get();
+        if ($tire->count() > 0) {
+            $tire = app('fractal')->collection($tire, new TireTransformer())->getArray();
+            return response()->json([
+                'success' => true,
+                'message' => 'Get Data Success',
+                'data' => $tire
+            ], 200);
+        } else {
+            return response()->json([
+                'success' => false,
+                'message' => 'Get Data failed',
+                'data' => ""
+            ], 404);
+        }
+    }
 }
