@@ -174,4 +174,10 @@ class VehicleController extends Controller
             ], 404);
         }
     }
+
+    public function filter(Request $re){
+        $name = $re->input("key");
+        $value = $re->input("value");
+        dd($re->all());
+    }
 }

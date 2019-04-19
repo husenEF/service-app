@@ -3,6 +3,9 @@
     <div class="card-header">List ban</div>
     <div class="card-body">
       <div class="table-responsive">
+        <div class="clearfix filter">
+          
+        </div>
         <table class="table">
           <thead>
             <tr>
@@ -19,7 +22,7 @@
               <td>{{tire.merek}}</td>
               <td>{{tire.buy_date}}</td>
               <td>
-                <router-link :to="'/vehicle/'+tire.vehicle.id">t{{tire.vehicle.merek}}</router-link>
+                <router-link :to="'/vehicle/'+tire.vehicle.id">{{tire.vehicle.merek}}</router-link>
               </td>
               <td>
                 <div class="btn-group" role="group" aria-label="Tire Button">

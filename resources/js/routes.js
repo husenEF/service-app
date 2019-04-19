@@ -26,38 +26,56 @@ import HistoryPosition from "./components/view/History/Position.vue"
 export const routes = [
     {
         path: "/login",
-        component: Login
+        component: Login,
+        meta: {
+            title: "Login page"
+        }
     },
     {
         path: "/",
         component: Dashboard,
         meta: {
-            requiresAuth: true
+            requiresAuth: true,
+            title: "Dashboard Page",
         }
     },
     {
         path: "/home",
-        component: Home
+        component: Home,
+        meta: {
+            title: "Home Page"
+        }
     },
     {
         path: "/user",
         component: UserIndex,
         meta: {
-            requiresAuth: true
+            requiresAuth: true,
+            title: "User List"
         },
         children: [
             {
                 path: "/",
                 component: UserList,
-                name: "userlist"
+                name: "userlist",
+                meta: {
+                    title: "User List"
+                }
+
             }, {
                 path: "add",
                 component: UserAdd,
-                name: "userAdd"
+                name: "userAdd",
+                meta: {
+                    title: "Add User"
+                }
             }, {
                 path: ":id",
                 component: UserEdit,
-                name: "userEdit"
+                name: "userEdit",
+                meta: {
+                    title: "Edit User"
+                }
             }
         ]
     },
@@ -70,15 +88,24 @@ export const routes = [
         children: [
             {
                 path: "/",
-                component: VehicleList
+                component: VehicleList,
+                meta: {
+                    title: "Daftar Kendaraan"
+                }
             },
             {
                 path: "add",
-                component: VehicleAdd
+                component: VehicleAdd,
+                meta: {
+                    title: "Tambah Kendaraan"
+                }
             },
             {
                 path: ":id",
-                component: VehicleDetail
+                component: VehicleDetail,
+                meta: {
+                    title: "Edit Kendaraan"
+                }
             }
         ]
     },
@@ -95,10 +122,16 @@ export const routes = [
             },
             {
                 path: "tires/:id",
-                component: HistoryTire
+                component: HistoryTire,
+                meta: {
+                    title: "History Ban"
+                }
             }, {
                 path: "position/:vehicle/:id",
-                component: HistoryPosition
+                component: HistoryPosition,
+                meta: {
+                    title: "History Posisi Ban"
+                }
             }
         ]
     },
@@ -112,7 +145,10 @@ export const routes = [
             {
                 path: "/",
                 component: TireList,
-                name: "tireList"
+                name: "tireList",
+                meta: {
+                    title: "Daftar Ban"
+                }
             }
         ]
     }

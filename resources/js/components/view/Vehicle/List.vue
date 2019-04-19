@@ -9,6 +9,52 @@
       </h2>
     </div>
     <div class="card-body">
+      <div class="clearfix filter">
+        <p>
+          <button
+            class="btn btn-info"
+            type="button"
+            data-toggle="collapse"
+            data-target="#collapseExample"
+            aria-expanded="false"
+            aria-controls="collapseExample"
+          >
+            Filter Data
+            <FilterIcon/>
+          </button>
+        </p>
+        <div class="collapse" id="collapseExample">
+          <div class="card card-body">
+            <form @submit.prevent="filterHandler">
+              <div class="row">
+                <div class="col-md-5">
+                  <div class="form-group">
+                    <label for>Filter By</label>
+                    <select class="form-control" required v-model="filter.key" name="key">
+                      <option value>Pilih</option>
+                      <option value="name">Name</option>
+                      <option value="email">Email</option>
+                      <option value="roles">Roles</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-md-5">
+                  <div class="form-group">
+                    <label for>Kata Kunci</label>
+                    <input required type="text" class="form-control" v-model="filter.value">
+                  </div>
+                </div>
+                <div class="col-md-2">
+                  <button class="btn btn-primary btn-block" type="submit">
+                    <SearchIcon/>
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
       <div class="table-responsive">
         <table class="table">
           <thead>
@@ -32,7 +78,7 @@
         </table>
       </div>
     </div>
-    <div class="card-footer">
+    <div class="card-footer" v-if="typeof meta.pagination!=='undefined'">
       <nav aria-label="Page navigation example" v-if="(meta.pagination.total_pages)>1">
         <ul class="pagination mb-0">
           <li v-for="(link,i) in meta.pagination.links" :key="i" class="page-item">
@@ -45,12 +91,14 @@
 </template>
 
 <script>
-import { PlusIcon } from "vue-feather-icons";
+import { PlusIcon, SearchIcon, FilterIcon } from "vue-feather-icons";
 
 export default {
   name: "vehicleIndex",
   components: {
-    PlusIcon
+    PlusIcon,
+    SearchIcon,
+    FilterIcon
   },
   beforeCreate() {
     // this.getList()
@@ -86,13 +134,28 @@ export default {
         }
       });
       return false;
-    }
+    },
+    filterHandler() {}
   },
   data() {
     return {
       vehicle: {},
-      meta: {}
+      meta: {},
+      filter: {
+        key: "",
+        value: ""
+      }
     };
   }
 };
 </script>
+
+<style lang="scss" scoped>
+.filter {
+  form {
+    button {
+      margin-top: 28px;
+    }
+  }
+}
+</style>
