@@ -3,7 +3,7 @@
     <h1 class="text-center w-100">
       <router-link :to="{path:back}" class="float-left" v-if="isBack">Back</router-link>
       {{title}}
-      <button class="btn btn-sm btn-danger float-right" v-on:click="logout()">
+      <button class="btn btn-sm btn-danger float-right" v-on:click="logout()" title="Logout">
         <LogOutIcon/>
       </button>
     </h1>
