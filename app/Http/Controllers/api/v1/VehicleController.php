@@ -175,9 +175,25 @@ class VehicleController extends Controller
         }
     }
 
-    public function filter(Request $re){
+    public function filter(Request $re)
+    {
         $name = $re->input("key");
         $value = $re->input("value");
-        dd($re->all());
+        $vehicle = Vehicle::where($name, 'LIKE', "%$value%")->get();
+
+        if ($vehicle->count()) {
+            $vehicle = app('fractal')->collection($vehicle, new VehicleTransformer())->getArray();
+            return response()->json([
+                'success' => true,
+                'message' => 'Filter Data Success',
+                'data' => $vehicle,
+            ], 200);
+        } else {
+            return response()->json([
+                'success' => false,
+                'message' => 'Data yang di cari Kosong',
+                'data' => ""
+            ], 404);
+        }
     }
 }

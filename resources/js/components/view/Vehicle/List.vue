@@ -9,6 +9,11 @@
       </h2>
     </div>
     <div class="card-body">
+      <div class="alert alert-danger" v-if="error!==''">
+        <p class="mb-0">
+          <span>{{error}}</span>
+        </p>
+      </div>
       <div class="clearfix filter">
         <p>
           <button
@@ -32,9 +37,8 @@
                     <label for>Filter By</label>
                     <select class="form-control" required v-model="filter.key" name="key">
                       <option value>Pilih</option>
-                      <option value="name">Name</option>
-                      <option value="email">Email</option>
-                      <option value="roles">Roles</option>
+                      <option value="merek">merek</option>
+                      <option value="platnumber">platnumber</option>
                     </select>
                   </div>
                 </div>
@@ -135,7 +139,26 @@ export default {
       });
       return false;
     },
-    filterHandler() {}
+    filterHandler() {
+      axios
+        .post("/api/v1/vehicle/filter", this.filter)
+        .then(res => {
+          const { data } = res;
+          // console.log("the data", data);
+          // console.log("res beforecreate", res);
+          if (data.success == true) {
+            let vehicleId = Object.keys(data.data).filter(i => i !== "meta");
+            // console.log("map vehicle", vehicleId);
+            this.vehicle = vehicleId.map(i => data.data[i]);
+            if (data.data.hasOwnProperty("meta")) {
+              this.meta = data.data.meta;
+            }
+          }
+        })
+        .catch(err => {
+          this.error = err.response.data.message;
+        });
+    }
   },
   data() {
     return {
@@ -144,7 +167,8 @@ export default {
       filter: {
         key: "",
         value: ""
-      }
+      },
+      error: ""
     };
   }
 };
