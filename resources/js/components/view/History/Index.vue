@@ -1,7 +1,7 @@
 <template>
   <div class="container-fluid">
     <div class="row">
-      <Header title="History" :back="url"/>
+      <Header title="Riwayat" :back="url"/>
     </div>
     <div class="row vehicle-index justify-content-center">
       <div class="col-12 col-md-10">

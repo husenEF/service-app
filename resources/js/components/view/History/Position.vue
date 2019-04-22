@@ -1,7 +1,7 @@
 <template>
   <div class="card">
     <div class="card-header">
-      <h2>List</h2>
+      <h2>Daftar Riwayat Posisi</h2>
     </div>
     <div class="card-body">
       <div class="table-responsive">
@@ -9,11 +9,11 @@
           <thead>
             <tr>
               <th>No</th>
-              <th>Data Name</th>
+              <th>Tipe Data</th>
               <th>Status</th>
               <th>Keterangan</th>
-              <th>Date Update</th>
-              <th>Update By</th>
+              <th>Tanggal Pembaharuan</th>
+              <th>DIperbaharui Oleh</th>
             </tr>
           </thead>
           <tbody>

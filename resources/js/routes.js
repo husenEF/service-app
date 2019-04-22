@@ -28,7 +28,7 @@ export const routes = [
         path: "/login",
         component: Login,
         meta: {
-            title: "Login page"
+            title: "Halaman Masuk"
         }
     },
     {
@@ -36,7 +36,7 @@ export const routes = [
         component: Dashboard,
         meta: {
             requiresAuth: true,
-            title: "Dashboard Page",
+            title: "Halaman Utama",
         }
     },
     {
@@ -51,7 +51,7 @@ export const routes = [
         component: UserIndex,
         meta: {
             requiresAuth: true,
-            title: "User List"
+            title: "Daftar Pengguna"
         },
         children: [
             {
@@ -59,7 +59,7 @@ export const routes = [
                 component: UserList,
                 name: "userlist",
                 meta: {
-                    title: "User List"
+                    title: "Daftar Pengguna"
                 }
 
             }, {
@@ -67,14 +67,14 @@ export const routes = [
                 component: UserAdd,
                 name: "userAdd",
                 meta: {
-                    title: "Add User"
+                    title: "Tambah Pengguna"
                 }
             }, {
                 path: ":id",
                 component: UserEdit,
                 name: "userEdit",
                 meta: {
-                    title: "Edit User"
+                    title: "Rubah Pengguna"
                 }
             }
         ]
@@ -124,13 +124,13 @@ export const routes = [
                 path: "tires/:id",
                 component: HistoryTire,
                 meta: {
-                    title: "History Ban"
+                    title: "Riwayat Ban"
                 }
             }, {
                 path: "position/:vehicle/:id",
                 component: HistoryPosition,
                 meta: {
-                    title: "History Posisi Ban"
+                    title: "Riwayat Posisi Ban"
                 }
             }
         ]

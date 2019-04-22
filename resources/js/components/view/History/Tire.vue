@@ -1,7 +1,7 @@
 <template>
   <div class="card">
     <div class="card-header">
-      <h2>List</h2>
+      <h2>Daftar Riwayat Ban</h2>
     </div>
     <div class="card-body">
       <div class="table-responsive">
@@ -9,11 +9,11 @@
           <thead>
             <tr>
               <th>No</th>
-              <th>Data Name</th>
+              <th>Nama Data</th>
               <th>Status</th>
               <th>Keterangan</th>
               <th>Kendaraan</th>
-              <th>Update By</th>
+              <th>Diperbaharui Oleh</th>
             </tr>
           </thead>
           <tbody>
@@ -23,7 +23,7 @@
               <td>{{h.status}}</td>
               <td>
                 <p>
-                  Images: {{h.images}}
+                  Gambar: {{h.images}}
                   <br>
                   Posisi: {{h.posistion}}
                   <br>
@@ -32,12 +32,12 @@
               </td>
               <td>
                 <router-link :to="'/vehicle/'+h.vehicle.id">{{h.vehicle.merek}}</router-link>
-                <p>Plat Number : {{h.vehicle.platnumber}}</p>
+                <p>Plat Nomor : {{h.vehicle.platnumber}}</p>
               </td>
               <td>
                 {{h.user.name}}
                 <p>
-                  <strong>Update at :</strong>
+                  <strong>Diperbaharuai pada :</strong>
                   {{h.created_at}}
                 </p>
               </td>
