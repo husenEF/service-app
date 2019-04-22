@@ -10,8 +10,9 @@ import UserEdit from "./components/view/User/Edit.vue"
 //vehivle
 import VehicleIndex from "./components/view/Vehicle/Index.vue"
 import VehicleList from "./components/view/Vehicle/List.vue"
-import VehicleDetail from "./components/view/Vehicle/Detail.vue"
+import VehicleEdit from "./components/view/Vehicle/Edit.vue"
 import VehicleAdd from "./components/view/Vehicle/Add.vue"
+import VehicleDetail from "./components/view/Vehicle/Detail.vue"
 
 //tire
 import TireIndex from "./components/view/Tire/Index.vue"
@@ -104,9 +105,16 @@ export const routes = [
                 path: ":id",
                 component: VehicleDetail,
                 meta: {
+                    title: "Detail Kendaraan"
+                }
+            },
+            {
+                path: "edit/:id",
+                component: VehicleEdit,
+                meta: {
                     title: "Edit Kendaraan"
                 }
-            }
+            },
         ]
     },
     {

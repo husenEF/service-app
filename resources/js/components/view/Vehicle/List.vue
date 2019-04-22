@@ -4,7 +4,7 @@
       <h2>
         Daftar Kendaraan
         <router-link to="/vehicle/add" class="btn btn-info float-right btn-sm">
-          <PlusIcon/> Tambah Kendaraan
+          <PlusIcon/>Tambah Kendaraan
         </router-link>
       </h2>
     </div>
@@ -72,12 +72,14 @@
           </thead>
           <tbody>
             <tr v-for="(item, index) in vehicle" :key="index">
-              <td>{{item.merek}}</td>
+              <td>
+                <router-link :to="`/vehicle/${item.id}`">{{item.merek}}</router-link>
+              </td>
               <td>{{item.platnumber}}</td>
               <td>{{Object.keys(item.tire).length}}</td>
               <td>{{item.size}}</td>
               <td>
-                <router-link :to="`/vehicle/${item.id}`">Edit</router-link>
+                <router-link :to="`/vehicle/edit/${item.id}`">Edit</router-link>
               </td>
             </tr>
           </tbody>
