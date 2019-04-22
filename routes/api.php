@@ -6,7 +6,7 @@ $router->group(['namespace' => 'v1', 'prefix' => '/v1'], function ($router) {
      * Users
      *
      */
-    $router->get('/user', 'UserController@get');
+    // $router->get('/user', 'UserController@get');
 
     //register login
     $router->post("/register", "AuthController@register");
@@ -14,6 +14,7 @@ $router->group(['namespace' => 'v1', 'prefix' => '/v1'], function ($router) {
 
     //user
     $router->group(['prefix' => 'user'], function () use ($router) {
+        $router->get('/', 'UserController@get');
         //post
         $router->post("/create", "UserController@create");
         //puth
@@ -24,6 +25,8 @@ $router->group(['namespace' => 'v1', 'prefix' => '/v1'], function ($router) {
         $router->delete("/delete/{id}", "UserController@delete");
         //filter
         $router->post("/filter", 'UserController@filter');
+
+        $router->post("/check", "UserController@check");
     });
 
     //vehicle

@@ -17,6 +17,27 @@ class UserController extends Controller
         $this->middleware('auth');
     }
 
+    public function check(Request $re)
+    {
+        // dd($re->all());
+        $user = User::where([
+            'id' => 100,
+            'api_token' => $re->token
+        ])->get();
+        if ($user->count()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Get Data Success',
+                'data' => $user->first()
+            ], 200);
+        } else {
+            return response()->json([
+                'success' => false,
+                'message' => 'Get Data failed',
+                'data' => ""
+            ], 404);
+        }
+    }
     public function get()
     {
         $user = User::paginate();

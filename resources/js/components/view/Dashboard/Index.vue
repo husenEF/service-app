@@ -35,6 +35,25 @@ export default {
   name: "dashboard-index",
   components: {
     Header
+  },
+  created() {
+    this.check();
+  },
+  methods: {
+    check() {
+      const { id, token } = this.user;
+      axios
+        .post("/api/v1/user/check", { id, token })
+        .then(res => {})
+        .catch(err => {
+          console.log(err.response.data);
+        });
+    }
+  },
+  computed: {
+    user() {
+      return this.$store.getters.currentUser;
+    }
   }
 };
 </script>
