@@ -5,11 +5,11 @@
       <input type="text" class="form-control" v-model="data.merek">
     </div>
     <div class="form-group">
-      <label for>Plat</label>
+      <label for>Plat Nomor</label>
       <input type="text" class="form-control" v-model="data.platnumber">
     </div>
     <div class="form-group">
-      <label for>Ukuran</label>
+      <label for>Ukuran Ban</label>
       <input type="text" class="form-control" v-model="data.size">
     </div>
 
@@ -18,7 +18,7 @@
       <button type="button" class="btn btn-info float-right" v-on:click="addBan()">+ Ban</button>
     </h3>
     <fieldset v-for="(theTire, index) in data.tire" :key="index" class="border pl-3 pr-3 pb-3 mb-3">
-      <legend class="w-auto">Tire {{index +1}}:</legend>
+      <legend class="w-auto">Ban ke {{index +1}}:</legend>
       <div class="row">
         <div class="col-md-5">
           <input type="text" class="form-control" placeholder="Merek Ban" v-model="theTire.merek">
@@ -50,7 +50,7 @@
         </div>
       </div>
     </fieldset>
-    <button type="submit" class="btn btn-primary">Update</button>
+    <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
   </form>
 </template>
 

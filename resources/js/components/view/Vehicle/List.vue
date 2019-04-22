@@ -4,7 +4,7 @@
       <h2>
         Daftar Kendaraan
         <router-link to="/vehicle/add" class="btn btn-info float-right btn-sm">
-          <PlusIcon/>
+          <PlusIcon/> Tambah Kendaraan
         </router-link>
       </h2>
     </div>
@@ -34,11 +34,11 @@
               <div class="row">
                 <div class="col-md-5">
                   <div class="form-group">
-                    <label for>Filter By</label>
+                    <label for>Filter</label>
                     <select class="form-control" required v-model="filter.key" name="key">
                       <option value>Pilih</option>
                       <option value="merek">merek</option>
-                      <option value="platnumber">platnumber</option>
+                      <option value="platnumber">plat nomor</option>
                     </select>
                   </div>
                 </div>
@@ -67,7 +67,7 @@
               <th>Plat</th>
               <th>Jumlah Ban</th>
               <th>Ukuran</th>
-              <th>Action</th>
+              <th>##</th>
             </tr>
           </thead>
           <tbody>

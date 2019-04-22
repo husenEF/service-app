@@ -1,6 +1,6 @@
 <template>
   <div class="card">
-    <div class="card-header">Add Vehicle</div>
+    <div class="card-header">Tambah Kendaraan</div>
     <div class="card-body">
       <div class="alert alert-danger" v-if="Object.keys(error).length>0">
         <p class="mb-0">
@@ -17,7 +17,7 @@
               type="text"
               class="form-control"
               v-model="form.plat_number"
-              placeholder="Plat number"
+              placeholder="Plat nomor"
             >
           </div>
           <div class="col-md-4">
