@@ -2,6 +2,7 @@
   <div class="card">
     <div class="card-header">Detail Kendaraan</div>
     <div class="card-body">
+        <!-- <pre>{{vehicle}}</pre> -->
       <div class="table-responsive">
         <table class="table">
           <tbody>
@@ -22,8 +23,22 @@
               <td>{{vehicle.update_by}}</td>
             </tr>
             <tr>
-              <th></th>
-              <td></td>
+              <th colspan="2">Daftar Ban ({{vehicle.size}}")</th>
+            </tr>
+            <tr v-for="(t,i) in vehicle.tire" :key="i">
+              <th>{{t.merek}}</th>
+              <td>
+                <p>
+                  <strong>Tangal Pembelian</strong>
+                  : {{t.buy_date}}
+                  <br>
+                  <strong>Gambar</strong>
+                  : <a :href="t.images_path" target="_blank" rel="noopener noreferrer">Link</a>
+                  <br>
+                  <strong>Penginput Data</strong>
+                  : {{t.user.name}} {{t.user.roles}}
+                </p>
+              </td>
             </tr>
           </tbody>
         </table>
