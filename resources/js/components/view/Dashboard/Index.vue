@@ -21,7 +21,7 @@
       </div>
       <div class="col-6">
         <h1 class="text-center">
-          <router-link to="/history">History Ban</router-link>
+          <router-link to="/history">Riwayat</router-link>
         </h1>
       </div>
     </div>

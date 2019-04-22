@@ -1,6 +1,6 @@
 <template>
   <div class="card">
-    <div class="card-header">List ban</div>
+    <div class="card-header">Daftar Ban</div>
     <div class="card-body">
       <div class="table-responsive">
         <div class="clearfix filter">
@@ -23,7 +23,7 @@
                 <div class="row">
                   <div class="col-md-5">
                     <div class="form-group">
-                      <label for>Filter By</label>
+                      <label for>Filter</label>
                       <select class="form-control" required v-model="filter.key" name="key">
                         <option value>Pilih</option>
                         <option value="merek">Merek</option>
@@ -69,7 +69,7 @@
               <th>Merek</th>
               <th>Tanggal Beli</th>
               <th>Kendaraan</th>
-              <th>history</th>
+              <th>Riwayat Penggunaan</th>
             </tr>
           </thead>
           <tbody>
@@ -90,14 +90,14 @@
                   <router-link
                     class="btn btn-info btn-sm"
                     :to="'/history/tires/'+tire.id"
-                    title="data History ban"
+                    title="Riwayat Ban"
                   >
                     <EyeIcon/>
                   </router-link>
                   <router-link
                     class="btn btn-primary btn-sm"
                     :to="'/history/position/'+tire.vehicle.id+`/`+tire.id"
-                    title="History Posisi"
+                    title="Riwayat berdasarkan Posisi"
                   >
                     <EyeIcon/>
                   </router-link>
