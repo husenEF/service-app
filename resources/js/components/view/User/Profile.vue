@@ -4,7 +4,7 @@
       <Header title="User Profile" back="/"/>
     </div>
     <div class="row current-user justify-content-center">
-      <div class="col-10 col-md-8">
+      <div class="col-12 col-md-10">
         <form @submit.prevent="submitData">
           <div class="form-group">
             <label>Name</label>

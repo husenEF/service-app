@@ -1,8 +1,8 @@
 <template>
   <div class="card">
     <div class="card-header">
-      User List
-      <router-link to="/user/add" class="btn btn-primary btn-sm float-right">Add User</router-link>
+      Daftar Pengguna
+      <router-link to="/user/add" class="btn btn-primary btn-sm float-right">Tambah Pengguna</router-link>
     </div>
     <div class="card-body">
       <div class="alert alert-danger" v-if="error!==''">
@@ -30,12 +30,12 @@
               <div class="row">
                 <div class="col-md-5">
                   <div class="form-group">
-                    <label for>Filter By</label>
+                    <label for>Filter </label>
                     <select class="form-control" required v-model="filter.key" name="key">
                       <option value>Pilih</option>
-                      <option value="name">Name</option>
+                      <option value="name">Nama</option>
                       <option value="email">Email</option>
-                      <option value="roles">Roles</option>
+                      <option value="roles">Jabatan</option>
                     </select>
                   </div>
                 </div>
@@ -60,8 +60,8 @@
           <thead>
             <th>No</th>
             <th>Nama</th>
-            <th>Roles</th>
-            <th>Edit</th>
+            <th>Jabatan</th>
+            <th>Ubah</th>
           </thead>
           <tbody>
             <tr v-for="(u,i) in user" :key="i">
@@ -75,7 +75,7 @@
               <td>{{u.roles}}</td>
               <td>
                 <div class="btn-group" role="group" aria-label="Button list">
-                  <router-link :to="'/user/'+u.id" class="btn btn-info btn-sm">
+                  <router-link :to="'/user/'+u.id" class="btn btn-info btn-sm" title="Rubah User">
                     <EyeIcon/>
                   </router-link>
                   <button

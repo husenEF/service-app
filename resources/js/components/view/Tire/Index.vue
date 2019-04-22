@@ -4,7 +4,7 @@
       <Header title="Ban" :back="url"/>
     </div>
     <div class="row vehicle-index justify-content-center">
-      <div class="col-10 col-md-8">
+      <div class="col-12 col-md-10">
         <router-view @back="onBack"></router-view>
       </div>
     </div>

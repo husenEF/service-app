@@ -1,10 +1,10 @@
 <template>
   <div class="container-fluid">
     <div class="row">
-      <Header title="User" :back="url"/>
+      <Header title="Pengguna" :back="url"/>
     </div>
     <div class="row user-index justify-content-center">
-      <div class="col-10 col-md-8">
+      <div class="col-12 col-md-10">
         <router-view @back="onBack"></router-view>
       </div>
     </div>

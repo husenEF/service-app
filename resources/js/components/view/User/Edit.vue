@@ -1,6 +1,6 @@
 <template>
   <div class="card">
-    <div class="card-header">User Detail</div>
+    <div class="card-header">Detail Pengguna</div>
     <div class="card-body">
       <div class="alert alert-danger" v-if="Object.keys(error).length>0">
         <p class="mb-0">
@@ -11,7 +11,7 @@
         <div class="row">
           <div class="col-md-6">
             <div class="form-group">
-              <label>Name</label>
+              <label>Nama</label>
               <input type="text" class="form-control" v-model="user.name">
             </div>
           </div>
@@ -29,7 +29,7 @@
               <input type="password" class="form-control" v-model="user.password">
             </div>
           </div>
-          <div class="col-md-6" v-if="user.roles=='admin'">
+          <div class="col-md-6" v-if="currentUser.roles=='admin'">
             <div class="form-group">
               <label>Jabatan</label>
               <select v-model="user.roles" class="form-control">
@@ -43,7 +43,7 @@
         <div class="form-group">
           <div class="form-check">
             <input type="checkbox" id="checkbox" v-model="user.active" class="form-check-input">
-            <label class="form-check-label" for="checkbox">Active User</label>
+            <label class="form-check-label" for="checkbox">Aktif</label>
           </div>
         </div>
         <button type="submit" class="btn btn-primary">Simpan</button>
@@ -65,6 +65,11 @@ export default {
     const { id } = this.$route.params;
     this.getUser(id);
     this.$emit("back", "/user");
+  },
+  computed: {
+    currentUser() {
+      return this.$store.getters.currentUser;
+    }
   },
   methods: {
     getUser(id) {

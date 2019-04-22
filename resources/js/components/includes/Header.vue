@@ -1,7 +1,7 @@
 <template>
   <nav class="navbar fixed-sticky mb-5 w-100 main-nav">
     <h1 class="text-center w-100">
-      <router-link :to="{path:back}" class="float-left" v-if="isBack">Back</router-link>
+      <router-link :to="{path:back}" class="float-left" v-if="isBack">Kembali</router-link>
       {{title}}
       <button class="btn btn-sm btn-danger float-right" v-on:click="logout()" title="Logout">
         <LogOutIcon/>

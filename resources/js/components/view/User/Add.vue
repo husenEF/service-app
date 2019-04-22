@@ -1,6 +1,6 @@
 <template>
   <div class="card">
-    <div class="card-header">Add New User</div>
+    <div class="card-header">Tambah Pengguna Baru</div>
     <div class="card-body">
       <div class="alert alert-danger" v-if="Object.keys(error).length>0">
         <p class="mb-0">
@@ -11,7 +11,7 @@
         <div class="row">
           <div class="col-md-6">
             <div class="form-group">
-              <label>Name</label>
+              <label>Nama</label>
               <input type="text" class="form-control" v-model="user.name">
             </div>
           </div>
@@ -43,11 +43,11 @@
         <div class="form-group">
           <div class="form-check">
             <input type="checkbox" id="checkbox" v-model="user.active" class="form-check-input">
-            <label class="form-check-label" for="checkbox">Active User</label>
+            <label class="form-check-label" for="checkbox">Aktif</label>
           </div>
         </div>
         <button type="submit" class="btn btn-primary">Simpan</button>
-        <router-link to="/user" class="btn btn-secondary float-right">Back</router-link>
+        <router-link to="/user" class="btn btn-secondary float-right">Kembali</router-link>
       </form>
     </div>
   </div>
