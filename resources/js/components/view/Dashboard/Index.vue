@@ -37,7 +37,7 @@ export default {
     Header
   },
   created() {
-    this.check();
+    // this.check();
   },
   methods: {
     check() {

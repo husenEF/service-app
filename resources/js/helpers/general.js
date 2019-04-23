@@ -7,6 +7,7 @@ export function initialize(store, router) {
         document.title = to.meta.title+" | Management Ban"
         if (requiresAuth && !currentUser) {
             next('/login')
+            // alert()
         } else if (to.path == '/login' && currentUser) {
             next('/')
         } else {

@@ -24,7 +24,7 @@ export default {
     this.isBack = this.back !== "" ? true : false;
   },
   mounted() {
-    console.log("this", this.isBack);
+    // console.log("this", this.isBack);
   },
   data() {
     return {
