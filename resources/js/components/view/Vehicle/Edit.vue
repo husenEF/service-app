@@ -12,44 +12,6 @@
       <label for>Ukuran Ban</label>
       <input type="text" class="form-control" v-model="data.size">
     </div>
-
-    <h3>
-      Ban
-      <button type="button" class="btn btn-info float-right" v-on:click="addBan()">+ Ban</button>
-    </h3>
-    <fieldset v-for="(theTire, index) in data.tire" :key="index" class="border pl-3 pr-3 pb-3 mb-3">
-      <legend class="w-auto">Ban ke {{index +1}}:</legend>
-      <div class="row">
-        <div class="col-md-5">
-          <input type="text" class="form-control" placeholder="Merek Ban" v-model="theTire.merek">
-        </div>
-        <div class="col-md-5">
-          <!-- <label for="">{{theTire.buy_date}}</label> -->
-          <Datetime v-model="theTire.buy_date" input-class="form-control" value-zone="Asia/Jakarta"></Datetime>
-        </div>
-        <div class="col-2">
-          <div class="btn-group" role="group" aria-label="Basic example">
-            <button type="button" class="btn btn-danger btn-sm" v-on:click="deletBan(theTire.id)">X</button>
-            <button
-              type="button"
-              class="btn btn-info btn-sm"
-              v-on:click="historyBand(theTire.id)"
-              title="History Band"
-            >
-              <EyeIcon/>
-            </button>
-            <button
-              type="button"
-              class="btn btn-warning btn-sm"
-              title="History Posisi"
-              v-on:click="historyPosition(data.id,theTire.posistion)"
-            >
-              <EyeIcon/>
-            </button>
-          </div>
-        </div>
-      </div>
-    </fieldset>
     <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
   </form>
 </template>

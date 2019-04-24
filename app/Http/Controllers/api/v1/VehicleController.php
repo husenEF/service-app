@@ -86,6 +86,11 @@ class VehicleController extends Controller
         $vehicle->size = $re->size;
         $vehicle->update_by = $re->session_user;
         $vehicle->save();
+        return response()->json([
+            'success' => true,
+            'message' => 'Update Done',
+            'data' => $return
+        ], 200);
         // if ($vehicle->save()) {
         //     $return['data']['vehicle'][] = [
         //         'status' => 'update',
@@ -96,6 +101,7 @@ class VehicleController extends Controller
 
         //update ban
         // dd($re->tires);
+        /*
         foreach ($re->tire as $k => $tire) {
             $tire = (object)$tire;
             if ($tire->id > 0) {
@@ -145,6 +151,7 @@ class VehicleController extends Controller
             'message' => 'Update Done',
             'data' => $return
         ], 200);
+        */
     }
 
     public function add(Request $re)
