@@ -58,10 +58,12 @@
       <div class="table-responsive">
         <table class="table">
           <thead>
-            <th>No</th>
-            <th>Nama</th>
-            <th>Jabatan</th>
-            <th>Ubah</th>
+            <tr>
+              <th>No</th>
+              <th>Nama</th>
+              <th>Jabatan</th>
+              <th>Ubah</th>
+            </tr>
           </thead>
           <tbody>
             <tr v-for="(u,i) in user" :key="i">
@@ -194,6 +196,69 @@ export default {
     button {
       margin-top: 28px;
     }
+  }
+}
+
+@media only screen and (max-width: 760px),
+  (min-device-width: 768px) and (max-device-width: 1024px) {
+  /* Force table to not be like tables anymore */
+  table,
+  thead,
+  tbody,
+  th,
+  td,
+  tr {
+    display: block;
+  }
+
+  thead {
+    tr {
+      position: absolute;
+      top: -9999px;
+      left: -9999px;
+    }
+  }
+  tbody {
+    tr {
+      border-left: 1px #eee solid;
+      border-right: 1px #eee solid;
+      &:nth-child(odd) {
+        background-color: #dedede;
+      }
+    }
+    td {
+      /* Behave  like a "row" */
+      border: none;
+      border-bottom: 1px solid #eee;
+      position: relative;
+      padding-left: 50%;
+      &::before {
+        /* Now like a table header */
+        position: absolute;
+        /* Top/left values mimic padding */
+        top: 6px;
+        left: 6px;
+        width: 45%;
+        padding-right: 10px;
+        white-space: nowrap;
+      }
+    }
+  }
+
+  td:nth-of-type(1):before {
+    content: "No";
+  }
+  td:nth-of-type(2):before {
+    content: "Nama";
+  }
+  td:nth-of-type(3):before {
+    content: "Jabatan";
+  }
+  td:nth-of-type(4):before {
+    content: "";
+  }
+  td:nth-of-type(5):before {
+    content: "";
   }
 }
 </style>
