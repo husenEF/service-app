@@ -37,6 +37,7 @@ export default {
     Header
   },
   created() {
+    // alert('a')
     // this.check();
   },
   methods: {
@@ -44,7 +45,9 @@ export default {
       const { id, token } = this.user;
       axios
         .post("/api/v1/user/check", { id, token })
-        .then(res => {})
+        .then(res => {
+          console.log("res", res);
+        })
         .catch(err => {
           console.log(err.response.data);
         });

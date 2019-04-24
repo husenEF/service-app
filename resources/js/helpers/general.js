@@ -4,7 +4,7 @@ export function initialize(store, router) {
         const currentUser = store.state.currentUser
 
         // console.log("to", to)
-        document.title = to.meta.title+" | Management Ban"
+        document.title = to.meta.title + " | Management Ban"
         if (requiresAuth && !currentUser) {
             next('/login')
             // alert()
@@ -15,12 +15,28 @@ export function initialize(store, router) {
         }
     });
 
+    axios.interceptors.request.use((config) => {
+        let common = config.headers.common
+        if (common.hasOwnProperty('Authorization')) {
+            //cek Authorization: "Bearer undefined"
+        }
+        console.log("common", common)
+        return config;
+    }, (error) => {
+        // Do something with request error
+        console.log("inceptor error", error)
+        return Promise.reject(error);
+    })
+
     axios.interceptors.response.use(null, (error) => {
-        // console.log(error.response.status)
+
+
         if (error.response.status == 401) {
-            // console.log('error 401')
-            store.commit('logout');
-            router.push('/login');
+            // console.log([error.response.status, store.getters.currentUser])
+
+
+            // store.commit('logout');
+            // router.push('/login');
         }
 
         return Promise.reject(error)
