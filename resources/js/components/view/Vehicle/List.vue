@@ -248,20 +248,5 @@ export default {
   td:nth-of-type(5):before {
     content: "";
   }
-  td:nth-of-type(6):before {
-    content: "Secret Alias";
-  }
-  td:nth-of-type(7):before {
-    content: "Date of Birth";
-  }
-  td:nth-of-type(8):before {
-    content: "Dream Vacation City";
-  }
-  td:nth-of-type(9):before {
-    content: "GPA";
-  }
-  td:nth-of-type(10):before {
-    content: "Arbitrary Data";
-  }
 }
 </style>
