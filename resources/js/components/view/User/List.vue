@@ -30,11 +30,11 @@
               <div class="row">
                 <div class="col-md-5">
                   <div class="form-group">
-                    <label for>Filter </label>
+                    <label for>Filter</label>
                     <select class="form-control" required v-model="filter.key" name="key">
                       <option value>Pilih</option>
                       <option value="name">Nama</option>
-                      <option value="email">Email</option>
+                      <option value="username">Username</option>
                       <option value="roles">Jabatan</option>
                     </select>
                   </div>
@@ -71,7 +71,10 @@
                 >{{(i+1)+(meta.pagination.per_page*(meta.pagination.current_page-1))}}</span>
                 <span v-else>{{i+1}}</span>
               </td>
-              <td>{{u.name}}</td>
+              <td>
+                {{u.name}}
+                <strong>({{u.username}})</strong>
+              </td>
               <td>{{u.roles}}</td>
               <td>
                 <div class="btn-group" role="group" aria-label="Button list">

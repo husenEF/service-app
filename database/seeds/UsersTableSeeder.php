@@ -19,7 +19,7 @@ class UsersTableSeeder extends Seeder
         if (!$admin) {
             DB::table('users')->insert([
                 'name' => "admin",
-                'email' => "admin@mail.com",
+                // 'email' => "admin@mail.com",
                 'username'=>'admin',
                 'password' => Hash::make("admin123"),
                 'roles' => 'admin',
@@ -30,7 +30,7 @@ class UsersTableSeeder extends Seeder
         foreach (range(0, 10) as $i) {
             DB::table('users')->insert([
                 'name' => $faker->name,
-                'email' => $faker->email,
+                // 'email' => $faker->email,
                 'username'=>$faker->userName,
                 'password' => Hash::make("123123"),
                 'roles' => 'mekanik',

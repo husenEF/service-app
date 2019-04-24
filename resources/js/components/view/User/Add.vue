@@ -17,8 +17,8 @@
           </div>
           <div class="col-md-6">
             <div class="form-group">
-              <label>Email</label>
-              <input type="email" class="form-control" v-model="user.email">
+              <label>username</label>
+              <input type="text" class="form-control" v-model="user.username">
             </div>
           </div>
         </div>
@@ -63,7 +63,7 @@ export default {
     return {
       user: {
         name: "",
-        email: "",
+        username: "",
         roles: "mekanik",
         active: false
       },

@@ -8,12 +8,12 @@
             {{authError}}
             <form @submit.prevent="authenticate">
               <div class="form-group">
-                <label for="email">Email</label>
-                <input type="text" class="form-control" id="email" v-model="form.email">
+                <label for="username">Username</label>
+                <input type="text" name="username" class="form-control" id="username" v-model="form.username">
               </div>
               <div class="form-group">
                 <label for>Password</label>
-                <input type="password" class="form-control" id="password" v-model="form.password">
+                <input type="password" name="password" class="form-control" id="password" v-model="form.password">
               </div>
               <div class="form-group">
                 <button type="submit" class="btn btn-primary">Login</button>
@@ -34,7 +34,7 @@ export default {
   data() {
     return {
       form: {
-        emai: "",
+        username: "",
         password: ""
       }
     };
@@ -47,10 +47,9 @@ export default {
   methods: {
     authenticate() {
       this.$store.dispatch("login");
-      console.log("fomr", this.$data);
 
       const send = {
-        email: this.$data.form.email,
+        username: this.$data.form.username,
         password: this.$data.form.password
       };
       login(this.$data.form).then(res => {

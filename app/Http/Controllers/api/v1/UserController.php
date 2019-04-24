@@ -82,19 +82,22 @@ class UserController extends Controller
     {
         $this->validate($request, [
             'name' => "required",
-            "email" => 'required|email|unique:users',
+            // "email" => 'required|email|unique:users',
+            "username" => "required|string|alpha_dash|unique:users,username",
             'password' => 'required|min:6',
             'roles' => 'required'
         ]);
 
         $name = $request->input('name');
-        $email = $request->input('email');
+        // $email = $request->input('email');
+        $username = $request->input('username');
         $password = Hash::make($request->input('password'));
         $roles = $request->input("roles");
 
         $user = new User();
         $user->name = $name;
-        $user->email = $email;
+        // $user->email = $email;
+        $user->username = $username;
         $user->password = $password;
         $user->roles = $roles;
         // dd($request->all());
