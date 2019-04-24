@@ -68,7 +68,7 @@ export default {
         // console.log("res", res);
         if (res.success) {
           this.$store.commit("loginSuccess", res.data);
-          window.location = "/";
+          this.$router.go("/");
           // this.$router.push({ path: "/" });
         } else {
           this.$store.commit("loginFailed", { error: res.message });
