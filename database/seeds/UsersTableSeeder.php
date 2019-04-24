@@ -20,6 +20,7 @@ class UsersTableSeeder extends Seeder
             DB::table('users')->insert([
                 'name' => "admin",
                 'email' => "admin@mail.com",
+                'username'=>'admin',
                 'password' => Hash::make("admin123"),
                 'roles' => 'admin',
                 'active' => 1
@@ -30,6 +31,7 @@ class UsersTableSeeder extends Seeder
             DB::table('users')->insert([
                 'name' => $faker->name,
                 'email' => $faker->email,
+                'username'=>$faker->userName,
                 'password' => Hash::make("123123"),
                 'roles' => 'mekanik',
                 'active' => rand(0, 1)
