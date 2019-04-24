@@ -15,28 +15,12 @@ export function initialize(store, router) {
         }
     });
 
-    axios.interceptors.request.use((config) => {
-        let common = config.headers.common
-        if (common.hasOwnProperty('Authorization')) {
-            //cek Authorization: "Bearer undefined"
-        }
-        console.log("common", common)
-        return config;
-    }, (error) => {
-        // Do something with request error
-        console.log("inceptor error", error)
-        return Promise.reject(error);
-    })
-
     axios.interceptors.response.use(null, (error) => {
 
 
         if (error.response.status == 401) {
-            // console.log([error.response.status, store.getters.currentUser])
-
-
-            // store.commit('logout');
-            // router.push('/login');
+            store.commit('logout');
+            router.push('/login');
         }
 
         return Promise.reject(error)
