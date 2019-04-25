@@ -23,12 +23,12 @@ class TiresSeeder extends Seeder
                 'created_by' => $faker->biasedNumberBetween(1, $user),
                 "posistion" => rand(1, 15),
                 "merek" => $faker->company(),
+                "ukuran" => rand(15, 17),
+                "nomor" => $faker->randomDigitNotNull,
+                "stempel" => $faker->word,
                 "buy_date" => $faker->dateTime("now"),
                 "created_at" => $faker->dateTime("now"),
                 "images" => $faker->image("public/media/tires", 400, 300, 'transport', false)
-                // 'email' => $faker->email,
-                // 'password' => Hash::make("123123"),
-                // 'roles' => 'mekanik',
             ]);
         }
     }
