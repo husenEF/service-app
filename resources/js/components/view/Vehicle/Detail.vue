@@ -2,7 +2,7 @@
   <div class="card">
     <div class="card-header">Detail Kendaraan</div>
     <div class="card-body">
-        <!-- <pre>{{vehicle}}</pre> -->
+      <!-- <pre>{{vehicle}}</pre> -->
       <div class="table-responsive">
         <table class="table">
           <tbody>
@@ -25,6 +25,16 @@
             <tr>
               <th colspan="2">Daftar Ban ({{vehicle.size}}")</th>
             </tr>
+          </tbody>
+        </table>
+
+        <table class="table">
+          <thead>
+            <tr>
+              <th colspan="3">Daftar Ban</th>
+            </tr>
+          </thead>
+          <tbody>
             <tr v-for="(t,i) in vehicle.tire" :key="i">
               <th>{{t.merek}}</th>
               <td>
@@ -33,11 +43,22 @@
                   : {{t.buy_date}}
                   <br>
                   <strong>Gambar</strong>
-                  : <a :href="t.images_path" target="_blank" rel="noopener noreferrer">Link</a>
+                  :
+                  <a
+                    :href="t.images_path"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >Link</a>
                   <br>
                   <strong>Penginput Data</strong>
                   : {{t.user.name}} {{t.user.roles}}
                 </p>
+              </td>
+              <td>
+                <router-link
+                  :to="'/ban/addhistory/'+t.id"
+                  class="btn btn-primary btn-sm"
+                >Tambah Hasil Uji</router-link>
               </td>
             </tr>
           </tbody>
