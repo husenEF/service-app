@@ -16,20 +16,20 @@
             </tr>
             <tr>
               <th>Data di buat Oleh</th>
-              <td>{{vehicle.create_user.create_user}} ({{vehicle.create_user.roles}})</td>
+              <td>{{vehicle.create_user.name}} ({{vehicle.create_user.roles}})</td>
             </tr>
             <tr>
               <th>Terakhir memperbaharui</th>
               <td>{{vehicle.update_by}}</td>
             </tr>
-            <tr>
+            <!-- <tr>
               <th colspan="2">Daftar Ban ({{vehicle.size}}")</th>
-            </tr>
+            </tr> -->
           </tbody>
         </table>
 
         <table class="table">
-          <thead>
+          <thead class="thead-dark">
             <tr>
               <th colspan="3">Daftar Ban</th>
             </tr>
