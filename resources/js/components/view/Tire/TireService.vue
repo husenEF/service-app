@@ -43,13 +43,18 @@
       </div>
 
       <fieldset>
-        <legend>Form Service</legend>
+        <legend class="w-auto">Form Service</legend>
+        <div class="alert alert-danger" v-if="Object.keys(error).length>0" role="alert">
+          <p class="mb-0">
+            <span v-for="(e,i) in error" :key="i" class="clearfix">{{e[0]}}</span>
+          </p>
+        </div>
         <form @submit.prevent="submitData">
           <div class="form-group row">
             <div class="col-md-3">
               <label for="tekananangin">Tekanan Angin</label>
               <input
-                type="text"
+                type="number"
                 class="form-control"
                 id="tekananangin"
                 v-model="service.tekanan_angin"
@@ -57,30 +62,111 @@
             </div>
             <div class="col-md-3">
               <label for="tebaltapak">Tebal Tapak</label>
-              <input type="text" class="form-control" id="tebaltapak" v-model="service.tebal_tapak">
+              <input
+                type="number"
+                class="form-control"
+                id="tebaltapak"
+                v-model="service.tebal_tapak"
+              >
             </div>
             <div class="col-md-3">
               <label for="posisi">Posisi</label>
-              <input type="text" id="posisi" v-model="service.posisi" class="form-control">
+              <input
+                type="number"
+                id="posisi"
+                v-model="service.posisi"
+                class="form-control"
+                min="1"
+                max="11"
+              >
             </div>
             <div class="col-md-3">
               <label for="jarak">Jarak Km</label>
-              <input type="text" id="jarak" v-model="service.jarakkm" class="form-control">
+              <input type="number" id="jarak" v-model="service.jarakkm" class="form-control">
             </div>
           </div>
           <div class="form-group row">
-            <div class="col-md-12">
+            <div class="col-md-4">
+              <label for>Keterangan lain</label>
+              <div class="form-check">
+                <input
+                  type="radio"
+                  id="misalignment"
+                  class="form-check-input"
+                  v-model="service.kelainan"
+                  value="Misalignment"
+                >
+                <label for="misalignment">Misalignment</label>
+              </div>
+              <div class="form-check">
+                <input
+                  type="radio"
+                  v-model="service.kelainan"
+                  id="tutuppentil"
+                  class="form-check-input"
+                  value="Tutup pentil tidak ada"
+                >
+                <label for="tutuppentil">Tutup pentil tidak ada</label>
+              </div>
+              <div class="form-check">
+                <input
+                  type="radio"
+                  v-model="service.kelainan"
+                  id="tekananangin"
+                  class="form-check-input"
+                  value="Kekurangan / Kelebihan Tekanan Angin"
+                >
+                <label for="tekananangin">Kekurangan / Kelebihan Tekanan Angin</label>
+              </div>
+              <div class="form-check">
+                <input
+                  type="radio"
+                  v-model="service.kelainan"
+                  id="pentilrusak"
+                  class="form-check-input"
+                  value="Pentil rusak"
+                >
+                <label for="pentilrusak">Pentil rusak</label>
+              </div>
+              <div class="form-check">
+                <input
+                  type="radio"
+                  v-model="service.kelainan"
+                  id="bautroda"
+                  class="form-check-input"
+                  value="Baut roda longgar / rusak"
+                >
+                <label for="bautroda">Baut roda longgar / rusak</label>
+              </div>
+              <div class="form-check">
+                <input
+                  type="radio"
+                  v-model="service.kelainan"
+                  id="sobek"
+                  class="form-check-input"
+                  value="Ban cacat / sobek"
+                >
+                <label for="sobek">Ban cacat / sobek</label>
+              </div>
+            </div>
+            <div class="col-md-8">
               <label for="catatan">Catatan</label>
-              <textarea name="catatan" id="catatan" class="form-control">{{service.catatan}}</textarea>
+              <textarea
+                name="catatan"
+                id="catatan"
+                rows="7"
+                class="form-control"
+                v-model="service.catatan"
+              >{{service.catatan}}</textarea>
             </div>
           </div>
+
           <div class="form-group">
             <button type="submit" class="btn btn-primary">simpan</button>
             <button class="btn btn-danger" type="button">Lepas ban?</button>
           </div>
         </form>
       </fieldset>
-      <pre>{{getUser}}</pre>
     </div>
   </div>
 </template>
@@ -98,6 +184,7 @@ export default {
       service: {
         tire_id: null,
         user: null,
+        kendaraan: null,
         tekanan_angin: "",
         tebal_tapak: "",
         posisi: "",
@@ -106,7 +193,8 @@ export default {
         kelainan: "",
         lepasban: null,
         alasanlepas: ""
-      }
+      },
+      error: {}
     };
   },
   computed: {
@@ -123,18 +211,37 @@ export default {
           this.tire = data.data;
           this.service.user = this.getUser.id;
           this.service.tire_id = id;
+          this.service.posisi = data.data.posistion;
+          this.service.kendaraan = data.data.vehicle.id;
           this.$emit("back", "/vehicle/" + data.data.vehicle.id);
         })
         .catch(err => {
-          console.log("err", err.response.data);
+          console.log(err.response.data);
+          this.error = err.response.data;
         });
     },
     submitData() {
       axios
         .post("/api/v1/service/save", this.service)
-        .then(res => console.log(res))
-        .catch(err => console.log("err", err));
+        .then(res => {
+          const { data } = res;
+          this.$swal(data.message).then(val => window.location.reload());
+        })
+        .catch(err => {
+          this.error = err.response.data;
+        });
     }
   }
 };
 </script>
+
+<style lang="scss">
+fieldset {
+  border-width: 2px;
+  border-style: groove;
+  // border-color: threedface;
+  border-image: initial;
+  padding: inherit;
+  margin: inherit;
+}
+</style>
