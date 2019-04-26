@@ -56,7 +56,7 @@
               </td>
               <td>
                 <router-link
-                  :to="'/ban/addhistory/'+t.id"
+                  :to="'/ban/service/'+t.id"
                   class="btn btn-primary btn-sm"
                 >Tambah Hasil Uji</router-link>
               </td>

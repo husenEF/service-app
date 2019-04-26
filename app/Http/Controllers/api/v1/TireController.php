@@ -77,12 +77,31 @@ class TireController extends Controller
 
         if ($name !== 'datetime') {
             $tire = Tire::where($name, 'LIKE', "%$value%")->get();
-        } else { 
-            $tire = Tire::whereDate('buy_date',date('Y-m-d',strtotime($value)))->get();
+        } else {
+            $tire = Tire::whereDate('buy_date', date('Y-m-d', strtotime($value)))->get();
         }
 
         if ($tire->count() > 0) {
             $tire = app('fractal')->collection($tire, new TireTransformer())->getArray();
+            return response()->json([
+                'success' => true,
+                'message' => 'Get Data Success',
+                'data' => $tire
+            ], 200);
+        } else {
+            return response()->json([
+                'success' => false,
+                'message' => 'Get Data failed',
+                'data' => ""
+            ], 404);
+        }
+    }
+
+    public function show($id)
+    {
+        $tire = Tire::findOrFail($id);
+        if ($tire) {
+            $tire = app('fractal')->item($tire, new TireTransformer())->getArray();
             return response()->json([
                 'success' => true,
                 'message' => 'Get Data Success',
