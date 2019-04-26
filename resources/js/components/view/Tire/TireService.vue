@@ -44,7 +44,7 @@
 
       <fieldset>
         <legend>Form Service</legend>
-        <form action method="post">
+        <form @submit.prevent="submitData">
           <div class="form-group row">
             <div class="col-md-3">
               <label for="tekananangin">Tekanan Angin</label>
@@ -74,8 +74,13 @@
               <textarea name="catatan" id="catatan" class="form-control">{{service.catatan}}</textarea>
             </div>
           </div>
+          <div class="form-group">
+            <button type="submit" class="btn btn-primary">simpan</button>
+            <button class="btn btn-danger" type="button">Lepas ban?</button>
+          </div>
         </form>
       </fieldset>
+      <pre>{{getUser}}</pre>
     </div>
   </div>
 </template>
@@ -91,6 +96,8 @@ export default {
     return {
       tire: {},
       service: {
+        tire_id: null,
+        user: null,
         tekanan_angin: "",
         tebal_tapak: "",
         posisi: "",
@@ -102,6 +109,11 @@ export default {
       }
     };
   },
+  computed: {
+    getUser() {
+      return this.$store.getters.currentUser;
+    }
+  },
   methods: {
     getTire(id) {
       axios
@@ -109,11 +121,16 @@ export default {
         .then(res => {
           const { data } = res;
           this.tire = data.data;
+          this.service.user = this.getUser.id;
+          this.service.tire_id = id;
           this.$emit("back", "/vehicle/" + data.data.vehicle.id);
         })
         .catch(err => {
           console.log("err", err.response.data);
         });
+    },
+    submitData() {
+      console.log(this.service);
     }
   }
 };
