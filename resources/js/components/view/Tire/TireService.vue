@@ -6,7 +6,7 @@
         <table class="table">
           <thead class="thead-dark">
             <tr>
-              <th colspan="2">Detail Ban</th>
+              <th colspan="2">Info Ban</th>
             </tr>
           </thead>
           <tbody>
@@ -41,6 +41,41 @@
           </tbody>
         </table>
       </div>
+
+      <fieldset>
+        <legend>Form Service</legend>
+        <form action method="post">
+          <div class="form-group row">
+            <div class="col-md-3">
+              <label for="tekananangin">Tekanan Angin</label>
+              <input
+                type="text"
+                class="form-control"
+                id="tekananangin"
+                v-model="service.tekanan_angin"
+              >
+            </div>
+            <div class="col-md-3">
+              <label for="tebaltapak">Tebal Tapak</label>
+              <input type="text" class="form-control" id="tebaltapak" v-model="service.tebal_tapak">
+            </div>
+            <div class="col-md-3">
+              <label for="posisi">Posisi</label>
+              <input type="text" id="posisi" v-model="service.posisi" class="form-control">
+            </div>
+            <div class="col-md-3">
+              <label for="jarak">Jarak Km</label>
+              <input type="text" id="jarak" v-model="service.jarakkm" class="form-control">
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-md-12">
+              <label for="catatan">Catatan</label>
+              <textarea name="catatan" id="catatan" class="form-control">{{service.catatan}}</textarea>
+            </div>
+          </div>
+        </form>
+      </fieldset>
     </div>
   </div>
 </template>
@@ -54,7 +89,17 @@ export default {
   },
   data() {
     return {
-      tire: {}
+      tire: {},
+      service: {
+        tekanan_angin: "",
+        tebal_tapak: "",
+        posisi: "",
+        jarakkm: "",
+        catatan: "",
+        kelainan: "",
+        lepasban: null,
+        alasanlepas: ""
+      }
     };
   },
   methods: {
