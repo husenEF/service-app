@@ -52,4 +52,9 @@ $router->group(['namespace' => 'v1', 'prefix' => '/v1'], function ($router) {
         $router->get("/tire/{id}", "HistoryController@tireHistory");
         $router->get("/position/{vehicle}/{id}", "HistoryController@positionHistory");
     });
+
+    //service
+    $router->group(['prefix' => 'service'], function () use ($router) {
+        $router->post('/save', "ServiceController@store");
+    });
 });

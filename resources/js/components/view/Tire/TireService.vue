@@ -130,7 +130,10 @@ export default {
         });
     },
     submitData() {
-      console.log(this.service);
+      axios
+        .post("/api/v1/service/save", this.service)
+        .then(res => console.log(res))
+        .catch(err => console.log("err", err));
     }
   }
 };
