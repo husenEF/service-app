@@ -157,19 +157,107 @@
                 rows="7"
                 class="form-control"
                 v-model="service.catatan"
-              >{{service.catatan}}</textarea>
+              ></textarea>
             </div>
           </div>
 
           <div class="form-group">
             <button type="submit" class="btn btn-primary">simpan</button>
-            <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#exampleModal">Lepas ban?</button>
+            <button
+              class="btn btn-danger"
+              type="button"
+              data-toggle="modal"
+              data-target="#lepasBan"
+            >Lepas ban?</button>
           </div>
         </form>
       </fieldset>
     </div>
+    <!-- Modal -->
+    <div
+      class="modal fade"
+      id="lepasBan"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="lepasBanLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <form @submit.prevent="lepasbanHandler">
+            <div class="modal-header">
+              <h5 class="modal-title" id="lepasBanLabel">Alasan Lepas Ban</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <!-- <form @submit.prevent="lepasbanHandler"> -->
+              <div class="alert alert-danger" v-if="Object.keys(error).length>0" role="alert">
+                <p class="mb-0">
+                  <span v-for="(e,i) in error" :key="i" class="clearfix">{{e[0]}}</span>
+                </p>
+              </div>
+              <div class="form-check">
+                <input
+                  type="radio"
+                  v-model="service.alasanlepas"
+                  id="gundul"
+                  value="Gundul"
+                  class="form-check-input"
+                >
+                <label for="gundul" class="form-check-label">Gundul</label>
+              </div>
+              <div class="form-check">
+                <input
+                  type="radio"
+                  v-model="service.alasanlepas"
+                  id="aus"
+                  value="Aus / Tidak rata"
+                  class="form-check-input"
+                >
+                <label for="aus" class="form-check-label">Aus / Tidak rata</label>
+              </div>
+              <div class="form-check">
+                <input
+                  type="radio"
+                  v-model="service.alasanlepas"
+                  id="rusak"
+                  value="Rusak / Bocor"
+                  class="form-check-input"
+                >
+                <label for="rusak" class="form-check-label">Rusak / Bocor</label>
+              </div>
+              <div class="form-check">
+                <input
+                  type="radio"
+                  v-model="service.alasanlepas"
+                  id="buang"
+                  value="Vulkanisir / Buang"
+                  class="form-check-input"
+                >
+                <label for="buang" class="form-check-label">Vulkanisir / Buang</label>
+              </div>
+              <div class="form-check">
+                <input
+                  type="radio"
+                  v-model="service.alasanlepas"
+                  id="tukar"
+                  value="Tukar posisi"
+                  class="form-check-input"
+                >
+                <label for="tukar" class="form-check-label">Tukar posisi</label>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary">Save changes</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
   </div>
-  
 </template>
 
 <script>
@@ -192,7 +280,7 @@ export default {
         jarakkm: "",
         catatan: "",
         kelainan: "",
-        lepasban: null,
+        lepasban: false,
         alasanlepas: ""
       },
       error: {}
@@ -209,6 +297,7 @@ export default {
         .get("/api/v1/tire/" + id)
         .then(res => {
           const { data } = res;
+          // console.log("d", data);
           this.tire = data.data;
           this.service.user = this.getUser.id;
           this.service.tire_id = id;
@@ -232,24 +321,21 @@ export default {
           this.error = err.response.data;
         });
     },
-    lepasban() {
+
+    lepasbanHandler() {
       this.$swal({
         title: "Anda Yakin?",
-        text: "Anda akan menghapus data ini?",
-        html:"<ul class=''>"+
-        "<li class='text-left'><input type='radio' name='alasan' v-on:click='alert(\"a\")' />Gundul</li>"+
-        "<li class='text-left'><input type='radio' name='alasan' />Gundul</li>"+
-        "<li class='text-left'><input type='radio' name='alasan' />Gundul</li>"+
-        "<li class='text-left'><input type='radio' name='alasan' />Gundul</li>"+
-        "</ul>",
+        text: "Apakah data Sudah benar?",
         type: "warning",
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
         cancelButtonColor: "#d33",
-        confirmButtonText: "Hapus!"
+        confirmButtonText: "Ya!"
       }).then(res => {
         if (res.value) {
-          console.log(res);
+          let service = this.service;
+          service.lepasban = true;
+          this.submitData();
         } else {
           console.log("cancel");
         }

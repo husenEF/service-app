@@ -30,23 +30,37 @@ class ServiceController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'tekanan_angin' => 'required',
-            'tebal_tapak' => 'required',
-            'posisi' => 'required|int',
-            'jarakkm' => 'required|int',
+        // dd($request->all());
+        if ($request->input('lepasban')) {
+            $this->validate(
+                $request,
+                [
+                    'alasanlepas' => 'required'
+                ],
+                [
+                    'alasanlepas.required' => "Harus Pilih salah satu alasan lepas ban"
+                ]
+            );
+        } else {
+            $this->validate($request, [
+                'tekanan_angin' => 'required',
+                'tebal_tapak' => 'required',
+                'posisi' => 'required|int',
+                'jarakkm' => 'required|int',
+            ]);
+        }
 
-        ]);
         $service = new Service();
         $service->tire_id = $request->input("tire_id");
         $service->user = $request->input("user");
         $service->kendaraan = $request->input("kendaraan");
-        $service->tekanan_angin = $request->input("tekanan_angin");
-        $service->tebal_tapak = $request->input("tebal_tapak");
+        $service->tekanan_angin = ($request->input("tekanan_angin")) ? $request->input("tekanan_angin") : 0;
+        $service->tebal_tapak = ($request->input("tebal_tapak")) ? $request->input("tebal_tapak") : 0;
         $service->posisi = $request->input("posisi");
-        $service->jarakkm = $request->input("jarakkm");
+        $service->jarakkm = ($request->input("jarakkm")) ? $request->input("jarakkm") : 0;
         $service->catatan = $request->input("catatan");
         $service->kelainan = $request->input("kelainan");
+        $service->lepasban = $request->input("lepasban");
         $service->alasanlepas = $request->input("alasanlepas");
         if ($service->save()) {
             return response()->json(
