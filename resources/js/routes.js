@@ -24,6 +24,10 @@ import HistoryList from "./components/view/History/List.vue"
 import HistoryTire from "./components/view/History/Tire.vue"
 import HistoryPosition from "./components/view/History/Position.vue"
 
+//service
+import ServiceIndex from "./components/view/Service/Index.vue"
+import ServiceList from "./components/view/Service/List.vue"
+
 
 export const routes = [
     {
@@ -164,6 +168,22 @@ export const routes = [
                 name: "tireService",
                 meta: {
                     title: "Service Ban"
+                }
+            }
+        ]
+    }, {
+        path: "/service",
+        component: ServiceIndex,
+        meta: {
+            requiresAuth: true
+        },
+        children: [
+            {
+                path: "/",
+                component: ServiceList,
+                name: "serviceList",
+                meta: {
+                    tire: "Riwayat Pengecekan Ban"
                 }
             }
         ]
