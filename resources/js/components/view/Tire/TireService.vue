@@ -163,12 +163,13 @@
 
           <div class="form-group">
             <button type="submit" class="btn btn-primary">simpan</button>
-            <button class="btn btn-danger" type="button">Lepas ban?</button>
+            <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#exampleModal">Lepas ban?</button>
           </div>
         </form>
       </fieldset>
     </div>
   </div>
+  
 </template>
 
 <script>
@@ -230,6 +231,29 @@ export default {
         .catch(err => {
           this.error = err.response.data;
         });
+    },
+    lepasban() {
+      this.$swal({
+        title: "Anda Yakin?",
+        text: "Anda akan menghapus data ini?",
+        html:"<ul class=''>"+
+        "<li class='text-left'><input type='radio' name='alasan' v-on:click='alert(\"a\")' />Gundul</li>"+
+        "<li class='text-left'><input type='radio' name='alasan' />Gundul</li>"+
+        "<li class='text-left'><input type='radio' name='alasan' />Gundul</li>"+
+        "<li class='text-left'><input type='radio' name='alasan' />Gundul</li>"+
+        "</ul>",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Hapus!"
+      }).then(res => {
+        if (res.value) {
+          console.log(res);
+        } else {
+          console.log("cancel");
+        }
+      });
     }
   }
 };
