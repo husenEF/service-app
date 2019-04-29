@@ -54,7 +54,10 @@
                   </small>
                 </p>
               </td>
-              <td>{{(s.lepasban)?'Ya':'Tidak'}}</td>
+              <td>
+                {{(s.lepasban)?'Ya':'Tidak'}}
+                <p>Alasan : {{s.alasanlepas}}</p>
+              </td>
             </tr>
           </tbody>
         </table>
