@@ -2,6 +2,57 @@
   <div class="card">
     <div class="card-header">Daftar Pengecekkan Ban</div>
     <div class="card-body">
+      <div class="clearfix filter">
+        <p>
+          <button
+            class="btn btn-info"
+            type="button"
+            data-toggle="collapse"
+            data-target="#collapseExample"
+            aria-expanded="false"
+            aria-controls="collapseExample"
+          >
+            Filter Data
+            <FilterIcon/>
+          </button>
+        </p>
+        <div class="collapse" id="collapseExample">
+          <div class="card card-body">
+            <form @submit.prevent="filterHandler">
+              <div class="row">
+                <div class="col-md-5">
+                  <div class="form-group">
+                    <label for>Filter</label>
+                    <select class="form-control" required  name="key">
+                      <option value>Pilih</option>
+                      <option value="merek">Merek</option>
+                      <option value="datetime">Tanggal Beli</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-md-5">
+                  <div class="form-group" >
+                    <label for>Kata Kunci</label>
+                    <input
+                      required
+                      type="text"
+                      class="form-control"
+                      placeholder="Kata Kunci"
+                    >
+                  </div>
+                  
+                </div>
+                <div class="col-md-2">
+                  <button class="btn btn-primary btn-block" type="submit">
+                    <SearchIcon/>
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
       <div class="table-responsive">
         <table class="table">
           <thead>
@@ -76,8 +127,14 @@
 </template>
 
 <script>
+import { EyeIcon, SearchIcon, FilterIcon } from "vue-feather-icons";
 export default {
   name: "serviceList",
+  components: {
+    EyeIcon,
+    SearchIcon,
+    FilterIcon
+  },
   data() {
     return {
       service: {},
