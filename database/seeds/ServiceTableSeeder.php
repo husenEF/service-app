@@ -16,4 +16,5 @@ class ServiceTableSeeder extends Seeder
         $user = User::all()->count();
         $tire = Tire::all()->count();
     }
+    
 }

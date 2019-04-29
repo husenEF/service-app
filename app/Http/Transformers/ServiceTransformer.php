@@ -9,8 +9,8 @@ class ServiceTransformer extends TransformerAbstract
     protected $availableIncludes = [];
 
     protected $defaultIncludes = [
-        // 'user', 'vehicle'
-        // 'user'
+        'user', 'vehicle',
+        'tire'
     ];
 
 
@@ -22,7 +22,33 @@ class ServiceTransformer extends TransformerAbstract
     public function transform(Service $service)
     {
         return [
-            "id" => $service->id
+            "id" => $service->id,
+            "tekanan_angin" => $service->tekanan_angin,
+            "tebal_tapak" => $service->tebal_tapak,
+            "posisi" => $service->posisi,
+            "jarakkm" => $service->jarakkm,
+            "catatan" => $service->catatan,
+            "kelainan" => $service->kelainan,
+            "lepasban" => $service->lepasban,
+            "alasanlepas" => $service->alasanlepas,
+            "create_at" => date("Y-m-d H:m:s", strtotime($service->created_at)),
+            // "user" => $service->getUser
+            // "raw" => $service
         ];
+    }
+
+    public function includeUser(Service $service)
+    {
+        return $this->item($service->getUser, new UserTransformer());
+    }
+
+    public function includeVehicle(Service $service)
+    {
+        return $this->item($service->vehicle, new VehicleTransformer());
+    }
+
+    public function includeTire(Service $service)
+    {
+        return $this->item($service->tire, new TireTransformer());
     }
 }

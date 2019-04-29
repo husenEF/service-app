@@ -20,7 +20,7 @@ class ServiceController extends Controller
      */
     public function index()
     {
-        $service = Service::paginate(2);
+        $service = Service::with(['getUser', 'tire', 'vehicle'])->paginate();
         if ($service) {
             $service = app('fractal')->collection($service, new ServiceTransformer())->getArray();
             return response()->json([
