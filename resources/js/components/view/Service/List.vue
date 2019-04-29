@@ -18,29 +18,20 @@
         </p>
         <div class="collapse" id="collapseExample">
           <div class="card card-body">
+            <!-- <pre>{{vehicle}}</pre> -->
             <form @submit.prevent="filterHandler">
               <div class="row">
                 <div class="col-md-5">
                   <div class="form-group">
-                    <label for>Filter</label>
-                    <select class="form-control" required  name="key">
-                      <option value>Pilih</option>
-                      <option value="merek">Merek</option>
-                      <option value="datetime">Tanggal Beli</option>
-                    </select>
+                    <label for="vehicle">Kendaraan</label>
+                    
                   </div>
                 </div>
                 <div class="col-md-5">
-                  <div class="form-group" >
+                  <div class="form-group">
                     <label for>Kata Kunci</label>
-                    <input
-                      required
-                      type="text"
-                      class="form-control"
-                      placeholder="Kata Kunci"
-                    >
+                    <input required type="text" class="form-control" placeholder="Kata Kunci">
                   </div>
-                  
                 </div>
                 <div class="col-md-2">
                   <button class="btn btn-primary btn-block" type="submit">
@@ -127,24 +118,43 @@
 </template>
 
 <script>
+
 import { EyeIcon, SearchIcon, FilterIcon } from "vue-feather-icons";
 export default {
   name: "serviceList",
   components: {
     EyeIcon,
     SearchIcon,
-    FilterIcon
+    FilterIcon,
   },
   data() {
     return {
       service: {},
-      meta: {}
+      meta: {},
+      filter: {
+        vehicle: null,
+        tire: null
+      },
+      vehicle: []
     };
   },
   created() {
     this.getList("/api/v1/service");
+    this.getAllCar();
   },
   methods: {
+    getAllCar() {
+      axios
+        .get("/api/v1/vehicle/list?page=all")
+        .then(res => {
+          const { data } = res;
+          // console.log(data)
+          this.vehicle = data.data.map(e => {
+            return { label: e.merek, code: e.id };
+          });
+        })
+        .catch(err => {});
+    },
     getList(link) {
       axios
         .get(link)

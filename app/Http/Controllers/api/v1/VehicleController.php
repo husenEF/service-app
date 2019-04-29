@@ -27,9 +27,14 @@ class VehicleController extends Controller
         $this->history = new HistoryController();
     }
 
-    public function index()
+    public function index(Request $re)
     {
-        $vehicle = Vehicle::with(['user', 'tires'])->paginate();
+        // dd($re->filled('page'));
+        if ($re->filled('page') && ($re->query('page') == 'all')) {
+            $vehicle = Vehicle::with(['user', 'tires'])->get();
+        } else {
+            $vehicle = Vehicle::with(['user', 'tires'])->paginate(5);
+        }
 
         $vehicle = app('fractal')->collection($vehicle, new VehicleTransformer())->getArray();
         if ($vehicle) {
