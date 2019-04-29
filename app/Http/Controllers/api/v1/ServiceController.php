@@ -4,6 +4,7 @@ namespace App\Http\Controllers\api\v1;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Transformers\ServiceTransformer;
 use App\Service;
 
 class ServiceController extends Controller
@@ -19,7 +20,21 @@ class ServiceController extends Controller
      */
     public function index()
     {
-        //
+        $service = Service::paginate(2);
+        if ($service) {
+            $service = app('fractal')->collection($service, new ServiceTransformer())->getArray();
+            return response()->json([
+                'success' => true,
+                'message' => 'Get Data Success',
+                'data' => $service
+            ], 200);
+        } else {
+            return response()->json([
+                'success' => false,
+                'message' => 'Get Data failed',
+                'data' => ""
+            ], 404);
+        }
     }
 
     /**

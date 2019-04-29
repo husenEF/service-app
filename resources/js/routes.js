@@ -183,7 +183,7 @@ export const routes = [
                 component: ServiceList,
                 name: "serviceList",
                 meta: {
-                    tire: "Riwayat Pengecekan Ban"
+                    title: "Riwayat Pengecekan Ban"
                 }
             }
         ]

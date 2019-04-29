@@ -12,6 +12,22 @@ export default {
     return {
       service: {}
     };
+  },
+  created() {
+    this.getList("/api/v1/service");
+  },
+  methods: {
+    getList(link) {
+      axios
+        .get(link)
+        .then(res => {
+          console.log("res", res);
+          // const {data} = res
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    }
   }
 };
 </script>
