@@ -37,6 +37,39 @@ class ServiceController extends Controller
         }
     }
 
+    public function filter(Request $re)
+    {
+        $this->validate(
+            $re,
+            [
+                'vehicle' => 'required',
+                'tire' => 'required'
+            ],
+            [
+                "vehicle.required" => "Silahkan pilih kendaraan",
+                "tire.required" => "Silahkan pilih Ban"
+            ]
+        );
+
+        $service = Service::where([
+            ['tire_id', '=', $re->tire['id']],
+            ['kendaraan', '=', $re->vehicle['id']]
+        ])->with(['getUser', 'tire', 'vehicle'])->get();
+        if ($service->count()) {
+            $service = app('fractal')->collection($service, new ServiceTransformer())->getArray();
+            return response()->json([
+                'success' => true,
+                'message' => 'Get Data Success',
+                'data' => $service
+            ], 200);
+        } else {
+            return response()->json([
+                'success' => false,
+                'message' => 'Get Data failed',
+                'data' => ""
+            ], 404);
+        }
+    }
     /**
      * Store a newly created resource in storage.
      *

@@ -18,25 +18,43 @@
         </p>
         <div class="collapse" id="collapseExample">
           <div class="card card-body">
-            <!-- <pre>{{vehicle}}</pre> -->
+            <div
+              class="alert alert-danger"
+              role="alert"
+              v-if="Object.keys(filter.error).length > 0"
+            >
+              <p class="m-0">
+                <span v-for="(j,i) in filter.error" :key="i">
+                  {{j[0]}}
+                  <br>
+                </span>
+              </p>
+            </div>
             <form @submit.prevent="filterHandler">
               <div class="row">
                 <div class="col-md-5">
                   <div class="form-group">
-                    <label for="vehicle">Kendaraan ({{filter.vehicle}})</label>
+                    <label for="vehicle">Kendaraan</label>
                     <multiselect
                       v-model="filter.vehicle"
                       :options="vehicle"
                       label="name"
                       placeholder="Select one"
                       track-by="name"
+                      @select="selectVehicle"
                     ></multiselect>
                   </div>
                 </div>
                 <div class="col-md-5">
                   <div class="form-group">
-                    <label for>Kata Kunci</label>
-                    <input required type="text" class="form-control" placeholder="Kata Kunci">
+                    <label for>Pilih Ban</label>
+                    <multiselect
+                      v-model="filter.tire"
+                      :options="tire"
+                      label="name"
+                      placeholder="Select one"
+                      track-by="name"
+                    ></multiselect>
                   </div>
                 </div>
                 <div class="col-md-2">
@@ -61,7 +79,7 @@
               <th>Lepas Ban?</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody v-if="service.length>0">
             <tr v-for="(s,i) in service" :key="i">
               <td>
                 <span
@@ -108,6 +126,16 @@
               </td>
             </tr>
           </tbody>
+          <tbody v-else>
+            <tr>
+              <td colspan="5">
+                <div
+                  class="alert alert-info"
+                  role="alert"
+                >Silakan pilih Kendaraan dan Ban di tombol Filter</div>
+              </td>
+            </tr>
+          </tbody>
         </table>
       </div>
     </div>
@@ -142,14 +170,18 @@ export default {
       meta: {},
       filter: {
         vehicle: null,
-        tire: null
+        tire: null,
+        error: {}
       },
       vehicle: [],
-      tire: []
+      tire: [],
+      raw: {
+        vehicle: {}
+      }
     };
   },
   created() {
-    this.getList("/api/v1/service");
+    // this.getList("/api/v1/service");
     this.getAll();
   },
   methods: {
@@ -162,6 +194,7 @@ export default {
           this.vehicle = data.data.map(e => {
             return { name: e.merek, id: e.id };
           });
+          this.raw.vehicle = data.data;
         })
         .catch(err => {});
       // axios
@@ -181,6 +214,34 @@ export default {
       //       });
       //     })
       //   );
+    },
+    selectVehicle(selectedOption, id) {
+      const { vehicle } = this.raw;
+      const theVehicle = vehicle.filter(v => v.id == selectedOption.id);
+      const theTire = theVehicle[0].tire.map(t => {
+        return { name: t.merek, id: t.id };
+      });
+      // console.log(theTire);
+      this.tire = theTire;
+      this.filter.vehicle = selectedOption.id;
+    },
+    filterHandler() {
+      this.filter.error = {};
+      axios
+        .post("/api/v1/service/filter", this.filter)
+        .then(res => {
+          const { data } = res;
+          // console.log(data)
+          let listId = Object.keys(data.data).filter(i => i !== "meta");
+          // console.log("map tireId", tireId);
+          this.service = listId.map(i => data.data[i]);
+          if (data.data.hasOwnProperty("meta")) {
+            this.meta = data.data.meta;
+          }
+        })
+        .catch(err => {
+          this.filter.error = err.response.data;
+        });
     },
     getList(link) {
       axios
@@ -203,3 +264,13 @@ export default {
   }
 };
 </script>
+
+<style lang="scss" scoped>
+.filter {
+  form {
+    button {
+      margin-top: 30px;
+    }
+  }
+}
+</style>

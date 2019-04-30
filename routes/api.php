@@ -57,5 +57,6 @@ $router->group(['namespace' => 'v1', 'prefix' => '/v1'], function ($router) {
     $router->group(['prefix' => 'service'], function () use ($router) {
         $router->post('/save', "ServiceController@store");
         $router->get("/", "ServiceController@index");
+        $router->post("/filter", "ServiceController@filter");
     });
 });
