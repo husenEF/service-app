@@ -20,18 +20,26 @@ class UsersTableSeeder extends Seeder
             DB::table('users')->insert([
                 'name' => "admin",
                 // 'email' => "admin@mail.com",
-                'username'=>'admin',
+                'username' => 'admin',
                 'password' => Hash::make("admin123"),
                 'roles' => 'admin',
                 'active' => 1
             ]);
         }
+        DB::table('users')->insert([
+            'name' => 'Nama mekanik',
+            // 'email' => $faker->email,
+            'username' => 'mekanik',
+            'password' => Hash::make("123123"),
+            'roles' => 'mekanik',
+            'active' => 1
+        ]);
         $faker = Faker::create();
         foreach (range(0, 10) as $i) {
             DB::table('users')->insert([
                 'name' => $faker->name,
                 // 'email' => $faker->email,
-                'username'=>$faker->userName,
+                'username' => $faker->userName,
                 'password' => Hash::make("123123"),
                 'roles' => 'mekanik',
                 'active' => rand(0, 1)
