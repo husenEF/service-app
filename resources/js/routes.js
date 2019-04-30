@@ -65,7 +65,8 @@ export const routes = [
                 component: UserList,
                 name: "userlist",
                 meta: {
-                    title: "Daftar Pengguna"
+                    title: "Daftar Pengguna",
+                    roles: "admin"
                 }
 
             }, {
@@ -73,14 +74,16 @@ export const routes = [
                 component: UserAdd,
                 name: "userAdd",
                 meta: {
-                    title: "Tambah Pengguna"
+                    title: "Tambah Pengguna",
+                    roles: "admin"
                 }
             }, {
                 path: ":id",
                 component: UserEdit,
                 name: "userEdit",
                 meta: {
-                    title: "Rubah Pengguna"
+                    title: "Rubah Pengguna",
+                    roles: "admin"
                 }
             }
         ]
@@ -103,7 +106,8 @@ export const routes = [
                 path: "add",
                 component: VehicleAdd,
                 meta: {
-                    title: "Tambah Kendaraan"
+                    title: "Tambah Kendaraan",
+                    roles: "admin"
                 }
             },
             {
@@ -117,7 +121,8 @@ export const routes = [
                 path: "edit/:id",
                 component: VehicleEdit,
                 meta: {
-                    title: "Edit Kendaraan"
+                    title: "Edit Kendaraan",
+                    roles: "admin"
                 }
             },
         ]

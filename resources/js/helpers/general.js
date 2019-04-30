@@ -5,10 +5,15 @@ export function initialize(store, router) {
 
         // console.log("to", to)
         document.title = to.meta.title + " | Management Ban"
+        // console.log("meta", [to.meta, currentUser])
+
         if (requiresAuth && !currentUser) {
             next('/login')
             // alert()
         } else if (to.path == '/login' && currentUser) {
+            next('/')
+        } else if (currentUser && currentUser.roles == 'mekanik' && to.meta.roles == 'admin') {
+            alert("Anda tidak di perkenankan di halaman ini")
             next('/')
         } else {
             next()

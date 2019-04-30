@@ -6,7 +6,8 @@
     <div class="row">
       <div class="col-6">
         <h1 class="text-center">
-          <router-link to="/user">Pengguna</router-link>
+          <router-link to="/user" v-if="user.roles=='admin'">Pengguna</router-link>
+          <router-link to="/user/detail" v-else>Profilku</router-link>
         </h1>
       </div>
       <div class="col-6">

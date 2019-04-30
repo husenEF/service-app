@@ -2,7 +2,11 @@
   <div class="card">
     <div class="card-header">
       Daftar Pengguna
-      <router-link to="/user/add" class="btn btn-primary btn-sm float-right">Tambah Pengguna</router-link>
+      <router-link
+        to="/user/add"
+        class="btn btn-primary btn-sm float-right"
+        v-if="getUser.roles=='admin'"
+      >Tambah Pengguna</router-link>
     </div>
     <div class="card-body">
       <div class="alert alert-danger" v-if="error!==''">
@@ -133,6 +137,11 @@ export default {
       },
       error: ""
     };
+  },
+  computed: {
+    getUser() {
+      return this.$store.getters.currentUser;
+    }
   },
   methods: {
     getData(url) {
