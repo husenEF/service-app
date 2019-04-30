@@ -23,8 +23,14 @@
               <div class="row">
                 <div class="col-md-5">
                   <div class="form-group">
-                    <label for="vehicle">Kendaraan</label>
-                    
+                    <label for="vehicle">Kendaraan ({{filter.vehicle}})</label>
+                    <multiselect
+                      v-model="filter.vehicle"
+                      :options="vehicle"
+                      label="name"
+                      placeholder="Select one"
+                      track-by="name"
+                    ></multiselect>
                   </div>
                 </div>
                 <div class="col-md-5">
@@ -118,14 +124,17 @@
 </template>
 
 <script>
-
+import Multiselect from "vue-multiselect";
 import { EyeIcon, SearchIcon, FilterIcon } from "vue-feather-icons";
+import "vue-multiselect/dist/vue-multiselect.min.css";
+
 export default {
   name: "serviceList",
   components: {
     EyeIcon,
     SearchIcon,
     FilterIcon,
+    Multiselect
   },
   data() {
     return {
@@ -135,25 +144,43 @@ export default {
         vehicle: null,
         tire: null
       },
-      vehicle: []
+      vehicle: [],
+      tire: []
     };
   },
   created() {
     this.getList("/api/v1/service");
-    this.getAllCar();
+    this.getAll();
   },
   methods: {
-    getAllCar() {
+    getAll() {
       axios
         .get("/api/v1/vehicle/list?page=all")
         .then(res => {
           const { data } = res;
           // console.log(data)
           this.vehicle = data.data.map(e => {
-            return { label: e.merek, code: e.id };
+            return { name: e.merek, id: e.id };
           });
         })
         .catch(err => {});
+      // axios
+      //   .all([
+      //     axios.get("/api/v1/vehicle/list?page=all"),
+      //     axios.get("/api/v1/tire/list?page=all")
+      //   ])
+      //   .then(
+      //     axios.spread((vehicleRes, tireRes) => {
+      //       const dataVehicle = vehicleRes.data.data;
+      //       const dataTire = tireRes.data.data;
+      //       this.vehicle = dataVehicle.map(e => {
+      //         return { name: e.merek, id: e.id };
+      //       });
+      //       this.tire = dataTire.map(t => {
+      //         return { name: e.merek, id: e.id };
+      //       });
+      //     })
+      //   );
     },
     getList(link) {
       axios

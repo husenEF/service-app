@@ -17,10 +17,13 @@ class TireController extends Controller
         $this->middleware('auth');
     }
 
-    public function index()
+    public function index(Request $re)
     {
-        $tire = Tire::with(['getUser', 'getVehicle'])->paginate();
-
+        if ($re->filled('page') && ($re->query('page') == 'all')) {
+            $tire = Tire::with(['getUser', 'getVehicle'])->get();
+        } else {
+            $tire = Tire::with(['getUser', 'getVehicle'])->paginate();
+        }
         $tire = app('fractal')->collection($tire, new TireTransformer())->getArray();
         if ($tire) {
             return response()->json([

@@ -6299,15 +6299,15 @@ vue-material-design-icons@^3.1.0:
   resolved "https://registry.yarnpkg.com/vue-material-design-icons/-/vue-material-design-icons-3.1.0.tgz#1c24752f4a43c40cad08c391d66e6fbd8ffaf2af"
   integrity sha512-2u+LRzsEKn4SmT35wCmmV0taqd90R1IWtZbHtwx6SUem2qma8SwWYAalr/pjOjATlSiWIQeka4DYYc3lch1Fvw==
 
+vue-multiselect@^2.1.6:
+  version "2.1.6"
+  resolved "https://registry.yarnpkg.com/vue-multiselect/-/vue-multiselect-2.1.6.tgz#5be5d811a224804a15c43a4edbb7485028a89c7f"
+  integrity sha512-s7jmZPlm9FeueJg1RwJtnE9KNPtME/7C8uRWSfp9/yEN4M8XcS/d+bddoyVwVnvFyRh9msFo0HWeW0vTL8Qv+w==
+
 vue-router@^3.0.2:
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/vue-router/-/vue-router-3.0.2.tgz#dedc67afe6c4e2bc25682c8b1c2a8c0d7c7e56be"
   integrity sha512-opKtsxjp9eOcFWdp6xLQPLmRGgfM932Tl56U9chYTnoWqKxQ8M20N7AkdEbM5beUh6wICoFGYugAX9vQjyJLFg==
-
-vue-select@^3.0.2:
-  version "3.0.2"
-  resolved "https://registry.yarnpkg.com/vue-select/-/vue-select-3.0.2.tgz#0d7566021099891e1c702e5a90bfb48d84a07680"
-  integrity sha512-1j4YW6wo1M18osx6o96CkZ6lBaQcuCEjlXq+LBfhcvYveTOuYLseK+i33+CX1UBptBtly2PZ7q3PG20TCMIzPg==
 
 vue-style-loader@^4.1.0:
   version "4.1.2"
