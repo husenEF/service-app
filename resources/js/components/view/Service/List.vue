@@ -42,6 +42,7 @@
                       placeholder="Select one"
                       track-by="name"
                       @select="selectVehicle"
+                      :allow-empty="true"
                     ></multiselect>
                   </div>
                 </div>
@@ -240,7 +241,13 @@ export default {
           }
         })
         .catch(err => {
-          this.filter.error = err.response.data;
+          // console.log("errrr", err.response.data);
+          let { data } = err.response;
+          if (data.hasOwnProperty("message")) {
+            this.filter.error = [[data.message]];
+          } else {
+            this.filter.error = err.response.data;
+          }
         });
     },
     getList(link) {

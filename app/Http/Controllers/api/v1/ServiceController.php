@@ -65,7 +65,7 @@ class ServiceController extends Controller
         } else {
             return response()->json([
                 'success' => false,
-                'message' => 'Get Data failed',
+                'message' => 'Data tidak ditemukan',
                 'data' => ""
             ], 404);
         }
