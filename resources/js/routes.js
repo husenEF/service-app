@@ -7,6 +7,7 @@ import UserIndex from "./components/view/User/Index.vue"
 import UserList from "./components/view/User/List.vue"
 import UserAdd from "./components/view/User/Add.vue"
 import UserEdit from "./components/view/User/Edit.vue"
+import UserProfile from "./components/view/User/Profile.vue"
 //vehivle
 import VehicleIndex from "./components/view/Vehicle/Index.vue"
 import VehicleList from "./components/view/Vehicle/List.vue"
@@ -50,6 +51,13 @@ export const routes = [
         component: Home,
         meta: {
             title: "Home Page"
+        }
+    },
+    {
+        path: "/my-account",
+        component: UserProfile,
+        meta: {
+            title: "My Account Detail"
         }
     },
     {

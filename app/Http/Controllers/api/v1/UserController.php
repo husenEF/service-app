@@ -150,7 +150,7 @@ class UserController extends Controller
                     'success' => true,
                     'message' => 'Update User Success!',
                     'data' => $user,
-                    "debug" => $request->all()
+                    // "debug" => $request->all()
                 ],
                 201
             );
