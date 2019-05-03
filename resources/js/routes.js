@@ -19,6 +19,7 @@ import VehicleDetail from "./components/view/Vehicle/Detail.vue"
 import TireIndex from "./components/view/Tire/Index.vue"
 import TireList from "./components/view/Tire/List.vue"
 import TireService from "./components/view/Tire/TireService.vue"
+import TireAdd from "./components/view/Tire/Add.vue"
 //history
 import HistoryIndex from "./components/view/History/Index.vue"
 import HistoryList from "./components/view/History/List.vue"
@@ -181,6 +182,14 @@ export const routes = [
                 name: "tireService",
                 meta: {
                     title: "Service Ban"
+                }
+            },
+            {
+                path: "add",
+                component: TireAdd,
+                name: "tireAdd",
+                meta: {
+                    title: "Tambah Ban Baru"
                 }
             }
         ]
