@@ -26,6 +26,7 @@ class CreateServicesTable extends Migration
             $table->text('kelainan')->nullable();
             $table->boolean("lepasban")->nullable();
             $table->text('alasanlepas')->nullable();
+            $table->text("image")->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

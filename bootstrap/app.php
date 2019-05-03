@@ -81,6 +81,7 @@ $app->register(App\Providers\AuthServiceProvider::class);
 // $app->register(App\Providers\EventServiceProvider::class);
 $app->register(Flipbox\LumenGenerator\LumenGeneratorServiceProvider::class);
 $app->register(Gergonzalez\Fractal\FractalServiceProvider::class);
+// $app->register(GrahamCampbell\Flysystem\FlysystemServiceProvider::class);
 
 /*
 |--------------------------------------------------------------------------

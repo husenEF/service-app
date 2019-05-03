@@ -44,11 +44,11 @@
 
       <fieldset>
         <legend class="w-auto">Form Service</legend>
-        <div class="alert alert-danger" v-if="Object.keys(error).length>0" role="alert">
+        <!-- <div class="alert alert-danger" v-if="Object.keys(error).length>0" role="alert">
           <p class="mb-0">
             <span v-for="(e,i) in error" :key="i" class="clearfix">{{e[0]}}</span>
           </p>
-        </div>
+        </div>-->
         <form @submit.prevent="submitData">
           <div class="form-group row">
             <div class="col-md-3">
@@ -189,6 +189,9 @@
         </form>
       </fieldset>
     </div>
+    <div class="card-footer">
+      <pre>{{service}}</pre>
+    </div>
     <!-- Modal -->
     <div
       class="modal fade"
@@ -297,9 +300,10 @@ export default {
         catatan: "",
         kelainan: "",
         lepasban: false,
-        alasanlepas: ""
+        alasanlepas: "",
+        image: ""
       },
-      error: {},
+      error: [],
       imageData: null
     };
   },
@@ -323,7 +327,7 @@ export default {
           this.$emit("back", "/vehicle/" + data.data.vehicle.id);
         })
         .catch(err => {
-          console.log(err.response.data);
+          // console.log(err.response.data);
           this.error = err.response.data;
         });
     },
@@ -365,6 +369,7 @@ export default {
         let reader = new FileReader();
         reader.onload = e => {
           this.imageData = e.target.result;
+          this.service.image = e.target.result;
         };
         reader.readAsDataURL(input.files[0]);
       }

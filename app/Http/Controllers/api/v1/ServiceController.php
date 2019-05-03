@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Transformers\ServiceTransformer;
 use App\Service;
+use Illuminate\Support\Facades\Storage;
+
 
 class ServiceController extends Controller
 {
@@ -78,7 +80,15 @@ class ServiceController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->all());
+        $file_data = $request->image;
+        preg_match("/^data:image\/(.*);base64/i",$file_data, $match);
+        // dd($match);
+        $file_name = 'image_' . time() . '.'.$match[1]; //generating unique file name; 
+        @list($type, $file_data) = explode(';', $file_data);
+        @list(, $file_data) = explode(',', $file_data);
+        if ($file_data != "") { // storing image in storage/app/public Folder 
+            \Storage::disk('public')->put($file_name, base64_decode($file_data));
+        }
         if ($request->input('lepasban')) {
             $this->validate(
                 $request,
@@ -95,6 +105,7 @@ class ServiceController extends Controller
                 'tebal_tapak' => 'required',
                 'posisi' => 'required|int',
                 'jarakkm' => 'required|int',
+                'image' => 'required'
             ]);
         }
 
@@ -110,6 +121,7 @@ class ServiceController extends Controller
         $service->kelainan = $request->input("kelainan");
         $service->lepasban = $request->input("lepasban");
         $service->alasanlepas = $request->input("alasanlepas");
+        $service->image = $request->input("image");
         if ($service->save()) {
             return response()->json(
                 [
