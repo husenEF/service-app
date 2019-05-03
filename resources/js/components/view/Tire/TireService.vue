@@ -160,6 +160,22 @@
               ></textarea>
             </div>
           </div>
+          <div class="form-group">
+            <label for="exampleInputEmail1">Upload Foto</label>
+            <div class="custom-file">
+              <input
+                type="file"
+                class="custom-file-input"
+                id="customFile"
+                @change="previewImage"
+                accept="image/*"
+              >
+              <label class="custom-file-label" for="customFile">Choose file</label>
+            </div>
+            <div class="image-preview" v-if="imageData">
+              <img class="preview" :src="imageData">
+            </div>
+          </div>
 
           <div class="form-group">
             <button type="submit" class="btn btn-primary">simpan</button>
@@ -283,7 +299,8 @@ export default {
         lepasban: false,
         alasanlepas: ""
       },
-      error: {}
+      error: {},
+      imageData: null
     };
   },
   computed: {
@@ -340,6 +357,17 @@ export default {
           console.log("cancel");
         }
       });
+    },
+    previewImage(ev) {
+      let input = ev.target;
+      console.log("input", input);
+      if (input.files && input.files[0]) {
+        let reader = new FileReader();
+        reader.onload = e => {
+          this.imageData = e.target.result;
+        };
+        reader.readAsDataURL(input.files[0]);
+      }
     }
   }
 };
@@ -353,5 +381,16 @@ fieldset {
   border-image: initial;
   padding: inherit;
   margin: inherit;
+}
+.file-upload-form,
+.image-preview {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  padding: 20px;
+}
+img.preview {
+  width: 200px;
+  background-color: white;
+  border: 1px solid #ddd;
+  padding: 5px;
 }
 </style>
