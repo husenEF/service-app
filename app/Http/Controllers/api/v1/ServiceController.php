@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Transformers\ServiceTransformer;
 use App\Service;
 use Illuminate\Support\Facades\Storage;
-
+use Illuminate\Http\File;
 
 class ServiceController extends Controller
 {
@@ -104,12 +104,15 @@ class ServiceController extends Controller
                 'image' => 'required'
             ]);
         }
-        $cover = $request->file('image');
-        $extension = $cover->getClientOriginalExtension();
-        $filename = time().".".$extension;
-        Storage::disk('public')->put($filename,  File::get($cover));
-
-
+        // $path = $request->file('image')->store('public/service');
+        $image = $request->file("image");
+        $filename = time() . "." . $image->getClientOriginalExtension();
+        $path = $image->storeAs('public/service', $filename);
+        // $extension = $cover->getClientOriginalExtension();
+        // $filename = time().".".$extension;
+        // Storage::disk('public')->put($filename,  File::get($cover));
+        // Storage::putFile('image', new File(''));
+        // $path = $cover->store('avatars');
         $service = new Service();
         $service->tire_id = $request->input("tire_id");
         $service->user = $request->input("user");
@@ -122,7 +125,7 @@ class ServiceController extends Controller
         $service->kelainan = $request->input("kelainan");
         $service->lepasban = $request->input("lepasban");
         $service->alasanlepas = $request->input("alasanlepas");
-        $service->image = $filename;
+        $service->image = filename;
         if ($service->save()) {
             return response()->json(
                 [

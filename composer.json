@@ -10,6 +10,7 @@
         "flipbox/lumen-generator": "^5.6",
         "fzaninotto/faker": "^1.8",
         "gergonzalez/lumen-fractal": "dev-master",
+        "graham-campbell/flysystem": "^5.2",
         "laravel/lumen-framework": "5.8.*",
         "vlucas/phpdotenv": "^3.3"
     },
