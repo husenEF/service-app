@@ -80,19 +80,14 @@ class ServiceController extends Controller
      */
     public function store(Request $request)
     {
-        $file_data = $request->image;
-        preg_match("/^data:image\/(.*);base64/i",$file_data, $match);
-        // dd($match);
-        $file_name = 'image_' . time() . '.'.$match[1]; //generating unique file name; 
-        @list($type, $file_data) = explode(';', $file_data);
-        @list(, $file_data) = explode(',', $file_data);
-        if ($file_data != "") { // storing image in storage/app/public Folder 
-            \Storage::disk('public')->put($file_name, base64_decode($file_data));
-        }
+
+        // dd([$request->all(), $request->image]);
+
         if ($request->input('lepasban')) {
             $this->validate(
                 $request,
                 [
+                    'image' => 'mimes:jpeg,jpg,png,gif|required|max:500',
                     'alasanlepas' => 'required'
                 ],
                 [
@@ -101,6 +96,7 @@ class ServiceController extends Controller
             );
         } else {
             $this->validate($request, [
+                'image' => 'mimes:jpeg,jpg,png,gif|required|max:500',
                 'tekanan_angin' => 'required',
                 'tebal_tapak' => 'required',
                 'posisi' => 'required|int',
@@ -108,6 +104,11 @@ class ServiceController extends Controller
                 'image' => 'required'
             ]);
         }
+        $cover = $request->file('image');
+        $extension = $cover->getClientOriginalExtension();
+        $filename = time().".".$extension;
+        Storage::disk('public')->put($filename,  File::get($cover));
+
 
         $service = new Service();
         $service->tire_id = $request->input("tire_id");
@@ -121,7 +122,7 @@ class ServiceController extends Controller
         $service->kelainan = $request->input("kelainan");
         $service->lepasban = $request->input("lepasban");
         $service->alasanlepas = $request->input("alasanlepas");
-        $service->image = $request->input("image");
+        $service->image = $filename;
         if ($service->save()) {
             return response()->json(
                 [

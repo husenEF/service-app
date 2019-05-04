@@ -44,11 +44,11 @@
 
       <fieldset>
         <legend class="w-auto">Form Service</legend>
-        <!-- <div class="alert alert-danger" v-if="Object.keys(error).length>0" role="alert">
+        <div class="alert alert-danger" v-if="Object.keys(error).length>0" role="alert">
           <p class="mb-0">
             <span v-for="(e,i) in error" :key="i" class="clearfix">{{e[0]}}</span>
           </p>
-        </div>-->
+        </div>
         <form @submit.prevent="submitData">
           <div class="form-group row">
             <div class="col-md-3">
@@ -163,14 +163,8 @@
           <div class="form-group">
             <label for="exampleInputEmail1">Upload Foto</label>
             <div class="custom-file">
-              <input
-                type="file"
-                class="custom-file-input"
-                id="customFile"
-                @change="previewImage"
-                accept="image/*"
-              >
-              <label class="custom-file-label" for="customFile">Choose file</label>
+              <input type="file" id="file" ref="file" @change="previewImage()" accept="image/*">
+              <label class="custom-file-label" for="file">Choose file</label>
             </div>
             <div class="image-preview" v-if="imageData">
               <img class="preview" :src="imageData">
@@ -332,8 +326,20 @@ export default {
         });
     },
     submitData() {
+      let formData = new FormData();
+      Object.keys(this.service).forEach(element => {
+        if (typeof this.service[element] === "boolean")
+          formData.append(element, this.service[element] ? 1 : 0);
+        else formData.append(element, this.service[element]);
+      });
+      // console.log("formdata",[formData,this.service]);
       axios
-        .post("/api/v1/service/save", this.service)
+        // .post("/api/v1/service/save", this.service)
+        .post("api/v1/service/save", formData, {
+          headers: {
+            "Content-Type": "multipart/form-data"
+          }
+        })
         .then(res => {
           const { data } = res;
           this.$swal(data.message).then(val => window.location.reload());
@@ -362,17 +368,19 @@ export default {
         }
       });
     },
-    previewImage(ev) {
-      let input = ev.target;
-      console.log("input", input);
-      if (input.files && input.files[0]) {
-        let reader = new FileReader();
-        reader.onload = e => {
-          this.imageData = e.target.result;
-          this.service.image = e.target.result;
-        };
-        reader.readAsDataURL(input.files[0]);
-      }
+    previewImage() {
+      this.service.image = this.$refs.file.files[0];
+      // console.log("ee", this.$refs.file.files[0]);
+      // let input = ev.target;
+      // console.log("input", input);
+      // if (input.files && input.files[0]) {
+      //   let reader = new FileReader();
+      //   reader.onload = e => {
+      //     this.imageData = e.target.result;
+      //     this.service.image = e.target.result;
+      //   };
+      //   reader.readAsDataURL(input.files[0]);
+      // }
     }
   }
 };
