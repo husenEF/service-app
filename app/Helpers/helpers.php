@@ -4,25 +4,25 @@ use Illuminate\Support\Str;
 use Illuminate\Container\Container;
 use Illuminate\Contracts\Bus\Dispatcher;
 
-// if (! function_exists('abort')) {
-//     /**
-//      * Throw an HttpException with the given data.
-//      *
-//      * @param  int     $code
-//      * @param  string  $message
-//      * @param  array   $headers
-//      * @return void
-//      *
-//      * @throws \Symfony\Component\HttpKernel\Exception\HttpException
-//      * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
-//      */
-//     function abort($code, $message = '', array $headers = [])
-//     {
-//         return app()->abort($code, $message, $headers);
-//     }
-// }
+if (!function_exists('abort')) {
+    /**
+     * Throw an HttpException with the given data.
+     *
+     * @param  int     $code
+     * @param  string  $message
+     * @param  array   $headers
+     * @return void
+     *
+     * @throws \Symfony\Component\HttpKernel\Exception\HttpException
+     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+     */
+    function abort($code, $message = '', array $headers = [])
+    {
+        return app()->abort($code, $message, $headers);
+    }
+}
 
-if (! function_exists('app')) {
+if (!function_exists('app')) {
     /**
      * Get the available container instance.
      *
@@ -40,7 +40,7 @@ if (! function_exists('app')) {
     }
 }
 
-if (! function_exists('base_path')) {
+if (!function_exists('base_path')) {
     /**
      * Get the path to the base of the install.
      *
@@ -49,11 +49,11 @@ if (! function_exists('base_path')) {
      */
     function base_path($path = '')
     {
-        return app()->basePath().($path ? '/'.$path : $path);
+        return app()->basePath() . ($path ? '/' . $path : $path);
     }
 }
 
-if (! function_exists('decrypt')) {
+if (!function_exists('decrypt')) {
     /**
      * Decrypt the given value.
      *
@@ -66,7 +66,7 @@ if (! function_exists('decrypt')) {
     }
 }
 
-if (! function_exists('dispatch')) {
+if (!function_exists('dispatch')) {
     /**
      * Dispatch a job to its appropriate handler.
      *
@@ -79,7 +79,7 @@ if (! function_exists('dispatch')) {
     }
 }
 
-if (! function_exists('config')) {
+if (!function_exists('config')) {
     /**
      * Get / set the specified configuration value.
      *
@@ -103,7 +103,7 @@ if (! function_exists('config')) {
     }
 }
 
-if (! function_exists('database_path')) {
+if (!function_exists('database_path')) {
     /**
      * Get the path to the database directory of the install.
      *
@@ -112,11 +112,11 @@ if (! function_exists('database_path')) {
      */
     function database_path($path = '')
     {
-        return app()->databasePath().($path ? '/'.$path : $path);
+        return app()->databasePath() . ($path ? '/' . $path : $path);
     }
 }
 
-if (! function_exists('encrypt')) {
+if (!function_exists('encrypt')) {
     /**
      * Encrypt the given value.
      *
@@ -129,7 +129,7 @@ if (! function_exists('encrypt')) {
     }
 }
 
-if (! function_exists('env')) {
+if (!function_exists('env')) {
     /**
      * Gets the value of an environment variable. Supports boolean, empty and null.
      *
@@ -171,7 +171,7 @@ if (! function_exists('env')) {
     }
 }
 
-if (! function_exists('event')) {
+if (!function_exists('event')) {
     /**
      * Fire an event and call the listeners.
      *
@@ -186,7 +186,7 @@ if (! function_exists('event')) {
     }
 }
 
-if (! function_exists('factory')) {
+if (!function_exists('factory')) {
     /**
      * Create a model factory builder for a given class, name, and amount.
      *
@@ -211,7 +211,7 @@ if (! function_exists('factory')) {
     }
 }
 
-if (! function_exists('info')) {
+if (!function_exists('info')) {
     /**
      * Write some information to the log.
      *
@@ -225,7 +225,7 @@ if (! function_exists('info')) {
     }
 }
 
-if (! function_exists('redirect')) {
+if (!function_exists('redirect')) {
     /**
      * Get an instance of the redirector.
      *
@@ -247,7 +247,7 @@ if (! function_exists('redirect')) {
     }
 }
 
-if (! function_exists('resource_path')) {
+if (!function_exists('resource_path')) {
     /**
      * Get the path to the resources folder.
      *
@@ -256,11 +256,11 @@ if (! function_exists('resource_path')) {
      */
     function resource_path($path = '')
     {
-        return app()->basePath().'/resources'.($path ? '/'.$path : $path);
+        return app()->basePath() . '/resources' . ($path ? '/' . $path : $path);
     }
 }
 
-if (! function_exists('response')) {
+if (!function_exists('response')) {
     /**
      * Return a new response from the application.
      *
@@ -281,7 +281,7 @@ if (! function_exists('response')) {
     }
 }
 
-if (! function_exists('route')) {
+if (!function_exists('route')) {
     /**
      * Generate a URL to a named route.
      *
@@ -293,11 +293,11 @@ if (! function_exists('route')) {
     function route($name, $parameters = [], $secure = null)
     {
         return (new Laravel\Lumen\Routing\UrlGenerator(app()))
-                ->route($name, $parameters, $secure);
+            ->route($name, $parameters, $secure);
     }
 }
 
-if (! function_exists('storage_path')) {
+if (!function_exists('storage_path')) {
     /**
      * Get the path to the storage folder.
      *
@@ -310,7 +310,7 @@ if (! function_exists('storage_path')) {
     }
 }
 
-if (! function_exists('trans')) {
+if (!function_exists('trans')) {
     /**
      * Translate the given message.
      *
@@ -330,7 +330,7 @@ if (! function_exists('trans')) {
     }
 }
 
-if (! function_exists('url')) {
+if (!function_exists('url')) {
     /**
      * Generate a url for the application.
      *
@@ -342,11 +342,11 @@ if (! function_exists('url')) {
     function url($path = null, $parameters = [], $secure = null)
     {
         return (new Laravel\Lumen\Routing\UrlGenerator(app()))
-                                ->to($path, $parameters, $secure);
+            ->to($path, $parameters, $secure);
     }
 }
 
-if (! function_exists('view')) {
+if (!function_exists('view')) {
     /**
      * Get the evaluated view contents for the given view.
      *
