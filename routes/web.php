@@ -26,11 +26,10 @@ $router->get('/', function () use ($router) {
  */
 $router->group([
     'namespace' => 'api',
-//    'middleware' => 'auth:api',
+    //    'middleware' => 'auth:api',
     'prefix' => '/api',
 ], function () use ($router) {
-    require __DIR__.'/../routes/api.php';
-
+    require __DIR__ . '/../routes/api.php';
 });
 
 $router->get("/", function () use ($router) {
@@ -45,9 +44,9 @@ $router->get("/key", function () {
     return str_random(32);
 });
 
-Route::get('/updateapp', function()
-{
+Route::get('/updateapp', function () {
     exec('composer dump-autoload');
     echo 'composer dump-autoload complete';
 });
 
+Route::get("media/{type}/{filename}", "MediaController@get");

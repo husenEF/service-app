@@ -32,6 +32,7 @@ class ServiceTransformer extends TransformerAbstract
             "lepasban" => $service->lepasban,
             "alasanlepas" => $service->alasanlepas,
             "create_at" => date("Y-m-d H:m:s", strtotime($service->created_at)),
+            "image" => url("media/service/" . $service->image)
             // "user" => $service->getUser
             // "raw" => $service
         ];

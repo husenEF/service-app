@@ -106,6 +106,9 @@
                   <strong>Tekanan Angin</strong>
                   : {{s.tekanan_angin}}
                   <br>
+                  <strong>Gambar</strong>
+                  :
+                  <a :href="s.image" target="_blank" rel="noopener noreferrer">Foto</a>
                 </p>
               </td>
               <td>

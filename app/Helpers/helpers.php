@@ -4,23 +4,23 @@ use Illuminate\Support\Str;
 use Illuminate\Container\Container;
 use Illuminate\Contracts\Bus\Dispatcher;
 
-if (! function_exists('abort')) {
-    /**
-     * Throw an HttpException with the given data.
-     *
-     * @param  int     $code
-     * @param  string  $message
-     * @param  array   $headers
-     * @return void
-     *
-     * @throws \Symfony\Component\HttpKernel\Exception\HttpException
-     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
-     */
-    function abort($code, $message = '', array $headers = [])
-    {
-        return app()->abort($code, $message, $headers);
-    }
-}
+// if (! function_exists('abort')) {
+//     /**
+//      * Throw an HttpException with the given data.
+//      *
+//      * @param  int     $code
+//      * @param  string  $message
+//      * @param  array   $headers
+//      * @return void
+//      *
+//      * @throws \Symfony\Component\HttpKernel\Exception\HttpException
+//      * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+//      */
+//     function abort($code, $message = '', array $headers = [])
+//     {
+//         return app()->abort($code, $message, $headers);
+//     }
+// }
 
 if (! function_exists('app')) {
     /**
