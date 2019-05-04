@@ -125,7 +125,7 @@ class ServiceController extends Controller
         $service->kelainan = $request->input("kelainan");
         $service->lepasban = $request->input("lepasban");
         $service->alasanlepas = $request->input("alasanlepas");
-        $service->image = filename;
+        $service->image = $filename;
         if ($service->save()) {
             return response()->json(
                 [
