@@ -80,14 +80,11 @@ class ServiceController extends Controller
      */
     public function store(Request $request)
     {
-
-        // dd([$request->all(), $request->image]);
-
         if ($request->input('lepasban')) {
             $this->validate(
                 $request,
                 [
-                    'image' => 'mimes:jpeg,jpg,png,gif|required|max:500',
+                    // 'image' => 'mimes:jpeg,jpg,png,gif|required|max:500',
                     'alasanlepas' => 'required'
                 ],
                 [
@@ -108,11 +105,7 @@ class ServiceController extends Controller
         $image = $request->file("image");
         $filename = time() . "." . $image->getClientOriginalExtension();
         $path = $image->storeAs('public/service', $filename);
-        // $extension = $cover->getClientOriginalExtension();
-        // $filename = time().".".$extension;
-        // Storage::disk('public')->put($filename,  File::get($cover));
-        // Storage::putFile('image', new File(''));
-        // $path = $cover->store('avatars');
+
         $service = new Service();
         $service->tire_id = $request->input("tire_id");
         $service->user = $request->input("user");

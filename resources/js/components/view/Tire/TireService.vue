@@ -166,9 +166,6 @@
               <input type="file" id="file" ref="file" @change="previewImage()" accept="image/*">
               <label class="custom-file-label" for="file">Choose file</label>
             </div>
-            <div class="image-preview" v-if="imageData">
-              <img class="preview" :src="imageData">
-            </div>
           </div>
 
           <div class="form-group">
@@ -183,9 +180,7 @@
         </form>
       </fieldset>
     </div>
-    <div class="card-footer">
-      <pre>{{service}}</pre>
-    </div>
+    
     <!-- Modal -->
     <div
       class="modal fade"
@@ -262,6 +257,7 @@
                 <label for="tukar" class="form-check-label">Tukar posisi</label>
               </div>
             </div>
+            
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
               <button type="submit" class="btn btn-primary">Save changes</button>
@@ -370,17 +366,6 @@ export default {
     },
     previewImage() {
       this.service.image = this.$refs.file.files[0];
-      // console.log("ee", this.$refs.file.files[0]);
-      // let input = ev.target;
-      // console.log("input", input);
-      // if (input.files && input.files[0]) {
-      //   let reader = new FileReader();
-      //   reader.onload = e => {
-      //     this.imageData = e.target.result;
-      //     this.service.image = e.target.result;
-      //   };
-      //   reader.readAsDataURL(input.files[0]);
-      // }
     }
   }
 };
