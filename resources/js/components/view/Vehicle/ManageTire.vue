@@ -13,8 +13,10 @@
               label="name"
               placeholder="Select one"
               track-by="name"
-              @select="selectHandler"
+              :hide-selected="true"
               :allow-empty="true"
+              @remove="removeHandler"
+              @select="selectHandler"
             ></multiselect>
           </div>
         </fieldset>
@@ -38,7 +40,7 @@ export default {
   data() {
     return {
       tirePos: {},
-      options: {},
+      options: [],
       vehicleId: 0
     };
   },
@@ -79,7 +81,7 @@ export default {
         .catch(err => {
           const { data } = err.response;
           if (data.hasOwnProperty("success")) {
-            this.options = {};
+            this.options = [];
           } else {
           }
         });
@@ -95,7 +97,19 @@ export default {
       });
 
       this.options = mySelect;
-      console.log("selectHandler", [selectedOption, id, mySelect]);
+      // console.log("selectHandler", [selectedOption, id, mySelect]);
+    },
+    removeHandler(removedOption, id) {
+      let options = this.options;
+      let mySelect = options.map(e => {
+        if (e.id == removedOption.id) {
+          return { id: e.id, name: e.name, $isDisabled: false };
+        } else {
+          return e;
+        }
+      });
+      this.options = mySelect;
+      // console.log("removedOption", removedOption);
     }
   }
 };
