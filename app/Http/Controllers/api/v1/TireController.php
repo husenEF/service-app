@@ -79,7 +79,7 @@ class TireController extends Controller
         $value = $re->value;
 
         if ($name !== 'datetime') {
-            $tire = Tire::where($name, 'LIKE', "%$value%")->get();
+            $tire = Tire::where($name, 'LIKE', $value)->get();
         } else {
             $tire = Tire::whereDate('buy_date', date('Y-m-d', strtotime($value)))->get();
         }

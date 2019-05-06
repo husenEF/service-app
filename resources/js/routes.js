@@ -14,6 +14,7 @@ import VehicleList from "./components/view/Vehicle/List.vue"
 import VehicleEdit from "./components/view/Vehicle/Edit.vue"
 import VehicleAdd from "./components/view/Vehicle/Add.vue"
 import VehicleDetail from "./components/view/Vehicle/Detail.vue"
+import VehicleTire from "./components/view/Vehicle/ManageTire.vue"
 
 //tire
 import TireIndex from "./components/view/Tire/Index.vue"
@@ -134,6 +135,13 @@ export const routes = [
                     roles: "admin"
                 }
             },
+            {
+                path: "tire/:id",
+                component: VehicleTire,
+                meta: {
+                    title: "Management Ban Kendaraan",
+                }
+            }
         ]
     },
     {

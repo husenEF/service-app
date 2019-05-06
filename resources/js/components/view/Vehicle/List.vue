@@ -76,7 +76,10 @@
                 <router-link :to="`/vehicle/${item.id}`">{{item.merek}}</router-link>
               </td>
               <td>{{item.platnumber}}</td>
-              <td>{{Object.keys(item.tire).length}}</td>
+              <td>
+                {{Object.keys(item.tire).length}}
+                <router-link :to="`/vehicle/tire/${item.id}`">Lihat Ban</router-link>
+              </td>
               <td>{{item.size}}</td>
               <td>
                 <router-link :to="`/vehicle/edit/${item.id}`">Edit</router-link>
