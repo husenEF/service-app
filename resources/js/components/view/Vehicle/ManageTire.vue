@@ -75,22 +75,32 @@ export default {
       this.vehicleId = id;
       this.$emit("back", "/vehicle");
       axios
-        .post("/api/v1/tire/filter", { key: "posistion", value: 0 })
-        .then(res => {
-          const { data } = res;
-          // console.log(data);
-          this.options = data.data.map(e => {
-            return { name: e.merek, id: e.id };
-          });
-          // this.tires = data.data;
-        })
-        .catch(err => {
-          const { data } = err.response;
-          if (data.hasOwnProperty("success")) {
-            this.options = [];
-          } else {
-          }
-        });
+        .all([
+          axios.post("/api/v1/tire/filter", { key: "posistion", value: 0 }),
+          axios.get("/api/v1/tire/assign/" + id)
+        ])
+        .then(
+          axios.spread((options, tires) => {
+            console.log("multi", [options, tires]);
+          })
+        );
+      // axios
+      //   .post("/api/v1/tire/filter", { key: "posistion", value: 0 })
+      //   .then(res => {
+      //     const { data } = res;
+      //     // console.log(data);
+      //     this.options = data.data.map(e => {
+      //       return { name: e.merek, id: e.id };
+      //     });
+      //     // this.tires = data.data;
+      //   })
+      //   .catch(err => {
+      //     const { data } = err.response;
+      //     if (data.hasOwnProperty("success")) {
+      //       this.options = [];
+      //     } else {
+      //     }
+      //   });
     },
     selectHandler(selectedOption, id) {
       let options = this.options;

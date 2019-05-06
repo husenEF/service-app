@@ -120,6 +120,49 @@ class TireController extends Controller
         }
     }
 
+    public function getAssignTire(Request $re,  $id)
+    {
+        $id = (int)$id;
+        if (!is_int($id)) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Get Data failed',
+                'data' => ""
+            ], 404);
+        }
+        $tire = Tire::where("id_vehicle", 'LIKE', $id)->orderBy('posistion')->get();
+
+        if ($tire->count() > 0) {
+
+            $tire = app('fractal')->collection($tire, new TireTransformer())->getArray();
+            // dd($tire);
+            $tires = [];
+            for ($n = 0; $n < 11; $n++) {
+                $data = array_filter($tire, function ($val) use ($n) {
+                    return ($val['posistion'] == ($n + 1));
+                });
+
+                if (count($data) > 0) {
+                    $tires[$n] = $data;
+                } else {
+                    $tires[$n] = [];
+                }
+            }
+            return response()->json([
+                'success' => true,
+                'message' => 'Get Data Success',
+                'data' => $tires,
+                'ori' => $tire
+            ], 200);
+        } else {
+            return response()->json([
+                'success' => false,
+                'message' => 'Get Data failed',
+                'data' => ""
+            ], 404);
+        }
+    }
+
     public function assignTire(Request $re)
     {
 
@@ -153,11 +196,11 @@ class TireController extends Controller
         $service->tebal_tapak = 0;
         $service->posisi = $tire->posistion;
         $service->jarakkm =  0;
-        $service->catatan ="";
+        $service->catatan = "";
         $service->kelainan = "";
         $service->lepasban = 0;
         $service->alasanlepas = "";
         $service->image = "";
         return $service->save();
-     }
+    }
 }
