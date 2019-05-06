@@ -47,12 +47,18 @@ export default {
   created() {
     this.getList();
   },
+  computed: {
+    user() {
+      return this.$store.getters.currentUser;
+    }
+  },
   methods: {
     kirimData() {
       // console.log("tirePos", this.tirePos);
       const data = {
         vehicle_id: this.vehicleId,
-        tires: this.tirePos
+        tires: this.tirePos,
+        uid: this.user.id
       };
 
       axios

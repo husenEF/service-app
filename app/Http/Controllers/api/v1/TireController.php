@@ -4,6 +4,7 @@ namespace App\Http\Controllers\api\v1;
 
 use Illuminate\Http\Request;
 use App\Tire;
+use App\Service;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\api\v1\HistoryController;
 use App\Http\Transformers\TireTransformer;
@@ -121,6 +122,42 @@ class TireController extends Controller
 
     public function assignTire(Request $re)
     {
-        dd($re->all());
+
+        $this->validate($re, [
+            "vehicle_id" => 'required|int',
+            "uid" => 'required|int'
+        ]);
+        $vehicleId = $re->input("vehicle_id");
+        $uid = $re->input('uid');
+
+        if (count($re->tires) > 0) {
+            foreach ($re->tires as $posisi => $v) {
+                $tire = Tire::find($v['id']);
+                $tire->posistion = $posisi;
+                $tire->id_vehicle = $vehicleId;
+                $tire->save();
+                $tire->uid = $uid;
+                $this->insertService($tire);
+            }
+        }
+    }
+
+    private function insertService($tire)
+    {
+        // dd($tire);
+        $service = new Service();
+        $service->tire_id = $tire->id;
+        $service->user = $tire->uid;
+        $service->kendaraan = $tire->id_vehicle;
+        $service->tekanan_angin = 0;
+        $service->tebal_tapak = 0;
+        $service->posisi = $tire->posistion;
+        $service->jarakkm =  0;
+        $service->catatan ="";
+        $service->kelainan = "";
+        $service->lepasban = 0;
+        $service->alasanlepas = "";
+        $service->image = "";
+        return $service->save();
      }
 }

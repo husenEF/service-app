@@ -15,7 +15,7 @@ class CreateTableTires extends Migration
     {
         Schema::create('tires', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer("id_vehicle");
+            $table->integer("id_vehicle")->nullable();
             $table->integer("created_by");
             $table->integer("posistion")->default("0");
             $table->string("merek");
