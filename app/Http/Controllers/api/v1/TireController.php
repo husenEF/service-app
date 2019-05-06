@@ -118,4 +118,9 @@ class TireController extends Controller
             ], 404);
         }
     }
+
+    public function assignTire(Request $re)
+    {
+        dd($re->all());
+     }
 }
