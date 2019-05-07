@@ -137,13 +137,14 @@ class TireController extends Controller
             $tire = app('fractal')->collection($tire, new TireTransformer())->getArray();
             // dd($tire);
             $tires = [];
+            $raw = [];
             for ($n = 0; $n < 11; $n++) {
                 $data = array_filter($tire, function ($val) use ($n) {
                     return ($val['posistion'] == ($n + 1));
                 });
-
+                $raw[$n] = $data;
                 if (count($data) > 0) {
-                    $tires[$n] = $data;
+                    $tires[$n] = array_values($data)[0];
                 } else {
                     $tires[$n] = [];
                 }
@@ -152,14 +153,15 @@ class TireController extends Controller
                 'success' => true,
                 'message' => 'Get Data Success',
                 'data' => $tires,
-                'ori' => $tire
+                'ori' => $tire,
+                'raw' => $raw
             ], 200);
         } else {
             return response()->json([
                 'success' => false,
                 'message' => 'Get Data failed',
-                'data' => ""
-            ], 404);
+                'data' => []
+            ], 200);
         }
     }
 
@@ -175,12 +177,14 @@ class TireController extends Controller
 
         if (count($re->tires) > 0) {
             foreach ($re->tires as $posisi => $v) {
-                $tire = Tire::find($v['id']);
-                $tire->posistion = $posisi;
-                $tire->id_vehicle = $vehicleId;
-                $tire->save();
-                $tire->uid = $uid;
-                $this->insertService($tire);
+                if (!empty($v)) {
+                    $tire = Tire::find($v['id']);
+                    $tire->posistion = $posisi;
+                    $tire->id_vehicle = $vehicleId;
+                    $tire->save();
+                    $tire->uid = $uid;
+                    $this->insertService($tire);
+                }
             }
         }
     }

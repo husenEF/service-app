@@ -3,9 +3,10 @@
     <div class="card-header">Lihat Ban</div>
     <div class="card-body">
       <form @submit.prevent="kirimData">
-        <fieldset v-for="n in 11 " :key="n" class="p-3">
+        <fieldset v-for="(n,i) in 11 " :key="i" class="p-3">
           <legend class="p-1 w-auto">Posisi {{n}}</legend>
-          <div class="form-group">
+
+          <div class="form-group" v-if="_.isEmpty(tirePos[i])">
             <label for>Name</label>
             <multiselect
               v-model="tirePos[n]"
@@ -18,6 +19,9 @@
               @remove="removeHandler"
               @select="selectHandler"
             ></multiselect>
+          </div>
+          <div class="form-group" v-else>
+            <pre>{{tirePos[i]}}</pre>
           </div>
         </fieldset>
         <div class="form-group mt-2">
@@ -81,7 +85,15 @@ export default {
         ])
         .then(
           axios.spread((options, tires) => {
-            console.log("multi", [options, tires]);
+            this.options = options.data.data.map(e => {
+              return { name: e.merek, id: e.id };
+            });
+            this.tirePos = tires.data.data;
+          })
+        )
+        .catch(
+          axios.spread(err => {
+            console.log("multi2", err);
           })
         );
       // axios

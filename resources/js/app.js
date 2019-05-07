@@ -8,6 +8,7 @@ import Vuex from 'vuex'
 // import VueFeatherIcon from 'vue-feather-icon'
 import { Datetime } from 'vue-datetime'
 import VueSweetalert2 from 'vue-sweetalert2';
+// import _ from 'lodash'
 
 import { routes } from "./routes"
 import MainApp from './components/MainApp.vue'
@@ -18,6 +19,7 @@ Vue.use(VueRouter)
 Vue.use(Vuex)
 // Vue.use(VueFeatherIcon)
 Vue.use(VueSweetalert2)
+Vue.set(Vue.prototype, '_', _);
 
 const store = new Vuex.Store(StoreData)
 const router = new VueRouter({
