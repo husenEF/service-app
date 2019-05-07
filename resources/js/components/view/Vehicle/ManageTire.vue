@@ -2,7 +2,7 @@
   <div class="card">
     <div class="card-header">Lihat Ban</div>
     <div class="card-body">
-      <!-- <pre>{{options}}</pre> -->
+      <!-- <pre>{{tirePos}}</pre> -->
       <form @submit.prevent="kirimData">
         <fieldset v-for="(n,i) in 11 " :key="i" class="p-3">
           <legend class="p-1 w-auto">Posisi {{n}}</legend>
@@ -10,7 +10,7 @@
           <div class="form-group" v-if="_.isEmpty(tirePos[i])">
             <label for>Name</label>
             <multiselect
-              v-model="tirePos[n]"
+              v-model="tirePos[i]"
               :options="options"
               label="name"
               placeholder="Select one"
@@ -111,7 +111,16 @@ export default {
       axios
         .post("/api/v1/tire/assign", data)
         .then(res => {
-          console.log("res", res);
+          // console.log("res", res);
+          const { data } = res;
+          if (data.success) {
+            this.$swal({
+              title: data.message,
+              type: "success"
+            }).then(res => {
+              window.location.reload();
+            });
+          }
         })
         .catch(err => {
           console.log("err", err.response.data);
@@ -128,9 +137,10 @@ export default {
         ])
         .then(
           axios.spread((options, tires) => {
-            this.options = options.data.data.map(e => {
-              return { name: e.merek, id: e.id };
-            });
+            // this.options = options.data.data.map(e => {
+            //   return { name: e.merek, id: e.id };
+            // });
+            this.options = options.data.data;
             this.tirePos = tires.data.data;
           })
         )
@@ -141,18 +151,23 @@ export default {
         );
     },
     selectHandler(selectedOption, id) {
-      // console.log("selectoption", selectedOption);
+      // console.log("selectoption", [selectedOption, id]);
       let options = this.options;
       let mySelect = options.map(e => {
-        // console.log("e", e);
+        // console.log("e", selectedOption);
         if (e.id == selectedOption.id) {
-          return { id: e.id, name: e.name, $isDisabled: true };
+          return {
+            id: selectedOption.id,
+            name: selectedOption.name,
+            $isDisabled: true
+          };
         } else {
           return e;
         }
       });
-
+      // console.log("myselc", mySelect);
       this.options = mySelect;
+
       // console.log("tirePos", this.tirePos);
       // console.log("selectHandler", [selectedOption, id, mySelect]);
     },

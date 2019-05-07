@@ -146,7 +146,7 @@ class TireController extends Controller
                 if (count($data) > 0) {
                     $tires[$n] = array_values($data)[0];
                 } else {
-                    $tires[$n] = [];
+                    $tires[$n] = (Object)[];
                 }
             }
             return response()->json([
@@ -168,6 +168,7 @@ class TireController extends Controller
     public function assignTire(Request $re)
     {
 
+        // dd($re->all());
         $this->validate($re, [
             "vehicle_id" => 'required|int',
             "uid" => 'required|int'
@@ -179,7 +180,7 @@ class TireController extends Controller
             foreach ($re->tires as $posisi => $v) {
                 if (!empty($v)) {
                     $tire = Tire::find($v['id']);
-                    $tire->posistion = $posisi;
+                    $tire->posistion = $posisi + 1;
                     $tire->id_vehicle = $vehicleId;
                     $tire->save();
                     $tire->uid = $uid;
@@ -187,6 +188,11 @@ class TireController extends Controller
                 }
             }
         }
+        return response()->json([
+            'success' => true,
+            'message' => 'Update Success',
+            'data' => []
+        ], 200);
     }
 
     private function insertService($tire)
