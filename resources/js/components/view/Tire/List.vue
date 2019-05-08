@@ -68,7 +68,7 @@
               <th>No</th>
               <th>Merek</th>
               <th>Tanggal Beli</th>
-              <th>Kendaraan</th>
+              <th>Foto</th>
               <th>Riwayat Penggunaan</th>
             </tr>
           </thead>
@@ -83,24 +83,30 @@
               <td>{{tire.merek}}</td>
               <td>{{tire.buy_date}}</td>
               <td>
-                <router-link :to="'/vehicle/'+tire.vehicle.id">{{tire.vehicle.merek}}</router-link>
+                <img
+                  :src="tire.images_path"
+                  :alt="tire.merek"
+                  class="img-fluid"
+                  v-if="tire.images_path"
+                >
               </td>
               <td>
                 <div class="btn-group" role="group" aria-label="Tire Button">
-                  <router-link
+                  <router-link class="btn btn-info btn-sm" :to="'/ban/edit/'+tire.id">Edit</router-link>
+                  <!-- <router-link
                     class="btn btn-info btn-sm"
                     :to="'/history/tires/'+tire.id"
                     title="Riwayat Ban"
                   >
                     <EyeIcon/>
-                  </router-link>
-                  <router-link
+                  </router-link>-->
+                  <!-- <router-link
                     class="btn btn-primary btn-sm"
                     :to="'/history/position/'+tire.vehicle.id+`/`+tire.id"
                     title="Riwayat berdasarkan Posisi"
                   >
                     <EyeIcon/>
-                  </router-link>
+                  </router-link>-->
                 </div>
               </td>
             </tr>

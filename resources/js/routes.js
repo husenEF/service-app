@@ -21,6 +21,7 @@ import TireIndex from "./components/view/Tire/Index.vue"
 import TireList from "./components/view/Tire/List.vue"
 import TireService from "./components/view/Tire/TireService.vue"
 import TireAdd from "./components/view/Tire/Add.vue"
+import TireEdit from "./components/view/Tire/Edit.vue"
 //history
 import HistoryIndex from "./components/view/History/Index.vue"
 import HistoryList from "./components/view/History/List.vue"
@@ -198,6 +199,13 @@ export const routes = [
                 name: "tireAdd",
                 meta: {
                     title: "Tambah Ban Baru"
+                }
+            }, {
+                path: "edit/:id",
+                component: TireEdit,
+                name: "tireEdit",
+                meta: {
+                    title: "Edit Ban"
                 }
             }
         ]
