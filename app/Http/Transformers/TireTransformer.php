@@ -31,7 +31,7 @@ class TireTransformer extends TransformerAbstract
             "nomor_ban" => $tire->nomor,
             "stempel_ban" => $tire->stempel,
             "buy_date" => $tire->buy_date,
-            "images_path" => ($tire->image) ? url('media/tires/' . $tire->images) : "",
+            "images_path" => ($tire->image !== "") ? url('media/tires/' . $tire->images) : "",
             "user" => $tire->getUser,
             "vehicle" => $tire->getVehicle
         ];

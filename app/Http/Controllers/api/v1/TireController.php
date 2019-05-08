@@ -77,19 +77,34 @@ class TireController extends Controller
     public function update(Request $re)
     {
         // dd($re->all());
+        $filename = "";
+        if ($re->has('image')) {
+            $image = $re->file("image");
+            $filename = time() . "." . $image->getClientOriginalExtension();
+            $image->storeAs('public/tires', $filename);
+        }
 
-        $image = $re->file("image");
-        $filename = time() . "." . $image->getClientOriginalExtension();
-        $image->storeAs('public/tire', $filename);
 
         $tire = Tire::find($re->input('id'));
         $tire->merek = $re->input('merek');
-        $tire->ukuran_ban = $re->input("ukuran_ban");
-        $tire->nomor_ban = $re->input("nomor_ban");
-        $tire->stempel_ban = $re->input("stempel_ban");
+        $tire->ukuran = $re->input("ukuran_ban");
+        $tire->nomor = $re->input("nomor_ban");
+        $tire->stempel = $re->input("stempel_ban");
         $tire->buy_date = date("Y-m-d H:m:s", strtotime($re->buy_date));
         $tire->images = $filename;
-        $tire->save();
+        if ($tire->save()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Update Data Success',
+                'data' => $tire
+            ], 200);
+        } else {
+            return response()->json([
+                'success' => false,
+                'message' => 'Update Data failed',
+                'data' => ""
+            ], 404);
+        }
     }
 
     public function filter(Request $re)
