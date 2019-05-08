@@ -90,14 +90,16 @@ export default {
           }
         })
         .then(res => {
-          console.log(res);
+          const { data } = res;
+          // console.log(data);
+          this.$swal(data.message).then(val => window.location.reload());
         })
         .catch(err => {
           console.error(err);
         });
     },
     previewImage() {
-      console.log(this.$refs.file.files[0]);
+      // console.log(this.$refs.file.files[0]);
       let tire = this.tire;
       tire.image = this.$refs.file.files[0];
       this.tire = tire;
