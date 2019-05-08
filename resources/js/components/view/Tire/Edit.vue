@@ -34,6 +34,7 @@
             <div class="custom-file">
               <input type="file" id="images" ref="file" @change="previewImage()" accept="image/*">
             </div>
+            
           </div>
         </div>
         <div class="form-group mt-2">
