@@ -167,7 +167,6 @@ class TireController extends Controller
 
     public function assignTire(Request $re)
     {
-
         // dd($re->all());
         $this->validate($re, [
             "vehicle_id" => 'required|int',
@@ -179,19 +178,23 @@ class TireController extends Controller
         if (count($re->tires) > 0) {
             foreach ($re->tires as $posisi => $v) {
                 if (!empty($v)) {
-                    $tire = Tire::find($v['id']);
-                    $tire->posistion = $posisi + 1;
-                    $tire->id_vehicle = $vehicleId;
-                    $tire->save();
-                    $tire->uid = $uid;
-                    $this->insertService($tire);
+                    $theTire = Tire::findOrfail($v['id']);
+                    if ($theTire->posistion == 0) {
+                        $tire = Tire::find($v['id']);
+                        $tire->posistion = $posisi + 1;
+                        $tire->id_vehicle = $vehicleId;
+                        $tire->save();
+                        $tire->uid = $uid;
+                        $dbug[] = $tire;
+                        $this->insertService($tire);
+                    }
                 }
             }
         }
         return response()->json([
             'success' => true,
             'message' => 'Update Success',
-            'data' => []
+            'data' => $dbug,
         ], 200);
     }
 
