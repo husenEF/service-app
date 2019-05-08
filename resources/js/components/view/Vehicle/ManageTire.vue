@@ -7,22 +7,8 @@
         <fieldset v-for="(n,i) in 11 " :key="i" class="p-3">
           <legend class="p-1 w-auto">Posisi {{n}}</legend>
 
-          <div class="form-group" v-if="_.isEmpty(tirePos[i])">
-            <label for>Name</label>
-            <multiselect
-              v-model="tirePos[i]"
-              :options="options"
-              label="name"
-              placeholder="Select one"
-              track-by="name"
-              :hide-selected="true"
-              :allow-empty="true"
-              @remove="removeHandler"
-              @select="selectHandler"
-            ></multiselect>
-          </div>
-
-          <div class="row" v-else>
+          <div class="row" v-if="!_.isEmpty(tirePos[i]) && (tirePos[i].posistion>0)">
+            <!-- <pre>{{tirePos[i]}}</pre> -->
             <div class="col-md-4">
               <img :src="tirePos[i].images_path" :alt="tirePos[i].merek" class="mr-3 img-fluid">
             </div>
@@ -65,6 +51,21 @@
                 </table>
               </div>
             </div>
+          </div>
+
+          <div class="form-group" v-else>
+            <label for>Name</label>
+            <multiselect
+              v-model="tirePos[i]"
+              :options="options"
+              label="name"
+              placeholder="Select one"
+              track-by="name"
+              :hide-selected="true"
+              :allow-empty="true"
+              @remove="removeHandler"
+              @select="selectHandler"
+            ></multiselect>
           </div>
         </fieldset>
         <div class="form-group mt-2">
