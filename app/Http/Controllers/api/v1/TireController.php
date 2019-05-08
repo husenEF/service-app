@@ -74,6 +74,24 @@ class TireController extends Controller
         }
     }
 
+    public function update(Request $re)
+    {
+        // dd($re->all());
+
+        $image = $re->file("image");
+        $filename = time() . "." . $image->getClientOriginalExtension();
+        $image->storeAs('public/tire', $filename);
+
+        $tire = Tire::find($re->input('id'));
+        $tire->merek = $re->input('merek');
+        $tire->ukuran_ban = $re->input("ukuran_ban");
+        $tire->nomor_ban = $re->input("nomor_ban");
+        $tire->stempel_ban = $re->input("stempel_ban");
+        $tire->buy_date = date("Y-m-d H:m:s", strtotime($re->buy_date));
+        $tire->images = $filename;
+        $tire->save();
+    }
+
     public function filter(Request $re)
     {
         $name = $re->key;
