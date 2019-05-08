@@ -8,9 +8,8 @@
           <legend class="p-1 w-auto">Posisi {{n}}</legend>
 
           <div class="row" v-if="!_.isEmpty(tirePos[i]) && (tirePos[i].posistion>0)">
-            <!-- <pre>{{tirePos[i]}}</pre> -->
             <div class="col-md-4">
-              <img :src="tirePos[i].images_path" :alt="tirePos[i].merek" class="mr-3 img-fluid">
+              <img :src="tirePos[i].images_path" :alt="tirePos[i].merek" class="mr-3 img-fluid" v-if="tirePos[i].images_path">
             </div>
             <div class="col-md-8">
               <div class="table-responsive">

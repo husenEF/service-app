@@ -201,23 +201,6 @@ export default {
           this.raw.vehicle = data.data;
         })
         .catch(err => {});
-      // axios
-      //   .all([
-      //     axios.get("/api/v1/vehicle/list?page=all"),
-      //     axios.get("/api/v1/tire/list?page=all")
-      //   ])
-      //   .then(
-      //     axios.spread((vehicleRes, tireRes) => {
-      //       const dataVehicle = vehicleRes.data.data;
-      //       const dataTire = tireRes.data.data;
-      //       this.vehicle = dataVehicle.map(e => {
-      //         return { name: e.merek, id: e.id };
-      //       });
-      //       this.tire = dataTire.map(t => {
-      //         return { name: e.merek, id: e.id };
-      //       });
-      //     })
-      //   );
     },
     selectVehicle(selectedOption, id) {
       const { vehicle } = this.raw;
