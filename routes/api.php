@@ -46,7 +46,8 @@ $router->group(['namespace' => 'v1', 'prefix' => '/v1'], function ($router) {
         $router->delete('/{id}', "TireController@delete");
         $router->post("/filter", 'TireController@filter');
         $router->post("/assign", "TireController@assignTire");
-        $router->post("/update","TireController@update");
+        $router->post("/update", "TireController@update");
+        $router->post("/store", "TireController@store");
     });
 
     //history

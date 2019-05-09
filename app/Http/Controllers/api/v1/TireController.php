@@ -249,4 +249,10 @@ class TireController extends Controller
         $service->image = "";
         return $service->save();
     }
+
+    public function store(Request $re)
+    {
+        dd($re->all());
+        
+    }
 }

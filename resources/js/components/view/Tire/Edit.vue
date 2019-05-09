@@ -3,7 +3,7 @@
     <div class="card-header">Edit Tire</div>
     <div class="card-body">
       <form @submit.prevent="submitData">
-        <pre>{{tire}}</pre>
+        <!-- <pre>{{tire}}</pre> -->
         <div class="row">
           <div class="col-md-6">
             <label for="merek">Merek</label>
@@ -11,13 +11,13 @@
           </div>
           <div class="col-md-6">
             <label for="ukuran">Ukuran Ban</label>
-            <input type="text" class="form-control" id="ukuran" v-model="tire.merek">
+            <input type="text" class="form-control" id="ukuran" v-model="tire.ukuran_ban">
           </div>
         </div>
         <div class="row">
           <div class="col-md-6">
             <label for="nomor">Nomor Ban</label>
-            <input type="text" class="form-control" id="nomor" v-model="tire.ukuran_ban">
+            <input type="text" class="form-control" id="nomor" v-model="tire.nomor_ban">
           </div>
           <div class="col-md-6">
             <label for="stempel">Stempel</label>
@@ -61,6 +61,7 @@ export default {
   },
   created() {
     this.getData();
+     this.$emit("back", "/ban");
   },
   methods: {
     getData() {

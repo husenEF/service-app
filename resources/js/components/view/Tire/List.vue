@@ -16,6 +16,8 @@
               Filter Data
               <FilterIcon/>
             </button>
+            <router-link to="/ban/add" class="btn btn-success float-right"><PlusIcon/> Tambah Ban</router-link>
+            <!-- <button type="button" class="btn btn-success float-right"><PlusIcon/> Tambah Ban</button> -->
           </p>
           <div class="collapse" id="collapseExample">
             <div class="card card-body">
@@ -127,7 +129,7 @@
 </template>
 
 <script>
-import { EyeIcon, SearchIcon, FilterIcon } from "vue-feather-icons";
+import { EyeIcon, SearchIcon, FilterIcon, PlusIcon } from "vue-feather-icons";
 import { Datetime } from "vue-datetime";
 import "vue-datetime/dist/vue-datetime.css";
 
@@ -137,6 +139,7 @@ export default {
     EyeIcon,
     SearchIcon,
     FilterIcon,
+    PlusIcon,
     Datetime
   },
   created() {
