@@ -2,8 +2,13 @@
   <div class="card">
     <div class="card-header">Edit Tire</div>
     <div class="card-body">
+      <div class="alert alert-danger" v-if="Object.keys(error).length>0">
+        <p class="mb-0">
+          <span v-for="(e,i) in error" :key="i" class="clearfix">{{e[0]}}</span>
+        </p>
+      </div>
       <form @submit.prevent="submitData">
-        <!-- <pre>{{tire}}</pre> -->
+        <!-- <pre>{{error}}</pre> -->
         <div class="row">
           <div class="col-md-6">
             <label for="merek">Merek</label>
@@ -63,12 +68,13 @@ export default {
         buy_date: "",
         image: "",
         uid: null
-      }
+      },
+      error: {}
     };
   },
   created() {
     this.$emit("back", "/ban");
-    console.log(this.user);
+    this.tire.uid = this.user.id;
   },
   computed: {
     user() {
@@ -78,7 +84,7 @@ export default {
   methods: {
     submitData() {
       let formData = new FormData();
-      formData.append("uid", this.user.id);
+      // formData.append("uid", this.user.id);
       Object.keys(this.tire).forEach(element => {
         if (typeof this.tire[element] === "boolean")
           formData.append(element, this.tire[element] ? 1 : 0);
@@ -86,7 +92,8 @@ export default {
       });
 
       // return false;
-      // console.log("formData", this.tire);
+      // console.log("formData", this.user);
+      // return false;
       axios
         .post("/api/v1/tire/store", formData, {
           headers: {
@@ -99,7 +106,8 @@ export default {
           this.$swal(data.message).then(val => window.location.reload());
         })
         .catch(err => {
-          console.error(err);
+          // console.error(err);
+          this.error = err.response.data;
         });
     },
     previewImage() {

@@ -8,6 +8,7 @@ use App\Service;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\api\v1\HistoryController;
 use App\Http\Transformers\TireTransformer;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class TireController extends Controller
 {
@@ -246,13 +247,54 @@ class TireController extends Controller
         $service->kelainan = "";
         $service->lepasban = 0;
         $service->alasanlepas = "";
-        $service->image = "";
+        $service->image = $tire->image;
         return $service->save();
     }
 
+    /**
+     * store tire
+     */
+
     public function store(Request $re)
     {
-        dd($re->all());
-        
+        // dd($re->all());
+        $this->validate($re, [
+            "merek" => 'required',
+            "ukuran_ban" => "required|int",
+            "nomor_ban" => 'required',
+            "stempel_ban" => "required",
+            "buy_date" => "required",
+            "image" => "mimes:jpeg,jpg,png,gif|required|max:10000"
+        ]);
+
+        try {
+            $image = $re->file("image");
+            $filename = time() . "." . $image->getClientOriginalExtension();
+            $image->storeAs('public/tires', $filename);
+
+            $store = new Tire();
+            $store->id_vehicle = 0;
+            $store->created_by = $re->input("uid");
+            $store->posistion = 0;
+            $store->merek = $re->input("merek");
+            $store->ukuran = $re->input("ukuran_ban");
+            $store->nomor = $re->input("nomor_ban");
+            $store->stempel = $re->input("stempel_ban");
+            $store->buy_date = date("Y-m-d H:m:s", strtotime($re->buy_date));
+            $store->images = $filename;
+            $store->save();
+            $this->insertService($store);
+            return response()->json([
+                'success' => true,
+                'message' => 'Save Data Success',
+                'data' => $store
+            ], 200);
+        } catch (ModelNotFoundException $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Save Data failed',
+                'data' => $e->getMessage()
+            ], 404);
+        }
     }
 }
