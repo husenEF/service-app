@@ -108,7 +108,11 @@
                   <br>
                   <strong>Gambar</strong>
                   :
-                  <a :href="s.image" target="_blank" rel="noopener noreferrer">Foto</a>
+                  <a
+                    :href="s.image"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >Foto</a>
                 </p>
               </td>
               <td>
@@ -191,16 +195,33 @@ export default {
   methods: {
     getAll() {
       axios
-        .get("/api/v1/vehicle/list?page=all")
-        .then(res => {
-          const { data } = res;
-          // console.log(data)
-          this.vehicle = data.data.map(e => {
-            return { name: e.merek, id: e.id };
-          });
-          this.raw.vehicle = data.data;
-        })
-        .catch(err => {});
+        .all([
+          axios.get("/api/v1/vehicle/list?page=all"),
+          axios.post("/api/v1/tire/filter", { key: "page", value: "all" })
+        ])
+        .then(
+          axios.spread((vehicle, tire) => {
+            this.vehicle = vehicle.data.data.map(e => {
+              return { name: e.merek, id: e.id };
+            });
+            this.tire = tire.data.data.map(d => {
+              return { name: d.merek, id: d.id };
+            });
+            // console.log("vehicle", vehicle);
+            // console.log("tire", tire);
+          })
+        );
+      // axios
+      //   .get("/api/v1/vehicle/list?page=all")
+      //   .then(res => {
+      //     const { data } = res;
+      //     // console.log(data)
+      //     this.vehicle = data.data.map(e => {
+      //       return { name: e.merek, id: e.id };
+      //     });
+      //     this.raw.vehicle = data.data;
+      //   })
+      //   .catch(err => {});
     },
     selectVehicle(selectedOption, id) {
       const { vehicle } = this.raw;

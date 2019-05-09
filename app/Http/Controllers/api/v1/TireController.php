@@ -110,13 +110,22 @@ class TireController extends Controller
 
     public function filter(Request $re)
     {
+
         $name = $re->key;
         $value = $re->value;
 
-        if ($name !== 'datetime') {
-            $tire = Tire::where($name, 'LIKE', $value)->get();
-        } else {
+        // dd([$name, $value]);
+        // if ($name !== 'datetime') {
+        //     $tire = Tire::where($name, 'LIKE', $value)->get();
+        // } else {
+        //     $tire = Tire::whereDate('buy_date', date('Y-m-d', strtotime($value)))->get();
+        // }
+        if ($value == 'all') {
+            $tire = Tire::all();
+        } else if ($name == 'datetime') {
             $tire = Tire::whereDate('buy_date', date('Y-m-d', strtotime($value)))->get();
+        } else {
+            $tire = Tire::where($name, 'LIKE', $value)->get();
         }
 
         if ($tire->count() > 0) {

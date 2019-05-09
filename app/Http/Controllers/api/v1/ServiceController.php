@@ -41,22 +41,46 @@ class ServiceController extends Controller
 
     public function filter(Request $re)
     {
-        $this->validate(
-            $re,
-            [
-                'vehicle' => 'required',
-                'tire' => 'required'
-            ],
-            [
-                "vehicle.required" => "Silahkan pilih kendaraan",
-                "tire.required" => "Silahkan pilih Ban"
-            ]
-        );
+        // dd($re->all());
+        // $this->validate(
+        //     $re,
+        //     [
+        //         'vehicle' => 'required',
+        //         'tire' => 'required'
+        //     ],
+        //     [
+        //         "vehicle.required" => "Silahkan pilih kendaraan",
+        //         "tire.required" => "Silahkan pilih Ban"
+        //     ]
+        // );
 
-        $service = Service::where([
-            ['tire_id', '=', $re->tire['id']],
-            ['kendaraan', '=', $re->vehicle['id']]
-        ])->with(['getUser', 'tire', 'vehicle'])->get();
+        // $service = Service::where([
+        //     ['tire_id', '=', $re->tire['id']],
+        //     ['kendaraan', '=', $re->vehicle['id']]
+        // ])->with(['getUser', 'tire', 'vehicle'])->get();
+
+        if ($re->tire !== null) {
+            // echo "tire";
+            // $service = Service::where([
+            //     ['tire_id', '=', $re->tire['id']],
+            //     // ['kendaraan', '=', $re->vehicle['id']]
+            // ])->with(['getUser', 'tire', 'vehicle'])->get();
+            $service = Service::where("tire_id", $re->tire['id'])->with(['getUser', 'tire', 'vehicle'])->get();
+        }
+        if ($re->vehicle !== null) {
+            echo "vehicle";
+            $service = Service::where([
+                // ['tire_id', '=', $re->tire['id']],
+                ['kendaraan', '=', $re->vehicle['id']]
+            ])->with(['getUser', 'tire', 'vehicle'])->get();
+        }
+
+        dd([$re->all(), $service]);
+
+        // $service = Service::where([
+        //     ['tire_id', '=', $re->tire['id']],
+        //     ['kendaraan', '=', $re->vehicle['id']]
+        // ])->with(['getUser', 'tire', 'vehicle'])->get();
         if ($service->count()) {
             $service = app('fractal')->collection($service, new ServiceTransformer())->getArray();
             return response()->json([
