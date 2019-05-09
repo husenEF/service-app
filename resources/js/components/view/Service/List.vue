@@ -209,7 +209,7 @@ export default {
         return { name: t.merek, id: t.id };
       });
       // console.log(theTire);
-      this.tire = theTire;
+      // this.tire = theTire;
       this.filter.vehicle = selectedOption.id;
     },
     filterHandler() {
