@@ -244,6 +244,7 @@ class TireController extends Controller
     private function insertService($tire)
     {
         // dd($tire);
+
         $service = new Service();
         $service->tire_id = $tire->id;
         $service->user = $tire->uid;
@@ -256,7 +257,7 @@ class TireController extends Controller
         $service->kelainan = "";
         $service->lepasban = 0;
         $service->alasanlepas = "";
-        $service->image = $tire->image;
+        $service->image = $tire->images;
         return $service->save();
     }
 
@@ -280,6 +281,7 @@ class TireController extends Controller
             $image = $re->file("image");
             $filename = time() . "." . $image->getClientOriginalExtension();
             $image->storeAs('public/tires', $filename);
+            $image->storeAs('public/service', $filename);
 
             $store = new Tire();
             $store->id_vehicle = 0;
@@ -292,6 +294,7 @@ class TireController extends Controller
             $store->buy_date = date("Y-m-d H:m:s", strtotime($re->buy_date));
             $store->images = $filename;
             $store->save();
+            $store->uid = $re->input('uid');
             $this->insertService($store);
             return response()->json([
                 'success' => true,

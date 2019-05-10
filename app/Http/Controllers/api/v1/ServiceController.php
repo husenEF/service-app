@@ -75,7 +75,7 @@ class ServiceController extends Controller
             ])->with(['getUser', 'tire', 'vehicle'])->get();
         }
 
-        dd([$re->all(), $service]);
+        // dd([$re->all(), $service]);
 
         // $service = Service::where([
         //     ['tire_id', '=', $re->tire['id']],

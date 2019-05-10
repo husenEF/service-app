@@ -45,7 +45,7 @@ class ServiceTransformer extends TransformerAbstract
 
     public function includeVehicle(Service $service)
     {
-        return $this->item($service->vehicle, new VehicleTransformer());
+        return ($service->vehicle) ? $this->item($service->vehicle, new VehicleTransformer()) : null;
     }
 
     public function includeTire(Service $service)
