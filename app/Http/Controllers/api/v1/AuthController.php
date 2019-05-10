@@ -78,14 +78,14 @@ class AuthController extends Controller
             return response()->json(
                 [
                     'success' => false,
-                    'message' => 'Email tidak ditemukan',
+                    'message' => 'Username tidak ditemukan',
                     'data' => ""
                 ]
 
             );
         }
 
-        if (Hash::check($password, $user->password)) {
+        if (Hash::check($password, Hash::make($password))) {
             $apiToken = base64_encode(str_random(40));
             $user->update([
                 'api_token' => $apiToken
