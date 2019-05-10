@@ -68,7 +68,7 @@ class ServiceController extends Controller
             $service = Service::where("tire_id", $re->tire['id'])->with(['getUser', 'tire', 'vehicle'])->get();
         }
         if ($re->vehicle !== null) {
-            echo "vehicle";
+            // echo "vehicle";
             $service = Service::where([
                 // ['tire_id', '=', $re->tire['id']],
                 ['kendaraan', '=', $re->vehicle['id']]

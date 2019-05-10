@@ -9,6 +9,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\api\v1\HistoryController;
 use App\Http\Transformers\TireTransformer;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Session\Store;
+use Illuminate\Support\Facades\Storage;
 
 class TireController extends Controller
 {
@@ -217,7 +219,7 @@ class TireController extends Controller
         ]);
         $vehicleId = $re->input("vehicle_id");
         $uid = $re->input('uid');
-
+        $dbug = [];
         if (count($re->tires) > 0) {
             foreach ($re->tires as $posisi => $v) {
                 if (!empty($v)) {
@@ -226,9 +228,11 @@ class TireController extends Controller
                         $tire = Tire::find($v['id']);
                         $tire->posistion = $posisi + 1;
                         $tire->id_vehicle = $vehicleId;
+                        // dd();
                         $tire->save();
                         $tire->uid = $uid;
                         $dbug[] = $tire;
+                        
                         $this->insertService($tire);
                     }
                 }

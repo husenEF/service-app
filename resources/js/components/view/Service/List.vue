@@ -70,6 +70,7 @@
       </div>
 
       <div class="table-responsive">
+        <!-- <pre>{{service}}</pre> -->
         <table class="table">
           <thead>
             <tr>
@@ -224,11 +225,11 @@ export default {
       //   .catch(err => {});
     },
     selectVehicle(selectedOption, id) {
-      const { vehicle } = this.raw;
-      const theVehicle = vehicle.filter(v => v.id == selectedOption.id);
-      const theTire = theVehicle[0].tire.map(t => {
-        return { name: t.merek, id: t.id };
-      });
+      // const { vehicle } = this.raw;
+      // const theVehicle = vehicle.filter(v => v.id == selectedOption.id);
+      // const theTire = theVehicle[0].tire.map(t => {
+      //   return { name: t.merek, id: t.id };
+      // });
       // console.log(theTire);
       // this.tire = theTire;
       this.filter.vehicle = selectedOption.id;
@@ -239,9 +240,9 @@ export default {
         .post("/api/v1/service/filter", this.filter)
         .then(res => {
           const { data } = res;
-          // console.log(data)
+          // console.log("data", data);
           let listId = Object.keys(data.data).filter(i => i !== "meta");
-          // console.log("map tireId", tireId);
+          // console.log("map tireId", listId);
           this.service = listId.map(i => data.data[i]);
           if (data.data.hasOwnProperty("meta")) {
             this.meta = data.data.meta;
