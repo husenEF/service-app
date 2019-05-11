@@ -1,5 +1,7 @@
 <?php
 
+
+
 $router->group(['namespace' => 'v1', 'prefix' => '/v1'], function ($router) {
 
     /**
@@ -7,7 +9,7 @@ $router->group(['namespace' => 'v1', 'prefix' => '/v1'], function ($router) {
      *
      */
     // $router->get('/user', 'UserController@get');
-
+    // $router->get("/download", "UserController@export");
     //register login
     $router->post("/register", "AuthController@register");
     $router->post("/login", "AuthController@login");

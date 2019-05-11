@@ -44,9 +44,11 @@ $router->get("/key", function () {
     return str_random(32);
 });
 
+
 Route::get('/updateapp', function () {
     exec('composer dump-autoload');
     echo 'composer dump-autoload complete';
 });
 
+//core
 Route::get("media/{type}/{filename}", "MediaController@get");

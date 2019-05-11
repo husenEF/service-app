@@ -6,15 +6,17 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\Controller;
-use App\Http\Resources\UserCollection as UserResource;
+// use App\Http\Resources\UserCollection as UserResource;
 use App\Http\Transformers\UserTransformer;
+use App\Exports\UsersExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 
 class UserController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth', ["except" => ["export"]]);
     }
 
     public function check(Request $re)
@@ -233,5 +235,10 @@ class UserController extends Controller
                 'data' => ""
             ], 404);
         }
+    }
+
+    public function export()
+    {
+        return Excel::download(new UsersExport, 'users.xlsx');
     }
 }
