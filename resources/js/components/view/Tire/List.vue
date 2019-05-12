@@ -4,7 +4,7 @@
     <div class="card-body">
       <div class="table-responsive">
         <div class="clearfix filter">
-          <p>
+          <div class="btn-group mb-2">
             <button
               class="btn btn-info"
               type="button"
@@ -16,10 +16,13 @@
               Filter Data
               <FilterIcon/>
             </button>
-            <router-link to="/ban/add" class="btn btn-success float-right"><PlusIcon/> Tambah Ban</router-link>
+            <a href="/export/ban" target="_blank" rel="noopener noreferrer" class="btn btn-warning"><PrinterIcon/></a>
+            <router-link to="/ban/add" class="btn btn-success float-right">
+              <PlusIcon/>Tambah Ban
+            </router-link>
             <!-- <button type="button" class="btn btn-success float-right"><PlusIcon/> Tambah Ban</button> -->
-          </p>
-          <div class="collapse" id="collapseExample">
+          </div>
+          <div class="collapse mb-3" id="collapseExample">
             <div class="card card-body">
               <form @submit.prevent="filterHandler">
                 <div class="row">
@@ -129,7 +132,13 @@
 </template>
 
 <script>
-import { EyeIcon, SearchIcon, FilterIcon, PlusIcon } from "vue-feather-icons";
+import {
+  EyeIcon,
+  SearchIcon,
+  FilterIcon,
+  PlusIcon,
+  PrinterIcon
+} from "vue-feather-icons";
 import { Datetime } from "vue-datetime";
 import "vue-datetime/dist/vue-datetime.css";
 
@@ -140,6 +149,7 @@ export default {
     SearchIcon,
     FilterIcon,
     PlusIcon,
+    PrinterIcon,
     Datetime
   },
   created() {

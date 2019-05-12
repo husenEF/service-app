@@ -24,7 +24,7 @@
             aria-expanded="false"
             aria-controls="collapseExample"
           >
-            Filter Data
+            Filter
             <FilterIcon/>
           </button>
           <button class="btn btn-success" title="Cetak Data" type="button" v-on:click="printData">

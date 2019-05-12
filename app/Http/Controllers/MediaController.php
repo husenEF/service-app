@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\File;
 use Maatwebsite\Excel\Facades\Excel;
 
 use App\Exports\VehicleExport;
+use App\Exports\TireExport;
 
 class MediaController extends Controller
 {
@@ -31,6 +32,9 @@ class MediaController extends Controller
         switch ($type) {
             case 'kendaraan':
                 return Excel::download(new VehicleExport(), "kendaraan.xlsx");
+                break;
+            case 'ban':
+                return Excel::download(new TireExport, "ban.xlsx");
                 break;
         }
         dd($type);
