@@ -38,6 +38,7 @@ $router->group(['namespace' => 'v1', 'prefix' => '/v1'], function ($router) {
         $router->put("/{id}", "VehicleController@update");
         $router->post("/add", "VehicleController@add");
         $router->post("/filter", "VehicleController@filter");
+        $router->get("/download/{code}", "VehicleController@download");
     });
 
     //tire

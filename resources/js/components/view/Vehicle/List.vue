@@ -15,7 +15,7 @@
         </p>
       </div>
       <div class="clearfix filter">
-        <p>
+        <div class="btn-group mb-2">
           <button
             class="btn btn-info"
             type="button"
@@ -27,8 +27,11 @@
             Filter Data
             <FilterIcon/>
           </button>
-        </p>
-        <div class="collapse" id="collapseExample">
+          <button class="btn btn-success" title="Cetak Data" type="button" v-on:click="printData">
+            <PrinterIcon/>
+          </button>
+        </div>
+        <div class="collapse mb-3" id="collapseExample">
           <div class="card card-body">
             <form @submit.prevent="filterHandler">
               <div class="row">
@@ -102,14 +105,20 @@
 </template>
 
 <script>
-import { PlusIcon, SearchIcon, FilterIcon } from "vue-feather-icons";
+import {
+  PlusIcon,
+  SearchIcon,
+  FilterIcon,
+  PrinterIcon
+} from "vue-feather-icons";
 
 export default {
   name: "vehicleIndex",
   components: {
     PlusIcon,
     SearchIcon,
-    FilterIcon
+    FilterIcon,
+    PrinterIcon
   },
   beforeCreate() {
     // this.getList()
@@ -165,6 +174,25 @@ export default {
         .catch(err => {
           this.error = err.response.data.message;
         });
+    },
+    printData() {
+      const { token } = this.user;
+      const newCode = window.btoa(token);
+      // console.log("user", [newCode, token]);
+      window.open("api/v1/vehicle/download/" + newCode, "_blank");
+      // axios
+      //   .get("api/v1/vehicle/download/" + newCode)
+      //   .then(res => {
+      //     console.log("res", res);
+      //   })
+      //   .catch(err => {
+      //     console.log("err", err);
+      //   });
+    }
+  },
+  computed: {
+    user() {
+      return this.$store.getters.currentUser;
     }
   },
   data() {
