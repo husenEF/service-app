@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
+use Maatwebsite\Excel\Facades\Excel;
+
+use App\Exports\VehicleExport;
 
 class MediaController extends Controller
 {
@@ -15,11 +18,21 @@ class MediaController extends Controller
         }
         $ext = File::extension($path);
         $get = File::get($path);
-        
+
         return response($get)
             ->header('Content-Type', "image/$ext")
             ->header('Pragma', 'public')
             ->header('Content-Disposition', 'inline; filename="' . $filename . '"')
             ->header('Cache-Control', 'max-age=60, must-revalidate');
+    }
+
+    function export($type)
+    {
+        switch ($type) {
+            case 'kendaraan':
+                return Excel::download(new VehicleExport(), "kendaraan.xlsx");
+                break;
+        }
+        dd($type);
     }
 }

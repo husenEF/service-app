@@ -30,6 +30,9 @@
           <button class="btn btn-success" title="Cetak Data" type="button" v-on:click="printData">
             <PrinterIcon/>
           </button>
+          <a href="/export/kendaraan" target="blank" class="btn btn-info" title="Cetak data 2">
+            <PrinterIcon/>
+          </a>
         </div>
         <div class="collapse mb-3" id="collapseExample">
           <div class="card card-body">

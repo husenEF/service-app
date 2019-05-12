@@ -160,6 +160,7 @@ class VehicleController extends Controller
         $user = AuthController::getUser($code);
         if ($user) {
             $filename = "vehicle-{$user->id}-" . time() . ".xlsx";
+            // Excel::store(new VehicleExport(), ("/public/excel/kendaraan.xlsx"));
             return Excel::download(new VehicleExport, $filename);
         } else {
             return response("File not found", 404);

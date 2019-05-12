@@ -1,4 +1,5 @@
 <?php
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -52,3 +53,4 @@ Route::get('/updateapp', function () {
 
 //core
 Route::get("media/{type}/{filename}", "MediaController@get");
+Route::get("export/{type}","MediaController@export");
