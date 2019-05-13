@@ -6,7 +6,6 @@
       <form @submit.prevent="kirimData">
         <fieldset v-for="(n,i) in 11 " :key="i" class="p-3">
           <legend class="p-1 w-auto">Posisi {{n}}</legend>
-
           <div class="row" v-if="!_.isEmpty(tirePos[i]) && (tirePos[i].posistion>0)">
             <div class="col-md-4">
               <img :src="tirePos[i].images_path" :alt="tirePos[i].merek" class="mr-3 img-fluid" v-if="tirePos[i].images_path">
@@ -132,7 +131,7 @@ export default {
       this.$emit("back", "/vehicle");
       axios
         .all([
-          axios.post("/api/v1/tire/filter", { key: "posistion", value: 0 }),
+          axios.post("/api/v1/tire/filter", { key: "posistion", value: 'all' }),
           axios.get("/api/v1/tire/assign/" + id)
         ])
         .then(
@@ -140,6 +139,7 @@ export default {
             // this.options = options.data.data.map(e => {
             //   return { name: e.merek, id: e.id };
             // });
+            // console.log("op",options.data.data)
             this.options = options.data.data;
             this.tirePos = tires.data.data;
           })

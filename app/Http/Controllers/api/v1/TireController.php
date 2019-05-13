@@ -113,7 +113,7 @@ class TireController extends Controller
     public function filter(Request $re)
     {
 
-        $name = $re->key;
+        $key = $re->key;
         $value = $re->value;
 
         // dd([$name, $value]);
@@ -122,26 +122,35 @@ class TireController extends Controller
         // } else {
         //     $tire = Tire::whereDate('buy_date', date('Y-m-d', strtotime($value)))->get();
         // }
-        if ($value == 'all') {
+        \DB::enableQueryLog();
+        $no = 0;
+        if ($value === 'all') {
             $tire = Tire::all();
-        } else if ($name == 'datetime') {
+            $no = 1;
+        } else if ($key == 'datetime') {
             $tire = Tire::whereDate('buy_date', date('Y-m-d', strtotime($value)))->get();
+            $no = 2;
         } else {
-            $tire = Tire::where($name, 'LIKE', $value)->get();
+            $tire = Tire::where($key, $value)->get();
+            $no = 3;
         }
+        $query = \DB::getQueryLog();
+        // $debug = [$query, [$key, $value], $no];
 
         if ($tire->count() > 0) {
             $tire = app('fractal')->collection($tire, new TireTransformer())->getArray();
             return response()->json([
                 'success' => true,
                 'message' => 'Get Data Success',
-                'data' => $tire
+                'data' => $tire,
+                // 'debug' => $debug
             ], 200);
         } else {
             return response()->json([
                 'success' => false,
                 'message' => 'Get Data failed',
-                'data' => ""
+                'data' => "",
+                // 'debug' => $debug
             ], 404);
         }
     }
@@ -175,7 +184,8 @@ class TireController extends Controller
                 'data' => ""
             ], 404);
         }
-        $tire = Tire::where("id_vehicle", 'LIKE', $id)->orderBy('posistion')->get();
+        // dd($id);
+        $tire = Tire::where("id_vehicle", '=', $id)->orderBy('posistion')->get();
 
         if ($tire->count() > 0) {
 
@@ -232,7 +242,7 @@ class TireController extends Controller
                         $tire->save();
                         $tire->uid = $uid;
                         $dbug[] = $tire;
-                        
+
                         $this->insertService($tire);
                     }
                 }
