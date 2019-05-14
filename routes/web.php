@@ -44,6 +44,9 @@ $router->get('/version', function () use ($router) {
 $router->get("/key", function () {
     return str_random(32);
 });
+$router->get("/info", function () {
+    return phpinfo();
+});
 
 
 Route::get('/updateapp', function () {
@@ -53,4 +56,4 @@ Route::get('/updateapp', function () {
 
 //core
 Route::get("media/{type}/{filename}", "MediaController@get");
-Route::get("export/{type}","MediaController@export");
+Route::get("export/{type}", "MediaController@export");
