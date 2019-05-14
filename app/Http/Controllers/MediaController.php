@@ -15,8 +15,13 @@ class MediaController extends Controller
     {
         $path = storage_path('app/public/' . $type . '/' . $filename);
         if (!File::exists($path)) {
+            $path = storage_path("app/public/tires/" . $filename);
+        }
+        
+        if (!File::exists($path)) {
             return response("404 not found", 404);
         }
+
         $ext = File::extension($path);
         $get = File::get($path);
 

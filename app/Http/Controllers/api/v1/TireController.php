@@ -258,7 +258,6 @@ class TireController extends Controller
     private function insertService($tire)
     {
         // dd($tire);
-
         $service = new Service();
         $service->tire_id = $tire->id;
         $service->user = $tire->uid;
