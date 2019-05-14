@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Transformers\ServiceTransformer;
 use App\Service;
+use App\Exports\ServiceExport;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\File;
 
@@ -13,7 +15,7 @@ class ServiceController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth', ["except" => ["export"]]);
     }
     /**
      * Display a listing of the resource.
@@ -196,5 +198,10 @@ class ServiceController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function export(Request $re)
+    {
+        return Excel::download(new ServiceExport, 'service.xlsx');
     }
 }
