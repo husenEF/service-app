@@ -253,6 +253,9 @@ export default {
     filterHandler() {
       this.printed = false;
       this.filter.error = {};
+      //remove old link
+      $("[download='service.xlsx']").remove();
+
       axios
         .post("/api/v1/service/filter", this.filter)
         .then(res => {
@@ -295,11 +298,19 @@ export default {
         });
     },
     printFilter() {
-      console.log("printFilter", this.filter);
+      // console.log("printFilter", this.filter);
+      // $("[download='service.xlsx']").remove();
+      // doc.findElementByAttribute("download", "service.xlsx");
       axios
         .post("/api/v1/service/export", this.filter)
         .then(res => {
-          console.log("res", res);
+          // console.log("res", res);
+          const url = res.data;
+          const link = document.createElement("a");
+          link.href = url;
+          link.setAttribute("download", "service.xlsx"); //or any other extension
+          document.body.appendChild(link);
+          link.click();
         })
         .catch(err => {
           console.log("err", err);
