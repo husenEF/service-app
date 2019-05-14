@@ -15,6 +15,15 @@
             Filter Data
             <FilterIcon/>
           </button>
+          <button
+            class="btn btn-warning"
+            type="button"
+            v-on:click="printFilter"
+            v-if="printed"
+            title="Cetak Data Pencarian"
+          >
+            <PrinterIcon/>
+          </button>
         </p>
         <div class="collapse" id="collapseExample">
           <div class="card card-body">
@@ -162,7 +171,12 @@
 
 <script>
 import Multiselect from "vue-multiselect";
-import { EyeIcon, SearchIcon, FilterIcon } from "vue-feather-icons";
+import {
+  EyeIcon,
+  SearchIcon,
+  FilterIcon,
+  PrinterIcon
+} from "vue-feather-icons";
 import "vue-multiselect/dist/vue-multiselect.min.css";
 
 export default {
@@ -171,7 +185,8 @@ export default {
     EyeIcon,
     SearchIcon,
     FilterIcon,
-    Multiselect
+    Multiselect,
+    PrinterIcon
   },
   data() {
     return {
@@ -186,7 +201,8 @@ export default {
       tire: [],
       raw: {
         vehicle: {}
-      }
+      },
+      printed: false
     };
   },
   created() {
@@ -235,6 +251,7 @@ export default {
       this.filter.vehicle = selectedOption.id;
     },
     filterHandler() {
+      this.printed = false;
       this.filter.error = {};
       axios
         .post("/api/v1/service/filter", this.filter)
@@ -244,6 +261,7 @@ export default {
           let listId = Object.keys(data.data).filter(i => i !== "meta");
           // console.log("map tireId", listId);
           this.service = listId.map(i => data.data[i]);
+          this.printed = true;
           if (data.data.hasOwnProperty("meta")) {
             this.meta = data.data.meta;
           }
@@ -275,6 +293,9 @@ export default {
         .catch(err => {
           console.log(err);
         });
+    },
+    printFilter() {
+      console.log("printFilter", this.filter);
     }
   }
 };
