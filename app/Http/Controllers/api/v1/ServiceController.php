@@ -204,13 +204,15 @@ class ServiceController extends Controller
     {
         // dd($re->all());
         $where = [];
-        if ($re->has('tire')) {
+        if ($re->has('tire') && ($re->tire !== null)) {
             $where['tire_id'] = $re->tire['id'];
         }
-        if ($re->has('vehicle')) {
+        if ($re->has('vehicle') && ($re->vehicle !== null)) {
             $where['kendaraan'] = $re->vehicle['id'];
         }
-        dd([$where, $re->all()]);
-        return Excel::download(new ServiceExport, 'service.xlsx');
+        // dd([$where, $re->all()]);
+        // return Excel::download(new ServiceExport($where), 'service.xlsx');
+        Excel::store(new ServiceExport($where), 'public/excel/service.xlsx');
+        return url("/media/excel/service.xlsx");
     }
 }
