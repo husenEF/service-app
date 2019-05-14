@@ -296,6 +296,14 @@ export default {
     },
     printFilter() {
       console.log("printFilter", this.filter);
+      axios
+        .post("/api/v1/service/export", this.filter)
+        .then(res => {
+          console.log("res", res);
+        })
+        .catch(err => {
+          console.log("err", err);
+        });
     }
   }
 };

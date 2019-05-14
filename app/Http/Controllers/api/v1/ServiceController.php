@@ -202,6 +202,15 @@ class ServiceController extends Controller
 
     public function export(Request $re)
     {
+        // dd($re->all());
+        $where = [];
+        if ($re->has('tire')) {
+            $where['tire_id'] = $re->tire['id'];
+        }
+        if ($re->has('vehicle')) {
+            $where['kendaraan'] = $re->vehicle['id'];
+        }
+        dd([$where, $re->all()]);
         return Excel::download(new ServiceExport, 'service.xlsx');
     }
 }
