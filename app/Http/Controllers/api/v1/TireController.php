@@ -135,7 +135,7 @@ class TireController extends Controller
             $no = 3;
         }
         $query = \DB::getQueryLog();
-        // $debug = [$query, [$key, $value], $no];
+        $debug = [$query, [$key, $value], $no];
 
         if ($tire->count() > 0) {
             $tire = app('fractal')->collection($tire, new TireTransformer())->getArray();
@@ -143,14 +143,14 @@ class TireController extends Controller
                 'success' => true,
                 'message' => 'Get Data Success',
                 'data' => $tire,
-                // 'debug' => $debug
+                'debug' => $debug
             ], 200);
         } else {
             return response()->json([
                 'success' => false,
                 'message' => 'Get Data failed',
                 'data' => "",
-                // 'debug' => $debug
+                'debug' => $debug
             ], 404);
         }
     }

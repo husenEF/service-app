@@ -131,7 +131,7 @@ export default {
       this.$emit("back", "/vehicle");
       axios
         .all([
-          axios.post("/api/v1/tire/filter", { key: "posistion", value: 'all' }),
+          axios.post("/api/v1/tire/filter", { key: "posistion", value: '0' }),
           axios.get("/api/v1/tire/assign/" + id)
         ])
         .then(
