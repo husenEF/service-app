@@ -44,23 +44,6 @@ class ServiceExport implements FromCollection, WithHeadings, WithMapping
     public function collection()
     {
         \DB::enableQueryLog();
-        // if (count($this->where) > 0) {
-        //     $service = new Service();
-        //     foreach ($this->where as $K => $v)
-        //         $service->where($K, $v);
-        //     $serviceReturn = $service->get();
-        //     $query = \DB::getQueryLog();
-        //     $this->debug = $query;
-        //     // return $service->get();
-        //     return $serviceReturn;
-        // } else {
-
-        //     $serviceReturn = Service::all();
-        //     $query = \DB::getQueryLog();
-        //     $this->debug = $query;
-        //     // return Service::all();
-        //     return $serviceReturn;
-        // }
         if (isset($this->where["tire_id"]) && !isset($this->where["kendaraan"])) {
             $returnData = Service::where("tire_id", $this->where["tire_id"])->get();
             $this->debug = \DB::getQueryLog();
@@ -78,24 +61,12 @@ class ServiceExport implements FromCollection, WithHeadings, WithMapping
             $this->debug = \DB::getQueryLog();
             return $returnData;
         }
-        // $service = new Service();
-        // if (isset($this->where["tire_id"]))
-        //     $service->where("tire_id", $this->where["tire_id"]);
-        // if (isset($this->where["kendaraan"]))
-        //     $service->where("kendaraan", $this->where["kendaraan"]);
-        // // foreach ($this->where as $K => $v)
-        // //     $service->where($K, $v);
-        // $serviceReturn = $service->get();
-        // $query = \DB::getQueryLog();
-        // $this->debug = $query;
-        // // return $service->get();
-        // return $serviceReturn;
     }
 
     public function map($service): array
     {
         $lepasBan = ($service->lepasban) ? "Ya" : "Tidak";
-        
+
         return [
             $service->id,
             $service->tire->merek,
