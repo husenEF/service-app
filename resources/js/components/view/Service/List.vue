@@ -19,7 +19,7 @@
             class="btn btn-warning"
             type="button"
             v-on:click="printFilter"
-            v-if="printed"
+            :disabled="printed==false"
             title="Cetak Data Pencarian"
           >
             <PrinterIcon/>
