@@ -10,15 +10,17 @@ export default {
         loading: false,
         auth_error: null,
         customers: [],
+        imagesPath:"/images/",
     },
     getters: {
-        //pasring default state to component
-        //in component call with 
+        // pasring default state to component
+        // in component call with 
         // computer:{
         //     someMethod(){
         //      return this.$store.getters.someMethod
         //     }
         // }
+        
         isLoading(state) {
             return state.loading
         },
@@ -34,6 +36,9 @@ export default {
         customers(state) {
             return state.customers
         },
+        getImagePath(state){
+            return state.imagesPath
+        }
     },
     mutations: {
         //commit from vue component

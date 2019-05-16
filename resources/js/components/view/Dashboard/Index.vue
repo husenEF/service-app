@@ -7,12 +7,16 @@
       <div class="col-6">
         <h1 class="text-center">
           <router-link to="/user" v-if="user.roles=='admin'">Pengguna</router-link>
-          <router-link to="/my-account" v-else>Profilku</router-link>
+          <router-link to="/my-account" v-else>
+            <img :src="path+'icons8-manager-96.png'" alt="Profilku" title="Profilku">
+          </router-link>
         </h1>
       </div>
       <div class="col-6">
         <h1 class="text-center">
-          <router-link to="/vehicle">Kendaraan</router-link>
+          <router-link to="/vehicle">
+            <img :src="path+'icons8-car-100.png'" title="Car icon">
+          </router-link>
         </h1>
       </div>
       <div class="col-6">
@@ -31,11 +35,13 @@
 
 <script>
 import Header from "../../includes/Header.vue";
+// import car from "../../../../images/icons8-car-100.png";
 
 export default {
   name: "dashboard-index",
   components: {
     Header
+    // car
   },
   created() {
     // alert('a')
@@ -57,6 +63,9 @@ export default {
   computed: {
     user() {
       return this.$store.getters.currentUser;
+    },
+    path() {
+      return this.$store.getters.getImagePath;
     }
   }
 };
