@@ -35,7 +35,6 @@
 
 <script>
 import Header from "../../includes/Header.vue";
-// import car from "../../../../images/icons8-car-100.png";
 
 export default {
   name: "dashboard-index",
