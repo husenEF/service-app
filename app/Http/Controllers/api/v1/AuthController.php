@@ -85,7 +85,9 @@ class AuthController extends Controller
             );
         }
 
-        if (Hash::check($password, Hash::make($password))) {
+        // dd([$user->password, $password]);
+        // if (Hash::check($user->password, Hash::make($password))) {
+        if (Hash::check($password, $user->password)) {
             $apiToken = base64_encode(str_random(40));
             $user->update([
                 'api_token' => $apiToken
