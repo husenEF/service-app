@@ -4,27 +4,32 @@
             <Header title="Dashboard" back/>
         </div>
         <div class="row">
-            <div class="col-6 text-center">
+            <div class="col-6 text-center mb-5">
                 <router-link to="/user" v-if="user.roles=='admin'">
                     <img src="/images/user.svg" alt="Ikon Pengguna" class="icon"/>
+                    <br />Pengguna
                 </router-link>
                 <router-link to="/my-account" v-else>
                     <img src="/images/user.svg" alt="Profilku" title="Profilku" class="icon">
+                    <br />Akun Saya
                 </router-link>
             </div>
             <div class="col-6 text-center">
                 <router-link to="/vehicle">
                     <img src="/images/bus.svg" alt="Ikon Kendaraan" class="icon"/>
+                    <br />Kendaraan
                 </router-link>
             </div>
             <div class="col-6 text-center">
                 <router-link to="/ban">
                     <img src="/images/wheel.svg" alt="Ikon Ban" class="icon"/>
+                    <br />Ban
                 </router-link>
             </div>
             <div class="col-6 text-center">
                 <router-link to="/service">
                     <img src="/images/notes.svg" alt="Ikon riwayat" class="icon"/>
+                    <br />Riwayat
                 </router-link>
             </div>
         </div>
