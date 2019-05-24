@@ -78,7 +78,7 @@ class AuthController extends Controller
             return response()->json(
                 [
                     'success' => false,
-                    'message' => 'Pengguna tidak ditemukan',
+                    'message' => 'Username tidak ditemukan',
                     'data' => ""
                 ]
 
@@ -92,10 +92,11 @@ class AuthController extends Controller
             $user->update([
                 'api_token' => $apiToken
             ]);
+
             return response()->json(
                 [
                     'success' => true,
-                    'message' => 'Login Sukses!',
+                    'message' => 'Login Succes!',
                     'data' => [
                         'user' => $user,
                         'api_token' => $apiToken

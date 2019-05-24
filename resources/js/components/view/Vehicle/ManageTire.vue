@@ -43,7 +43,7 @@
                         type="button"
                         class="btn btn-danger btn-sm"
                         v-on:click="serviceBan(tirePos[i].id)"
-                      >Serive/Lepas?</button>
+                      >Service/Lepas?</button>
                     </td>
                   </tr>
                 </table>
