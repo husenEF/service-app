@@ -16,7 +16,9 @@
               Filter Data
               <FilterIcon/>
             </button>
-            <a href="/export/ban" target="_blank" rel="noopener noreferrer" class="btn btn-warning"><PrinterIcon/></a>
+            <a href="/export/ban" target="_blank" rel="noopener noreferrer" class="btn btn-warning">
+              <PrinterIcon/>
+            </a>
             <router-link to="/ban/add" class="btn btn-success float-right">
               <PlusIcon/>Tambah Ban
             </router-link>
@@ -72,8 +74,10 @@
             <tr>
               <th>No</th>
               <th>Merek</th>
+              <th>Ukuran</th>
+              <th>Stempel</th>
               <th>Tanggal Beli</th>
-              <th>Foto</th>
+              <!-- <th>Foto</th> -->
               <th>Riwayat Penggunaan</th>
             </tr>
           </thead>
@@ -88,13 +92,16 @@
               <td>{{tire.merek}}</td>
               <td>{{tire.buy_date}}</td>
               <td>
-                <img
+                {{tire.stempel_ban}}
+                <!-- <pre>{{tire}}</pre> -->
+                <!-- <img
                   :src="tire.images_path"
                   :alt="tire.merek"
                   class="img-fluid"
                   v-if="tire.images_path"
-                >
+                >-->
               </td>
+              <td>{{tire.buy_date}}</td>
               <td>
                 <div class="btn-group" role="group" aria-label="Tire Button">
                   <router-link class="btn btn-info btn-sm" :to="'/ban/edit/'+tire.id">Edit</router-link>
