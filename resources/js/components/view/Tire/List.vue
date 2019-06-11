@@ -34,6 +34,8 @@
                       <select class="form-control" required v-model="filter.key" name="key">
                         <option value>Pilih</option>
                         <option value="merek">Merek</option>
+                        <option value="ukuran">Ukuran</option>
+                        <option value="stempel">Stempel</option>
                         <option value="datetime">Tanggal Beli</option>
                       </select>
                     </div>
@@ -77,8 +79,7 @@
               <th>Ukuran</th>
               <th>Stempel</th>
               <th>Tanggal Beli</th>
-              <!-- <th>Foto</th> -->
-              <th>Riwayat Penggunaan</th>
+              <th>Action</th>
             </tr>
           </thead>
           <tbody>
