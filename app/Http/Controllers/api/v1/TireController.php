@@ -283,9 +283,10 @@ class TireController extends Controller
         // dd($re->all());
         $this->validate($re, [
             "merek" => 'required',
-            "ukuran_ban" => "required|int",
+            "ukuran_ban" => "required",
+            // "position" => "required",
             "nomor_ban" => 'required',
-            "stempel_ban" => "required",
+            "stempel_ban" => "required|unique:tires,stempel",
             "buy_date" => "required",
             "image" => "mimes:jpeg,jpg,png,gif|required|max:10000"
         ]);
@@ -299,6 +300,7 @@ class TireController extends Controller
             $store = new Tire();
             $store->id_vehicle = 0;
             $store->created_by = $re->input("uid");
+            // $store->posistion = $re->input('position');
             $store->posistion = 0;
             $store->merek = $re->input("merek");
             $store->ukuran = $re->input("ukuran_ban");

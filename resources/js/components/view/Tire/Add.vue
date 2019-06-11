@@ -20,10 +20,24 @@
           </div>
         </div>
         <div class="row">
+          <!-- <div class="col-md-6">
+             <label for="position">Posisi</label>
+            <select name="position" id="position" class="form-control" v-model="tire.position">
+              <option value>Pilih Posisi</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+            </select> 
+          </div>-->
           <div class="col-md-6">
             <label for="nomor">Nomor Ban</label>
             <input type="text" class="form-control" id="nomor" v-model="tire.nomor_ban">
           </div>
+
           <div class="col-md-6">
             <label for="stempel">Stempel</label>
             <input type="text" class="form-control" id="stempel" v-model="tire.stempel_ban">
@@ -32,7 +46,12 @@
         <div class="row">
           <div class="col-md-6">
             <label for="buydate">Waktu Beli</label>
-            <Datetime v-model="tire.buy_date" input-class="form-control" value-zone="Asia/Jakarta"></Datetime>
+            <Datetime
+              v-model="tire.buy_date"
+              input-class="form-control"
+              value-zone="Asia/Jakarta"
+              :max-date="today.toString()"
+            />
           </div>
           <div class="col-md-6">
             <label for="images">Foto</label>
@@ -69,7 +88,8 @@ export default {
         image: "",
         uid: null
       },
-      error: {}
+      error: {},
+      today: Date.now()
     };
   },
   created() {
