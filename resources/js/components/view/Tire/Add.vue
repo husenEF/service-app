@@ -45,7 +45,7 @@
         </div>
         <div class="row">
           <div class="col-md-6">
-            <label for="buydate">Waktu Beli {{today}}</label>
+            <label for="buydate">Waktu Beli</label>
             <Datetime
               v-model="tire.buy_date"
               input-class="form-control"
