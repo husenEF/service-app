@@ -124,8 +124,8 @@ class ServiceController extends Controller
                 'tebal_tapak' => 'required',
                 'posisi' => 'required|int',
                 'jarakkm' => 'required|int',
-                'image' => 'required'
-            ]);
+                'image' => 'required|mimes:jpeg,jpg,png,gif|required|max:10000'
+            ], parent::errorValidationMessage());
         }
         // $path = $request->file('image')->store('public/service');
         $image = $request->file("image");

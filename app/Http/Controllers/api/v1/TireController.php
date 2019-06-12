@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Storage;
 class TireController extends Controller
 {
     private $history = null;
+
     public function __construct()
     {
         $this->history = new HistoryController();
@@ -226,7 +227,7 @@ class TireController extends Controller
         $this->validate($re, [
             "vehicle_id" => 'required|int',
             "uid" => 'required|int'
-        ]);
+        ], parent::errorValidationMessage());
         $vehicleId = $re->input("vehicle_id");
         $uid = $re->input('uid');
         $dbug = [];
@@ -289,7 +290,7 @@ class TireController extends Controller
             "stempel_ban" => "required|unique:tires,stempel",
             "buy_date" => "required",
             "image" => "mimes:jpeg,jpg,png,gif|required|max:10000"
-        ]);
+        ], parent::errorValidationMessage());
 
         try {
             $image = $re->file("image");
