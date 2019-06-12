@@ -20,7 +20,7 @@ class CreateTableTires extends Migration
             $table->integer("posistion")->default("0");
             $table->string("merek");
             $table->integer("ukuran")->nullable();
-            $table->integer("nomor")->nullable();
+            $table->string("nomor")->nullable();
             $table->string("stempel")->nullable();
             $table->date("buy_date");
             $table->string("images")->nullable();

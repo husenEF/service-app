@@ -81,6 +81,16 @@ class TireController extends Controller
     public function update(Request $re)
     {
         // dd($re->all());
+        $this->validate($re, [
+            "merek" => 'required',
+            "ukuran_ban" => "required",
+            // "position" => "required",
+            "nomor_ban" => 'required',
+            // "stempel_ban" => "required|unique:tires,stempel",
+            "buy_date" => "required",
+            // "image" => "mimes:jpeg,jpg,png,gif|required|max:10000"
+        ], parent::errorValidationMessage());
+
         $filename = "";
         if ($re->has('image')) {
             $image = $re->file("image");
