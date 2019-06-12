@@ -45,13 +45,13 @@
         </div>
         <div class="row">
           <div class="col-md-6">
-            <label for="buydate">Waktu Beli</label>
+            <label for="buydate">Waktu Beli {{today}}</label>
             <Datetime
               v-model="tire.buy_date"
               input-class="form-control"
               value-zone="Asia/Jakarta"
-              :max-date="today.toString()"
-            />
+              :max-datetime="today"
+            ></Datetime>
           </div>
           <div class="col-md-6">
             <label for="images">Foto</label>
@@ -70,6 +70,7 @@
 
 <script>
 import { Datetime } from "vue-datetime";
+import moment from "moment";
 import "vue-datetime/dist/vue-datetime.css";
 
 export default {
@@ -78,6 +79,7 @@ export default {
     Datetime
   },
   data() {
+    // console.log("data", "data");
     return {
       tire: {
         merek: "",
@@ -89,12 +91,18 @@ export default {
         uid: null
       },
       error: {},
-      today: Date.now()
+      today: moment(Date.now())
+        .add(1, "day")
+        .format("YYYY-MM-DD")
     };
+  },
+  mounted() {
+    console.log("mounted", "mount");
   },
   created() {
     this.$emit("back", "/ban");
     this.tire.uid = this.user.id;
+    console.log("created", today);
   },
   computed: {
     user() {
