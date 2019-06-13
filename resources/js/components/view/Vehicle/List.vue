@@ -43,8 +43,9 @@
                     <label for>Filter</label>
                     <select class="form-control" required v-model="filter.key" name="key">
                       <option value>Pilih</option>
-                      <option value="merek">merek</option>
-                      <option value="platnumber">plat nomor</option>
+                      <option value="merek">Merek</option>
+                      <option value="platnumber">Plat nomor</option>
+                      <option value="size">Ukuran Ban</option>
                     </select>
                   </div>
                 </div>
@@ -64,7 +65,6 @@
           </div>
         </div>
       </div>
-
       <div class="table-responsive">
         <table class="table">
           <thead>
