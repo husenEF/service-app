@@ -48,7 +48,17 @@ class TireController extends Controller
     public function delete(Request $re, $id)
     {
         $return = ["token" => $re->header("Authorization")];
-        $delete = Tire::find($id);
+        // $delete = Tire::find($id);
+        $delete = Tire::where('id', $id)->with(['getVehicle'])->first();
+        
+        if ($delete->id_vehicle !== 0 && $delete->position !== 0) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Afkir/Buang Gagal',
+                'data' => $delete
+            ], 400);
+        }
+        
         if ($delete) {
             $return['data']['tires'][] = [
                 'status' => 'delete',

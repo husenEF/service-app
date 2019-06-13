@@ -219,19 +219,44 @@ export default {
       }).then(val => {
         if (val.value) {
           // console.log("meta",this.meta)
-          axios.delete("/api/v1/tire/" + id).then(res => {
-            // console.log("res", res);
-            this.$swal("Ban berhasil di Afkir/Buang").then(res => {
-              const meta = this.meta;
-              if (typeof meta.pagination !== "undefined") {
-                this.getList(
-                  "/api/v1/tire/list?page=" + meta.pagination.current_page
-                );
-              } else {
-                this.getList("/api/v1/tire/list");
-              }
+          axios
+            .delete("/api/v1/tire/" + id)
+            .then(res => {
+              // console.log("res", res);
+              this.$swal("Ban berhasil di Afkir/Buang").then(res => {
+                const meta = this.meta;
+                if (typeof meta.pagination !== "undefined") {
+                  this.getList(
+                    "/api/v1/tire/list?page=" + meta.pagination.current_page
+                  );
+                } else {
+                  this.getList("/api/v1/tire/list");
+                }
+              });
+            })
+            .catch(error => {
+              const res = error.response.data;
+              this.$swal({
+                title: res.message,
+                text:
+                  "Ban masih terpasang di kendaraan " +
+                  res.data.get_vehicle.merek,
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#5bc0de",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Lepas ban?"
+              }).then(val => {
+                //vehicle/tire/1
+                if (val.value) {
+                  this.$router.push({
+                    path: "/vehicle/tire/" + res.data.get_vehicle.id
+                  });
+                }
+                // console.log([val, res]);
+              });
+              // console.log("err", error.response.data);
             });
-          });
         }
       });
     }
