@@ -91,7 +91,7 @@
                 <span v-else>{{i+1}}</span>
               </td>
               <td>{{tire.merek}}</td>
-              <td>{{tire.buy_date}}</td>
+              <td>{{tire.ukuran_ban}}</td>
               <td>
                 {{tire.stempel_ban}}
                 <!-- <pre>{{tire}}</pre> -->
@@ -305,7 +305,7 @@ export default {
       border: none;
       border-bottom: 1px solid #eee;
       position: relative;
-      padding-left: 50%;
+      padding-left: 40%;
       &::before {
         /* Now like a table header */
         position: absolute;
@@ -326,13 +326,16 @@ export default {
     content: "Merek";
   }
   td:nth-of-type(3):before {
-    content: "Tanggal Beli";
+    content: "Ukuran";
   }
   td:nth-of-type(4):before {
     content: "Kendaraan";
   }
   td:nth-of-type(5):before {
-    content: "Riwayat Penggunaan";
+    content: "Tanggal Beli";
+  }
+  td:nth-of-type(6):before {
+    content: "Action";
   }
 }
 </style>

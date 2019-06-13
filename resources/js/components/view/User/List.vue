@@ -240,7 +240,7 @@ export default {
       border: none;
       border-bottom: 1px solid #eee;
       position: relative;
-      padding-left: 50%;
+      padding-left: 40%;
       &::before {
         /* Now like a table header */
         position: absolute;
