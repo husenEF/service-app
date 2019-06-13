@@ -1,6 +1,8 @@
 <template>
   <div class="card">
-    <div class="card-header">Daftar Pengecekkan Ban</div>
+    <div class="card-header">
+      <h2>Daftar Pengecekkan Ban</h2>
+    </div>
     <div class="card-body">
       <div class="clearfix filter">
         <p>

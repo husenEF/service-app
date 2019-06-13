@@ -1,6 +1,8 @@
 <template>
   <div class="card">
-    <div class="card-header">Edit Tire</div>
+    <div class="card-header">
+      <h2>Edit Ban</h2>
+    </div>
     <div class="card-body">
       <form @submit.prevent="submitData">
         <!-- <pre>{{tire}}</pre> -->

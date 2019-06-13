@@ -1,6 +1,8 @@
 <template>
   <div class="card">
-    <div class="card-header">Daftar Ban</div>
+    <div class="card-header">
+      <h2>Daftar Ban</h2>
+    </div>
     <div class="card-body">
       <div class="table-responsive">
         <div class="clearfix filter">

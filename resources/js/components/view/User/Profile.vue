@@ -11,7 +11,9 @@
           </p>
         </div>
         <div class="card">
-          <div class="card-header">Aku Saya</div>
+          <div class="card-header">
+            <h2>Aku Saya</h2>
+          </div>
           <div class="card-body">
             <div class="table-responsive" v-if="!edit">
               <table class="table">

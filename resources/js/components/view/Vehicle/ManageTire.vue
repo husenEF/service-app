@@ -1,6 +1,8 @@
 <template>
   <div class="card">
-    <div class="card-header">Lihat Ban</div>
+    <div class="card-header">
+      <h2>Lihat Ban</h2>
+    </div>
     <div class="card-body">
       <!-- <pre>{{tirePos}}</pre> -->
       <form @submit.prevent="kirimData">

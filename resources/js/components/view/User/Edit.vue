@@ -1,6 +1,8 @@
 <template>
   <div class="card">
-    <div class="card-header">Detail Pengguna</div>
+    <div class="card-header">
+      <h2>Detail Pengguna</h2>
+    </div>
     <div class="card-body">
       <div class="alert alert-danger" v-if="Object.keys(error).length>0">
         <p class="mb-0">
