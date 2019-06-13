@@ -106,6 +106,10 @@
               <td>
                 <div class="btn-group" role="group" aria-label="Tire Button">
                   <router-link class="btn btn-info btn-sm" :to="'/ban/edit/'+tire.id">Edit</router-link>
+                  <button
+                    class="btn btn-danger btn-sm"
+                    v-on:click="confirmAfkir(tire.id)"
+                  >afkir/buang?</button>
                   <!-- <router-link
                     class="btn btn-info btn-sm"
                     :to="'/history/tires/'+tire.id"
@@ -149,6 +153,7 @@ import {
 } from "vue-feather-icons";
 import { Datetime } from "vue-datetime";
 import "vue-datetime/dist/vue-datetime.css";
+import { constants } from "crypto";
 
 export default {
   name: "tireList",
@@ -199,6 +204,34 @@ export default {
           } else {
             this.meta = {};
           }
+        }
+      });
+    },
+    confirmAfkir(id) {
+      this.$swal({
+        title: "Anda Yakin?",
+        text: "Yakin ban akan di Afkir/Buang?",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Ya!"
+      }).then(val => {
+        if (val.value) {
+          // console.log("meta",this.meta)
+          axios.delete("/api/v1/tire/" + id).then(res => {
+            // console.log("res", res);
+            this.$swal("Ban berhasil di Afkir/Buang").then(res => {
+              const meta = this.meta;
+              if (typeof meta.pagination !== "undefined") {
+                this.getList(
+                  "/api/v1/tire/list?page=" + meta.pagination.current_page
+                );
+              } else {
+                this.getList("/api/v1/tire/list");
+              }
+            });
+          });
         }
       });
     }
