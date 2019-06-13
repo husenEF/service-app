@@ -79,7 +79,6 @@
                 class="form-control"
                 min="1"
                 max="11"
-                readonly
               >
             </div>
             <div class="col-md-3">
@@ -182,7 +181,7 @@
         </form>
       </fieldset>
     </div>
-    
+
     <!-- Modal -->
     <div
       class="modal fade"
@@ -259,7 +258,7 @@
                 <label for="tukar" class="form-check-label">Tukar posisi</label>
               </div>
             </div>
-            
+
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
               <button type="submit" class="btn btn-primary">Save changes</button>
@@ -340,7 +339,16 @@ export default {
         })
         .then(res => {
           const { data } = res;
-          this.$swal(data.message).then(val => window.location.reload());
+          this.$swal(data.message).then(val => {
+            if (data.hasOwnProperty("redirect")) {
+              // window.location
+              this.$router.push({ path: data.redirect }, () => {
+                window.location.reload();
+              });
+            } else {
+              window.location.reload();
+            }
+          });
         })
         .catch(err => {
           this.error = err.response.data;
