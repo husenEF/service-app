@@ -67,6 +67,7 @@
                 class="form-control"
                 id="tebaltapak"
                 v-model="service.tebal_tapak"
+                step="any"
               >
             </div>
             <div class="col-md-3">
@@ -78,6 +79,7 @@
                 class="form-control"
                 min="1"
                 max="11"
+                readonly
               >
             </div>
             <div class="col-md-3">
