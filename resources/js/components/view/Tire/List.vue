@@ -5,72 +5,84 @@
     </div>
     <div class="card-body">
       <div class="table-responsive">
-        <div class="clearfix filter">
-          <div class="btn-group mb-2">
-            <button
-              class="btn btn-info"
-              type="button"
-              data-toggle="collapse"
-              data-target="#collapseExample"
-              aria-expanded="false"
-              aria-controls="collapseExample"
-            >
-              Filter Data
-              <FilterIcon/>
-            </button>
-            <a href="/export/ban" target="_blank" rel="noopener noreferrer" class="btn btn-warning">
-              <PrinterIcon/>
-            </a>
-            <router-link to="/ban/add" class="btn btn-success float-right">
-              <PlusIcon/>Tambah Ban
-            </router-link>
-            <!-- <button type="button" class="btn btn-success float-right"><PlusIcon/> Tambah Ban</button> -->
-          </div>
-          <div class="collapse mb-3" id="collapseExample">
-            <div class="card card-body">
-              <form @submit.prevent="filterHandler">
-                <div class="row">
-                  <div class="col-md-5">
-                    <div class="form-group">
-                      <label for>Filter</label>
-                      <select class="form-control" required v-model="filter.key" name="key">
-                        <option value>Pilih</option>
-                        <option value="merek">Merek</option>
-                        <option value="ukuran">Ukuran</option>
-                        <option value="stempel">Stempel</option>
-                        <option value="datetime">Tanggal Beli</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div class="col-md-5">
-                    <div class="form-group" v-if="filter.key !=='datetime'">
-                      <label for>Kata Kunci</label>
-                      <input
-                        required
-                        type="text"
-                        class="form-control"
-                        v-model="filter.value"
-                        placeholder="Kata Kunci"
-                        v-if="filter.key !=='datetime'"
-                      >
-                    </div>
-                    <div class="form-group" v-else>
-                      <label for>Pilih Tanggal</label>
-                      <Datetime
-                        v-model="filter.value"
-                        input-class="form-control"
-                        value-zone="Asia/Jakarta"
-                      ></Datetime>
-                    </div>
-                  </div>
-                  <div class="col-md-2">
-                    <button class="btn btn-primary btn-block" type="submit">
-                      <SearchIcon/>
-                    </button>
-                  </div>
-                </div>
-              </form>
+        <div class="row filter">
+          <div class="col-md-6">
+            <div class="btn-group mb-2">
+              <button
+                class="btn btn-info"
+                type="button"
+                data-toggle="collapse"
+                data-target="#collapseExample"
+                aria-expanded="false"
+                aria-controls="collapseExample"
+              >
+                Filter Data
+                <FilterIcon/>
+              </button>
+              <a
+                href="/export/ban"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn btn-warning"
+              >
+                <PrinterIcon/>
+              </a>
+              <router-link to="/ban/add" class="btn btn-success float-right">
+                <PlusIcon/>Tambah Ban
+              </router-link>
+              <!-- <button type="button" class="btn btn-success float-right"><PlusIcon/> Tambah Ban</button> -->
             </div>
+            <div class="collapse mb-3" id="collapseExample">
+              <div class="card card-body">
+                <form @submit.prevent="filterHandler">
+                  <div class="row">
+                    <div class="col-md-5">
+                      <div class="form-group">
+                        <label for>Filter</label>
+                        <select class="form-control" required v-model="filter.key" name="key">
+                          <option value>Pilih</option>
+                          <option value="merek">Merek</option>
+                          <option value="ukuran">Ukuran</option>
+                          <option value="stempel">Stempel</option>
+                          <option value="datetime">Tanggal Beli</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="col-md-5">
+                      <div class="form-group" v-if="filter.key !=='datetime'">
+                        <label for>Kata Kunci</label>
+                        <input
+                          required
+                          type="text"
+                          class="form-control"
+                          v-model="filter.value"
+                          placeholder="Kata Kunci"
+                          v-if="filter.key !=='datetime'"
+                        >
+                      </div>
+                      <div class="form-group" v-else>
+                        <label for>Pilih Tanggal</label>
+                        <Datetime
+                          v-model="filter.value"
+                          input-class="form-control"
+                          value-zone="Asia/Jakarta"
+                        ></Datetime>
+                      </div>
+                    </div>
+                    <div class="col-md-2">
+                      <button class="btn btn-primary btn-block" type="submit">
+                        <SearchIcon/>
+                      </button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 text-md-right">
+            <router-link to="/ban/trash">
+              <Trash2Icon/>
+            </router-link>
           </div>
         </div>
         <table class="table">
@@ -151,7 +163,8 @@ import {
   SearchIcon,
   FilterIcon,
   PlusIcon,
-  PrinterIcon
+  PrinterIcon,
+  Trash2Icon
 } from "vue-feather-icons";
 import { Datetime } from "vue-datetime";
 import "vue-datetime/dist/vue-datetime.css";
@@ -165,7 +178,8 @@ export default {
     FilterIcon,
     PlusIcon,
     PrinterIcon,
-    Datetime
+    Datetime,
+    Trash2Icon
   },
   created() {
     this.getList("/api/v1/tire/list");

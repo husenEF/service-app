@@ -33,7 +33,8 @@ class TireTransformer extends TransformerAbstract
             "buy_date" => $tire->buy_date,
             "images_path" => ($tire->image !== "") ? url('media/tires/' . $tire->images) : "",
             "user" => $tire->getUser,
-            "vehicle" => $tire->getVehicle
+            "vehicle" => $tire->getVehicle,
+            "afkir" => date("Y-m-d H:m:s", strtotime($tire->deleted_at))
         ];
     }
 

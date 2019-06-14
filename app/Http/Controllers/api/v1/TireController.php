@@ -50,7 +50,7 @@ class TireController extends Controller
         $return = ["token" => $re->header("Authorization")];
         // $delete = Tire::find($id);
         $delete = Tire::where('id', $id)->with(['getVehicle'])->first();
-        
+
         if ($delete->id_vehicle !== 0 && $delete->position !== 0) {
             return response()->json([
                 'success' => false,
@@ -58,7 +58,7 @@ class TireController extends Controller
                 'data' => $delete
             ], 400);
         }
-        
+
         if ($delete) {
             $return['data']['tires'][] = [
                 'status' => 'delete',
@@ -344,5 +344,26 @@ class TireController extends Controller
                 'data' => $e->getMessage()
             ], 404);
         }
+    }
+
+    public function trash()
+    {
+        $tire = Tire::onlyTrashed()->paginate();
+
+        if ($tire) {
+            $tire = app('fractal')->collection($tire, new TireTransformer())->getArray();
+            return response()->json([
+                'success' => true,
+                'message' => 'Get Data Success',
+                'data' => $tire,
+            ], 200);
+        } else {
+            return response()->json([
+                'success' => false,
+                'message' => 'Get Data failed',
+                'data' => "",
+            ], 404);
+        }
+        // $tire = app('fractal')->collection($tire, new TireTransformer())->getArray();
     }
 }

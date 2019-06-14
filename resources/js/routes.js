@@ -22,6 +22,7 @@ import TireList from "./components/view/Tire/List.vue"
 import TireService from "./components/view/Tire/TireService.vue"
 import TireAdd from "./components/view/Tire/Add.vue"
 import TireEdit from "./components/view/Tire/Edit.vue"
+import TireTrash from "./components/view/Tire/Trash.vue"
 //history
 import HistoryIndex from "./components/view/History/Index.vue"
 import HistoryList from "./components/view/History/List.vue"
@@ -206,6 +207,13 @@ export const routes = [
                 name: "tireEdit",
                 meta: {
                     title: "Edit Ban"
+                }
+            }, {
+                path: "trash",
+                component: TireTrash,
+                name: "tireTrash",
+                meta: {
+                    title: "Trash"
                 }
             }
         ]
