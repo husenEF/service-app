@@ -5,21 +5,20 @@ require('./bootstrap');
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Vuex from 'vuex'
-// import VueFeatherIcon from 'vue-feather-icon'
 import { Datetime } from 'vue-datetime'
 import VueSweetalert2 from 'vue-sweetalert2';
-// import _ from 'lodash'
-
 import { routes } from "./routes"
 import MainApp from './components/MainApp.vue'
 import StoreData from "./store"
 import { initialize } from "./helpers/general"
+// import _ from 'lodash'
+// import VueFeatherIcon from 'vue-feather-icon'
 
 Vue.use(VueRouter)
 Vue.use(Vuex)
-// Vue.use(VueFeatherIcon)
 Vue.use(VueSweetalert2)
 Vue.set(Vue.prototype, '_', _);
+// Vue.use(VueFeatherIcon)
 
 const store = new Vuex.Store(StoreData)
 const router = new VueRouter({

@@ -8,7 +8,8 @@ import UserList from "./components/view/User/List.vue"
 import UserAdd from "./components/view/User/Add.vue"
 import UserEdit from "./components/view/User/Edit.vue"
 import UserProfile from "./components/view/User/Profile.vue"
-//vehivle
+
+//vehicle
 import VehicleIndex from "./components/view/Vehicle/Index.vue"
 import VehicleList from "./components/view/Vehicle/List.vue"
 import VehicleEdit from "./components/view/Vehicle/Edit.vue"
@@ -22,6 +23,7 @@ import TireList from "./components/view/Tire/List.vue"
 import TireService from "./components/view/Tire/TireService.vue"
 import TireAdd from "./components/view/Tire/Add.vue"
 import TireEdit from "./components/view/Tire/Edit.vue"
+
 //history
 import HistoryIndex from "./components/view/History/Index.vue"
 import HistoryList from "./components/view/History/List.vue"

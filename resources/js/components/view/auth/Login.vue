@@ -19,7 +19,7 @@
                                 >
                             </div>
                             <div class="form-group">
-                                <label for>Kata Kunci</label>
+                                <label for="password">Kata Sandi</label>
                                 <input
                                     type="password"
                                     name="password"

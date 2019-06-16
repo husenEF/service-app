@@ -1,7 +1,7 @@
 <template>
     <div class="container-fluid">
         <div class="row">
-            <Header title="Dashboard" back/>
+            <Header title="Dasbor" back/>
         </div>
         <div class="row">
             <div class="col-6 text-center mb-5">

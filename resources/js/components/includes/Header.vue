@@ -40,7 +40,7 @@
         methods: {
             logout() {
                 this.$store.commit("logout");
-                this.$swal("Anda sudah Logout").then(val => {
+                this.$swal("Anda sudah keluar").then(val => {
                     this.$router.push("/login");
                 });
             }
