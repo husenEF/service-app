@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Transformers\ServiceTransformer;
 use App\Service;
+use App\Tire;
 use App\Exports\ServiceExport;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Storage;
@@ -124,21 +125,24 @@ class ServiceController extends Controller
                 'tebal_tapak' => 'required',
                 'posisi' => 'required|int',
                 'jarakkm' => 'required|int',
-                'image' => 'required'
-            ]);
+                'image' => 'required|mimes:jpeg,jpg,png,gif|required|max:10000'
+            ], parent::errorValidationMessage());
         }
         // $path = $request->file('image')->store('public/service');
-        $image = $request->file("image");
-        $filename = time() . "." . $image->getClientOriginalExtension();
-        $path = $image->storeAs('public/service', $filename);
+        $filename = "";
+        if ($request->hasFile("image")) {
+            $image = $request->file("image");
+            $filename = time() . "." . $image->getClientOriginalExtension();
+            $path = $image->storeAs('public/service', $filename);
+        }
 
         $service = new Service();
         $service->tire_id = $request->input("tire_id");
         $service->user = $request->input("user");
-        $service->kendaraan = $request->input("kendaraan");
+        $service->kendaraan = ($request->input('lepasban')) ? 0 : $request->input("kendaraan");
         $service->tekanan_angin = ($request->input("tekanan_angin")) ? $request->input("tekanan_angin") : 0;
         $service->tebal_tapak = ($request->input("tebal_tapak")) ? $request->input("tebal_tapak") : 0;
-        $service->posisi = $request->input("posisi");
+        $service->posisi = ($request->input('lepasban')) ? 0 : $request->input("posisi");
         $service->jarakkm = ($request->input("jarakkm")) ? $request->input("jarakkm") : 0;
         $service->catatan = $request->input("catatan");
         $service->kelainan = $request->input("kelainan");
@@ -146,12 +150,22 @@ class ServiceController extends Controller
         $service->alasanlepas = $request->input("alasanlepas");
         $service->image = $filename;
         if ($service->save()) {
+            if ($request->input('lepasban')) {
+                $tire = Tire::find($service->tire_id);
+                $tire->posistion = 0;
+                $tire->id_vehicle = 0;
+                $tire->save();
+            }
+            $data = [
+                'success' => true,
+                'message' => 'Simpan data sukses!',
+                'data' => $service
+            ];
+            if ($request->input('lepasban')) {
+                $data['redirect'] = "/vehicle/tire/" . $request->input("kendaraan");
+            }
             return response()->json(
-                [
-                    'success' => true,
-                    'message' => 'Simpan data sukses!',
-                    'data' => $service
-                ],
+                $data,
                 201
             );
         } else {

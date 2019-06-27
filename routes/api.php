@@ -44,6 +44,7 @@ $router->group(['namespace' => 'v1', 'prefix' => '/v1'], function ($router) {
     //tire
     $router->group(["prefix" => "tire"], function () use ($router) {
         $router->get("/list", "TireController@index");
+        $router->get("/trash", "TireController@trash");
         $router->get("/{id}", "TireController@show");
         $router->get("/assign/{id}", "TireController@getAssignTire");
         $router->delete('/{id}', "TireController@delete");

@@ -106,7 +106,7 @@ class VehicleController extends Controller
             'merek' => 'required',
             'plat_number' => 'required',
             'size' => 'required|int'
-        ]);
+        ], parent::errorValidationMessage());
 
         $user = AuthController::getUser($re->header('authorization'));
 

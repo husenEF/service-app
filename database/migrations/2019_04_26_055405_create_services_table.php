@@ -19,7 +19,7 @@ class CreateServicesTable extends Migration
             $table->integer('user');
             $table->integer('kendaraan');
             $table->integer('tekanan_angin')->nullable();
-            $table->integer('tebal_tapak')->nullable();
+            $table->string('tebal_tapak')->nullable();
             $table->integer('posisi');
             $table->integer('jarakkm')->nullable();
             $table->text('catatan')->nullable();

@@ -7,3 +7,5 @@ node_modules
 public/media/tires/
 nbproject/
 /nbproject/private/
+
+public/js/*

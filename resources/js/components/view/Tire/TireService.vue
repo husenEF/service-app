@@ -1,6 +1,8 @@
 <template>
   <div class="card">
-    <div class="card-header">Tambah Data Uji</div>
+    <div class="card-header">
+      <h2>Tambah Data Uji</h2>
+    </div>
     <div class="card-body">
       <div class="table-responsive">
         <table class="table">
@@ -67,6 +69,7 @@
                 class="form-control"
                 id="tebaltapak"
                 v-model="service.tebal_tapak"
+                step="any"
               >
             </div>
             <div class="col-md-3">
@@ -180,7 +183,7 @@
         </form>
       </fieldset>
     </div>
-    
+
     <!-- Modal -->
     <div
       class="modal fade"
@@ -257,7 +260,7 @@
                 <label for="tukar" class="form-check-label">Tukar posisi</label>
               </div>
             </div>
-            
+
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
               <button type="submit" class="btn btn-primary">Save changes</button>
@@ -338,7 +341,16 @@ export default {
         })
         .then(res => {
           const { data } = res;
-          this.$swal(data.message).then(val => window.location.reload());
+          this.$swal(data.message).then(val => {
+            if (data.hasOwnProperty("redirect")) {
+              // window.location
+              this.$router.push({ path: data.redirect }, () => {
+                window.location.reload();
+              });
+            } else {
+              window.location.reload();
+            }
+          });
         })
         .catch(err => {
           this.error = err.response.data;

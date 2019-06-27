@@ -67,7 +67,7 @@ class AuthController extends Controller
         $this->validate($request, [
             'username' => 'required',
             'password' => 'required'
-        ]);
+        ], parent::errorValidationMessage());
 
         $username = $request->input('username');
         $password = $request->input('password');

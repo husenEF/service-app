@@ -88,7 +88,7 @@ class UserController extends Controller
             "username" => "required|string|alpha_dash|unique:users,username",
             'password' => 'required|min:6',
             'roles' => 'required'
-        ]);
+        ], parent::errorValidationMessage());
 
         $name = $request->input('name');
         // $email = $request->input('email');
@@ -134,7 +134,7 @@ class UserController extends Controller
             $roles["password"] = 'required|min:6';
         }
 
-        $this->validate($request, $roles);
+        $this->validate($request, $roles, parent::errorValidationMessage());
 
         // dd($roles);
         $user = User::find($id);

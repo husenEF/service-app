@@ -1,6 +1,8 @@
 <template>
   <div class="card">
-    <div class="card-header">Edit Tire</div>
+    <div class="card-header">
+      <h2>Tambah Ban</h2>
+    </div>
     <div class="card-body">
       <div class="alert alert-danger" v-if="Object.keys(error).length>0">
         <p class="mb-0">
@@ -20,10 +22,24 @@
           </div>
         </div>
         <div class="row">
+          <!-- <div class="col-md-6">
+             <label for="position">Posisi</label>
+            <select name="position" id="position" class="form-control" v-model="tire.position">
+              <option value>Pilih Posisi</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+            </select> 
+          </div>-->
           <div class="col-md-6">
             <label for="nomor">Nomor Ban</label>
             <input type="text" class="form-control" id="nomor" v-model="tire.nomor_ban">
           </div>
+
           <div class="col-md-6">
             <label for="stempel">Stempel</label>
             <input type="text" class="form-control" id="stempel" v-model="tire.stempel_ban">
@@ -32,7 +48,12 @@
         <div class="row">
           <div class="col-md-6">
             <label for="buydate">Waktu Beli</label>
-            <Datetime v-model="tire.buy_date" input-class="form-control" value-zone="Asia/Jakarta"></Datetime>
+            <Datetime
+              v-model="tire.buy_date"
+              input-class="form-control"
+              value-zone="Asia/Jakarta"
+              :max-datetime="today"
+            ></Datetime>
           </div>
           <div class="col-md-6">
             <label for="images">Foto</label>
@@ -51,6 +72,7 @@
 
 <script>
 import { Datetime } from "vue-datetime";
+import moment from "moment";
 import "vue-datetime/dist/vue-datetime.css";
 
 export default {
@@ -59,6 +81,7 @@ export default {
     Datetime
   },
   data() {
+    // console.log("data", "data");
     return {
       tire: {
         merek: "",
@@ -69,12 +92,19 @@ export default {
         image: "",
         uid: null
       },
-      error: {}
+      error: {},
+      today: moment(Date.now())
+        .add(1, "day")
+        .format("YYYY-MM-DD")
     };
+  },
+  mounted() {
+    console.log("mounted", "mount");
   },
   created() {
     this.$emit("back", "/ban");
     this.tire.uid = this.user.id;
+    console.log("created", today);
   },
   computed: {
     user() {

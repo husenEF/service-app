@@ -1,6 +1,8 @@
 <template>
   <div class="card">
-    <div class="card-header">Edit Tire</div>
+    <div class="card-header">
+      <h2>Edit Ban</h2>
+    </div>
     <div class="card-body">
       <form @submit.prevent="submitData">
         <!-- <pre>{{tire}}</pre> -->
@@ -27,14 +29,18 @@
         <div class="row">
           <div class="col-md-6">
             <label for="buydate">Waktu Beli</label>
-            <Datetime v-model="tire.buy_date" input-class="form-control" value-zone="Asia/Jakarta"></Datetime>
+            <Datetime
+              v-model="tire.buy_date"
+              input-class="form-control"
+              value-zone="Asia/Jakarta"
+              :max-datetime="today"
+            ></Datetime>
           </div>
           <div class="col-md-6">
             <label for="images">Foto</label>
             <div class="custom-file">
               <input type="file" id="images" ref="file" @change="previewImage()" accept="image/*">
             </div>
-            
           </div>
         </div>
         <div class="form-group mt-2">
@@ -47,6 +53,7 @@
 
 <script>
 import { Datetime } from "vue-datetime";
+import moment from "moment";
 import "vue-datetime/dist/vue-datetime.css";
 
 export default {
@@ -56,12 +63,15 @@ export default {
   },
   data() {
     return {
-      tire: {}
+      tire: {},
+      today: moment(Date.now())
+        .add(1, "day")
+        .format("YYYY-MM-DD")
     };
   },
   created() {
     this.getData();
-     this.$emit("back", "/ban");
+    this.$emit("back", "/ban");
   },
   methods: {
     getData() {

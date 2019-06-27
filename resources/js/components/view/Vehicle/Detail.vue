@@ -1,6 +1,8 @@
 <template>
   <div class="card">
-    <div class="card-header">Detail Kendaraan</div>
+    <div class="card-header">
+      <h2>Detail Kendaraan</h2>
+    </div>
     <div class="card-body">
       <!-- <pre>{{vehicle}}</pre> -->
       <div class="table-responsive">

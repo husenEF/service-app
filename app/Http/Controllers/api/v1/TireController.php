@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Storage;
 class TireController extends Controller
 {
     private $history = null;
+
     public function __construct()
     {
         $this->history = new HistoryController();
@@ -47,7 +48,17 @@ class TireController extends Controller
     public function delete(Request $re, $id)
     {
         $return = ["token" => $re->header("Authorization")];
-        $delete = Tire::find($id);
+        // $delete = Tire::find($id);
+        $delete = Tire::where('id', $id)->with(['getVehicle'])->first();
+
+        if ($delete->id_vehicle !== 0 && $delete->position !== 0) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Afkir/Buang Gagal',
+                'data' => $delete
+            ], 400);
+        }
+
         if ($delete) {
             $return['data']['tires'][] = [
                 'status' => 'delete',
@@ -80,6 +91,16 @@ class TireController extends Controller
     public function update(Request $re)
     {
         // dd($re->all());
+        $this->validate($re, [
+            "merek" => 'required',
+            "ukuran_ban" => "required",
+            // "position" => "required",
+            "nomor_ban" => 'required',
+            // "stempel_ban" => "required|unique:tires,stempel",
+            "buy_date" => "required",
+            // "image" => "mimes:jpeg,jpg,png,gif|required|max:10000"
+        ], parent::errorValidationMessage());
+
         $filename = "";
         if ($re->has('image')) {
             $image = $re->file("image");
@@ -226,7 +247,7 @@ class TireController extends Controller
         $this->validate($re, [
             "vehicle_id" => 'required|int',
             "uid" => 'required|int'
-        ]);
+        ], parent::errorValidationMessage());
         $vehicleId = $re->input("vehicle_id");
         $uid = $re->input('uid');
         $dbug = [];
@@ -282,13 +303,14 @@ class TireController extends Controller
     {
         // dd($re->all());
         $this->validate($re, [
-            "merek" => 'required',
-            "ukuran_ban" => "required|int",
+            "merek" => 'required|unique:tires,merek',
+            "ukuran_ban" => "required",
+            // "position" => "required",
             "nomor_ban" => 'required',
-            "stempel_ban" => "required",
+            "stempel_ban" => "required|unique:tires,stempel",
             "buy_date" => "required",
             "image" => "mimes:jpeg,jpg,png,gif|required|max:10000"
-        ]);
+        ], parent::errorValidationMessage());
 
         try {
             $image = $re->file("image");
@@ -299,6 +321,7 @@ class TireController extends Controller
             $store = new Tire();
             $store->id_vehicle = 0;
             $store->created_by = $re->input("uid");
+            // $store->posistion = $re->input('position');
             $store->posistion = 0;
             $store->merek = $re->input("merek");
             $store->ukuran = $re->input("ukuran_ban");
@@ -321,5 +344,26 @@ class TireController extends Controller
                 'data' => $e->getMessage()
             ], 404);
         }
+    }
+
+    public function trash()
+    {
+        $tire = Tire::onlyTrashed()->paginate();
+
+        if ($tire) {
+            $tire = app('fractal')->collection($tire, new TireTransformer())->getArray();
+            return response()->json([
+                'success' => true,
+                'message' => 'Get Data Success',
+                'data' => $tire,
+            ], 200);
+        } else {
+            return response()->json([
+                'success' => false,
+                'message' => 'Get Data failed',
+                'data' => "",
+            ], 404);
+        }
+        // $tire = app('fractal')->collection($tire, new TireTransformer())->getArray();
     }
 }
