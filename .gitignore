@@ -8,4 +8,7 @@ public/media/tires/
 nbproject/
 /nbproject/private/
 
-public/js/*
+public/js/app.js
+public/js/app.js.map
+public/css/app.css
+public/mix-manifest.json
