@@ -4,7 +4,7 @@
       <h2>Lihat Ban</h2>
     </div>
     <div class="card-body">
-        <img src="/images/diagram.jpg" alt="Diagram" title="Diagram">
+        <img src="/images/diagram.jpg" alt="Diagram" title="Diagram" class="img-fluid">
       <!-- <pre>{{tirePos}}</pre> -->
       <form @submit.prevent="kirimData">
         <fieldset v-for="(n,i) in 11 " :key="i" class="p-3">
