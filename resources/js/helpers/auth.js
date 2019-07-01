@@ -10,7 +10,7 @@ export function login(credentials) {
             })
             .catch((err) => {
                 console.log("error login", err)
-                rej("Wrong email or password")
+                rej("Email atau password Anda salah!")
             })
     })
 }

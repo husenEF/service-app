@@ -2,10 +2,10 @@
     <div class="container-fluid">
         <div class="login h-100 row justify-content-center">
             <div class="col-sm-8 col-md-6 col-lg-4">
-                <h1 class="mt-5">Login</h1>
+                <h1 class="mt-5 text-center">Login</h1>
                 <div class="card">
                     <div class="card-body">
-                        {{authError}}
+                        <div class="alert alert-danger" v-if="authError" role="alert">{{authError}}</div>
                         <form @submit.prevent="authenticate">
                             <div class="form-group">
                                 <label for="username">Nama Pengguna</label>
