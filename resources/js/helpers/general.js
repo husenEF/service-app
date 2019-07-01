@@ -13,7 +13,7 @@ export function initialize(store, router) {
         } else if (to.path == '/login' && currentUser) {
             next('/')
         } else if (currentUser && currentUser.roles == 'mekanik' && to.meta.roles == 'admin') {
-            alert("Anda tidak di perkenankan di halaman ini")
+            alert("Anda tidak diperkenankan di halaman ini")
             next('/')
         } else {
             next()

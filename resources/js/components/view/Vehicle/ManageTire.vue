@@ -4,16 +4,16 @@
       <h2>Lihat Ban</h2>
     </div>
     <div class="card-body">
+        <img src="/images/diagram.jpg" alt="Diagram" title="Diagram">
       <!-- <pre>{{tirePos}}</pre> -->
       <form @submit.prevent="kirimData">
         <fieldset v-for="(n,i) in 11 " :key="i" class="p-3">
           <!-- <legend class="p-1 w-auto">Posisi {{n}}</legend> -->
           <legend class="p-1 w-auto">
-            Posisi
+            Posisi <span>[{{ i+1 }}]</span> -
             <span
               v-if="!_.isEmpty(tirePos[i]) && (tirePos[i].posistion>0)"
-            >{{tirePos[i].stempel_ban}}</span>
-            <span v-else>[-]</span>
+            >Stempel Ban: {{tirePos[i].stempel_ban}}</span>
           </legend>
           <div class="row" v-if="!_.isEmpty(tirePos[i]) && (tirePos[i].posistion>0)">
             <div class="col-md-4">
@@ -70,9 +70,9 @@
             <multiselect
               v-model="tirePos[i]"
               :options="options"
-              label="name"
+              label="stempel_ban"
               placeholder="Select one"
-              track-by="name"
+              track-by="stempel_ban"
               :hide-selected="true"
               :allow-empty="true"
               @remove="removeHandler"

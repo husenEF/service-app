@@ -29,7 +29,7 @@
                                 >
                             </div>
                             <div class="form-group">
-                                <button type="submit" class="btn btn-primary">Masuk</button>
+                                <button type="submit" class="btn btn-primary">Masuk Log</button>
                             </div>
                         </form>
                     </div><!-- .card-body -->
@@ -62,9 +62,12 @@
                 this.$store.dispatch("login");
 
                 const send = {
-                    username: this.$data.form.username,
-                    password: this.$data.form.password
+                    username: this.form.username,
+                    password: this.form.password
                 };
+
+                // As promises need to do after succeed and failed so this part need to have catch
+                // to show whatever error that will come.
                 login(this.$data.form).then(res => {
                     // console.log("res", res);
                     if (res.success) {
@@ -74,6 +77,8 @@
                     } else {
                         this.$store.commit("loginFailed", {error: res.message});
                     }
+                }).catch( (err) =>{
+                    this.$store.commit("loginFailed", {error: err});
                 });
             }
         }
