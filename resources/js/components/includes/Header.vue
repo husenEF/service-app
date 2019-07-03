@@ -14,7 +14,7 @@
     import { LogOutIcon, ArrowLeftIcon } from "vue-feather-icons";
 
     export default {
-        name: "header",
+        name: "topHeader",
         props: ["title", "back"],
         computed: {},
         components: {

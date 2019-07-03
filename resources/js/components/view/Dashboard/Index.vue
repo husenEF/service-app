@@ -43,13 +43,14 @@
         name: "dashboard-index",
         data() {
             return {
-                userIcon: User
+                
             }
         },
         components: {
             Header,
         },
         created() {
+           // console.log("user",this.user)
             // alert('a')
             // this.check();
         },
