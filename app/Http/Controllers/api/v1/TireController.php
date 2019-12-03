@@ -108,27 +108,47 @@ class TireController extends Controller
             $image->storeAs('public/tires', $filename);
         }
 
-
-        $tire = Tire::find($re->input('id'));
-        $tire->merek = $re->input('merek');
-        $tire->ukuran = $re->input("ukuran_ban");
-        $tire->nomor = $re->input("nomor_ban");
-        $tire->stempel = $re->input("stempel_ban");
-        $tire->buy_date = date("Y-m-d H:m:s", strtotime($re->buy_date));
-        $tire->images = $filename;
-        if ($tire->save()) {
+        try {
+            $tire = Tire::find($re->input('id'));
+            $tire->merek = $re->input('merek');
+            $tire->ukuran = $re->input("ukuran_ban");
+            $tire->nomor = $re->input("nomor_ban");
+            $tire->stempel = $re->input("stempel_ban");
+            $tire->buy_date = date("Y-m-d H:m:s", strtotime($re->buy_date));
+            $tire->images = $filename;
+            $tire->save();
             return response()->json([
                 'success' => true,
                 'message' => 'Update Data Success',
                 'data' => $tire
             ], 200);
-        } else {
+        } catch (\Exception $e) {
             return response()->json([
                 'success' => false,
-                'message' => 'Update Data failed',
+                'message' => $e->getMessage(),
                 'data' => ""
             ], 404);
         }
+        // $tire = Tire::find($re->input('id'));
+        // $tire->merek = $re->input('merek');
+        // $tire->ukuran = $re->input("ukuran_ban");
+        // $tire->nomor = $re->input("nomor_ban");
+        // $tire->stempel = $re->input("stempel_ban");
+        // $tire->buy_date = date("Y-m-d H:m:s", strtotime($re->buy_date));
+        // $tire->images = $filename;
+        // if ($tire->save()) {
+        //     return response()->json([
+        //         'success' => true,
+        //         'message' => 'Update Data Success',
+        //         'data' => $tire
+        //     ], 200);
+        // } else {
+        //     return response()->json([
+        //         'success' => false,
+        //         'message' => 'Update Data failed',
+        //         'data' => ""
+        //     ], 404);
+        // }
     }
 
     public function filter(Request $re)
@@ -197,7 +217,7 @@ class TireController extends Controller
 
     public function getAssignTire(Request $re,  $id)
     {
-        $id = (int)$id;
+        $id = (int) $id;
         if (!is_int($id)) {
             return response()->json([
                 'success' => false,
@@ -222,7 +242,7 @@ class TireController extends Controller
                 if (count($data) > 0) {
                     $tires[$n] = array_values($data)[0];
                 } else {
-                    $tires[$n] = (Object)[];
+                    $tires[$n] = (object) [];
                 }
             }
             return response()->json([

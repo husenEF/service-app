@@ -9,21 +9,21 @@
         <div class="row">
           <div class="col-md-6">
             <label for="merek">Merek</label>
-            <input type="text" class="form-control" id="merek" v-model="tire.merek">
+            <input type="text" class="form-control" id="merek" v-model="tire.merek" />
           </div>
           <div class="col-md-6">
             <label for="ukuran">Ukuran Ban</label>
-            <input type="text" class="form-control" id="ukuran" v-model="tire.ukuran_ban">
+            <input type="text" class="form-control" id="ukuran" v-model="tire.ukuran_ban" />
           </div>
         </div>
         <div class="row">
           <div class="col-md-6">
             <label for="nomor">Nomor Ban</label>
-            <input type="text" class="form-control" id="nomor" v-model="tire.nomor_ban">
+            <input type="text" class="form-control" id="nomor" v-model="tire.nomor_ban" />
           </div>
           <div class="col-md-6">
             <label for="stempel">Stempel</label>
-            <input type="text" class="form-control" id="stempel" v-model="tire.stempel_ban">
+            <input type="text" class="form-control" id="stempel" v-model="tire.stempel_ban" />
           </div>
         </div>
         <div class="row">
@@ -39,7 +39,7 @@
           <div class="col-md-6">
             <label for="images">Foto</label>
             <div class="custom-file">
-              <input type="file" id="images" ref="file" @change="previewImage()" accept="image/*">
+              <input type="file" id="images" ref="file" @change="previewImage()" accept="image/*" />
             </div>
           </div>
         </div>
@@ -94,7 +94,6 @@ export default {
           formData.append(element, this.tire[element] ? 1 : 0);
         else formData.append(element, this.tire[element]);
       });
-      console.log("formData", this.tire);
       axios
         .post("/api/v1/tire/update", formData, {
           headers: {
@@ -103,11 +102,21 @@ export default {
         })
         .then(res => {
           const { data } = res;
-          // console.log(data);
+          console.log("data", data);
           this.$swal(data.message).then(val => window.location.reload());
         })
         .catch(err => {
-          console.error(err);
+          // console.error("err", err.response);
+          const {
+            response: { data }
+          } = err;
+          // console.log("errrr", data);
+
+          this.$swal({
+            type: "error",
+            title: "Opps..!",
+            text: data.message
+          });
         });
     },
     previewImage() {
