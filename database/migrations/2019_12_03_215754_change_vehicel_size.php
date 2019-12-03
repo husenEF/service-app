@@ -26,7 +26,7 @@ class ChangeVehicelSize extends Migration
     public function down()
     {
         Schema::table('vehicles', function (Blueprint $table) {
-            $table->integer('size')->change();
+            // $table->integer('size',11)->change();
         });
     }
 }

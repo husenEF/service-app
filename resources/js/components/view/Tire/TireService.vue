@@ -53,7 +53,7 @@
         </div>
         <form @submit.prevent="submitData">
           <div class="form-group row">
-            <div class="col-md-3">
+            <div class="col-md-4">
               <label for="tekananangin">Tekanan Angin</label>
               <input
                 type="number"
@@ -62,17 +62,8 @@
                 v-model="service.tekanan_angin"
               />
             </div>
-            <div class="col-md-3">
-              <label for="tebaltapak">Tebal Tapak</label>
-              <input
-                type="number"
-                class="form-control"
-                id="tebaltapak"
-                v-model="service.tebal_tapak"
-                step="any"
-              />
-            </div>
-            <div class="col-md-3">
+
+            <div class="col-md-4">
               <label for="posisi">Posisi</label>
               <input
                 type="number"
@@ -83,14 +74,32 @@
                 max="11"
               />
             </div>
-            <div class="col-md-3">
+            <div class="col-md-4">
               <label for="jarak">Jarak Km</label>
               <input type="number" id="jarak" v-model="service.jarakkm" class="form-control" />
             </div>
           </div>
+
+          <div class="row">
+            <div class="col-12">
+              <label for>Tebal Tapak</label>
+            </div>
+            <div class="col-md-6" v-for="(n,i) in 6" v-bind:key="n">
+              <div class="form-group">
+                <input
+                  type="number"
+                  :name="`tebal_tapak[${i}]`"
+                  v-model="service.tebal_tapak[i]"
+                  :placeholder="`Tebal Tapak ${n}`"
+                  class="form-control"
+                  step="0.01"
+                  min="0"
+                />
+              </div>
+            </div>
+          </div>
           <div class="form-group row">
             <div class="col-md-4">
-              <p>{{service.kelainan}}</p>
               <label for>Keterangan lain</label>
               <div class="form-check">
                 <input
@@ -288,7 +297,7 @@ export default {
         user: null,
         kendaraan: null,
         tekanan_angin: "",
-        tebal_tapak: "",
+        tebal_tapak: [],
         posisi: "",
         jarakkm: "",
         catatan: "",

@@ -107,8 +107,11 @@
                   : {{s.tekanan_angin}}
                   <br />
                   <strong>Tebal Tapak</strong>
-                  : {{s.tebal_tapak}}
+                  :
                   <br />
+                  <ol>
+                  <li v-for="(e,i ) in s.tebal_tapak.split(',')" v-bind:key="i">Tebal Tapak {{i+1}}: {{e}}</li>
+                  </ol>
                   <strong>Posisi</strong>
                   : {{s.posisi}}
                   <br />

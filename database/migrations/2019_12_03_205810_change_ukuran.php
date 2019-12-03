@@ -26,7 +26,7 @@ class ChangeUkuran extends Migration
     public function down()
     {
         Schema::table('tires', function (Blueprint $table) {
-            $table->integer('ukuran')->change();
+            // $table->integer('ukuran')->change();
         });
     }
 }
