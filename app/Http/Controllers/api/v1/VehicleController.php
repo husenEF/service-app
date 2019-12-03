@@ -35,7 +35,7 @@ class VehicleController extends Controller
         if ($re->filled('page') && ($re->query('page') == 'all')) {
             $vehicle = Vehicle::with(['user', 'tires'])->get();
         } else {
-            $vehicle = Vehicle::with(['user', 'tires'])->paginate(5);
+            $vehicle = Vehicle::with(['user', 'tires'])->paginate(15);
         }
 
         $vehicle = app('fractal')->collection($vehicle, new VehicleTransformer())->getArray();
@@ -88,16 +88,34 @@ class VehicleController extends Controller
 
         $return = ['token' => $re->header('Authorization')];
         //update ban                   // dd($object);
-        $vehicle->merek = $re->merek;
-        $vehicle->platnumber = $re->platnumber;
-        $vehicle->size = $re->size;
-        $vehicle->update_by = $re->session_user;
-        $vehicle->save();
-        return response()->json([
-            'success' => true,
-            'message' => 'Update Done',
-            'data' => $return
-        ], 200);
+        try {
+            $vehicle->merek = $re->merek;
+            $vehicle->platnumber = $re->platnumber;
+            $vehicle->size = $re->size;
+            $vehicle->update_by = $re->session_user;
+            $vehicle->save();
+            return response()->json([
+                'success' => true,
+                'message' => 'Update Done',
+                'data' => $return
+            ], 200);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => $e->getMessage(),
+                'data' => ""
+            ], 400);
+        }
+        // $vehicle->merek = $re->merek;
+        // $vehicle->platnumber = $re->platnumber;
+        // $vehicle->size = $re->size;
+        // $vehicle->update_by = $re->session_user;
+        // $vehicle->save();
+        // return response()->json([
+        //     'success' => true,
+        //     'message' => 'Update Done',
+        //     'data' => $return
+        // ], 200);
     }
 
     public function add(Request $re)
@@ -105,7 +123,7 @@ class VehicleController extends Controller
         $this->validate($re, [
             'merek' => 'required',
             'plat_number' => 'required',
-            'size' => 'required|int'
+            'size' => 'required'
         ], parent::errorValidationMessage());
 
         $user = AuthController::getUser($re->header('authorization'));

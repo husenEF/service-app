@@ -2,15 +2,15 @@
   <form @submit.prevent="submitData">
     <div class="form-group">
       <label for>Merek</label>
-      <input type="text" class="form-control" v-model="data.merek">
+      <input type="text" class="form-control" v-model="data.merek" />
     </div>
     <div class="form-group">
       <label for>Plat Nomor</label>
-      <input type="text" class="form-control" v-model="data.platnumber">
+      <input type="text" class="form-control" v-model="data.platnumber" />
     </div>
     <div class="form-group">
       <label for>Ukuran Ban</label>
-      <input type="text" class="form-control" v-model="data.size">
+      <input type="text" class="form-control" v-model="data.size" />
     </div>
     <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
   </form>
@@ -50,7 +50,7 @@ export default {
         const { data } = res;
         if (data.success) {
           this.data = data.data;
-          this.data.tirescount = Object.keys(data.data.tires).length;
+          // this.data.tirescount = Object.keys(data.data.tires).length;
         }
       });
     },
@@ -64,38 +64,34 @@ export default {
       }
 
       this.data.session_user = userId;
-      axios.put("api/v1/vehicle/" + id, this.data).then(res => {
-        if (res.data.success) {
+      axios
+        .put("api/v1/vehicle/" + id, this.data)
+        .then(res => {
+          if (res.data.success) {
+            this.$swal({
+              title: "Data Save",
+              text: res.data.message,
+              type: "success",
+              confirmButtonColor: "#3085d6"
+            }).then(res => {
+              if (res.value) {
+                window.location.reload();
+              }
+            });
+          }
+        })
+        .catch(err => {
+          const {
+            response: { data }
+          } = err;
           this.$swal({
-            title: "Data Save",
-            text: res.data.message,
-            type: "success",
-            confirmButtonColor: "#3085d6"
-          }).then(res => {
-            if (res.value) {
-              window.location.reload();
-            }
+            type: "error",
+            title: "Opps..!",
+            text: data.message
           });
-        }
-      });
+        });
     },
-    addBan() {
-      const { id } = this.getUser;
-      const pos = this.data.tirescount + 1;
-      let { tire } = this.data;
-      const newBan = {
-        merek: "",
-        buy_date: "",
-        position: pos,
-        id: 0,
-        created_by: id,
-        id_vehicle: this.data.id
-      };
 
-      tire.push(newBan);
-
-      console.log("tire", tire);
-    },
     deletBan(id) {
       const userId = this.getUser.id;
       this.$swal({

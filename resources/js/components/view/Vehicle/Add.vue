@@ -24,7 +24,7 @@
           </div>
           <div class="col-md-4">
             <input
-              type="number"
+              type="text"
               class="form-control"
               v-model="form.size"
               min="0"

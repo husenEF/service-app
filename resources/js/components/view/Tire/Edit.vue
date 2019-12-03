@@ -106,12 +106,9 @@ export default {
           this.$swal(data.message).then(val => window.location.reload());
         })
         .catch(err => {
-          // console.error("err", err.response);
           const {
             response: { data }
           } = err;
-          // console.log("errrr", data);
-
           this.$swal({
             type: "error",
             title: "Opps..!",
@@ -120,11 +117,9 @@ export default {
         });
     },
     previewImage() {
-      // console.log(this.$refs.file.files[0]);
       let tire = this.tire;
       tire.image = this.$refs.file.files[0];
       this.tire = tire;
-      // tire.push()
     }
   }
 };
