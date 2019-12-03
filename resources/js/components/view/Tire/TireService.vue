@@ -36,7 +36,7 @@
               <th>Kendaraan Saat ini</th>
               <td>
                 {{tire.vehicle.merek}}
-                <br>
+                <br />
                 {{tire.vehicle.platnumber}}
               </td>
             </tr>
@@ -60,7 +60,7 @@
                 class="form-control"
                 id="tekananangin"
                 v-model="service.tekanan_angin"
-              >
+              />
             </div>
             <div class="col-md-3">
               <label for="tebaltapak">Tebal Tapak</label>
@@ -70,7 +70,7 @@
                 id="tebaltapak"
                 v-model="service.tebal_tapak"
                 step="any"
-              >
+              />
             </div>
             <div class="col-md-3">
               <label for="posisi">Posisi</label>
@@ -81,74 +81,75 @@
                 class="form-control"
                 min="1"
                 max="11"
-              >
+              />
             </div>
             <div class="col-md-3">
               <label for="jarak">Jarak Km</label>
-              <input type="number" id="jarak" v-model="service.jarakkm" class="form-control">
+              <input type="number" id="jarak" v-model="service.jarakkm" class="form-control" />
             </div>
           </div>
           <div class="form-group row">
             <div class="col-md-4">
+              <p>{{service.kelainan}}</p>
               <label for>Keterangan lain</label>
               <div class="form-check">
                 <input
-                  type="radio"
+                  type="checkbox"
                   id="misalignment"
                   class="form-check-input"
                   v-model="service.kelainan"
                   value="Misalignment"
-                >
+                />
                 <label for="misalignment">Misalignment</label>
               </div>
               <div class="form-check">
                 <input
-                  type="radio"
+                  type="checkbox"
                   v-model="service.kelainan"
                   id="tutuppentil"
                   class="form-check-input"
                   value="Tutup pentil tidak ada"
-                >
+                />
                 <label for="tutuppentil">Tutup pentil tidak ada</label>
               </div>
               <div class="form-check">
                 <input
-                  type="radio"
+                  type="checkbox"
                   v-model="service.kelainan"
-                  id="tekananangin"
+                  id="minplustekananangin"
                   class="form-check-input"
                   value="Kekurangan / Kelebihan Tekanan Angin"
-                >
-                <label for="tekananangin">Kekurangan / Kelebihan Tekanan Angin</label>
+                />
+                <label for="minplustekananangin">Kekurangan / Kelebihan Tekanan Angin</label>
               </div>
               <div class="form-check">
                 <input
-                  type="radio"
+                  type="checkbox"
                   v-model="service.kelainan"
                   id="pentilrusak"
                   class="form-check-input"
                   value="Pentil rusak"
-                >
+                />
                 <label for="pentilrusak">Pentil rusak</label>
               </div>
               <div class="form-check">
                 <input
-                  type="radio"
+                  type="checkbox"
                   v-model="service.kelainan"
                   id="bautroda"
                   class="form-check-input"
                   value="Baut roda longgar / rusak"
-                >
+                />
                 <label for="bautroda">Baut roda longgar / rusak</label>
               </div>
               <div class="form-check">
                 <input
-                  type="radio"
+                  type="checkbox"
                   v-model="service.kelainan"
                   id="sobek"
                   class="form-check-input"
                   value="Ban cacat / sobek"
-                >
+                />
                 <label for="sobek">Ban cacat / sobek</label>
               </div>
             </div>
@@ -166,7 +167,7 @@
           <div class="form-group">
             <label for="exampleInputEmail1">Upload Foto</label>
             <div class="custom-file">
-              <input type="file" id="file" ref="file" @change="previewImage()" accept="image/*">
+              <input type="file" id="file" ref="file" @change="previewImage()" accept="image/*" />
               <label class="custom-file-label" for="file">Choose file</label>
             </div>
           </div>
@@ -211,52 +212,52 @@
               </div>
               <div class="form-check">
                 <input
-                  type="radio"
+                  type="checkbox"
                   v-model="service.alasanlepas"
                   id="gundul"
                   value="Gundul"
                   class="form-check-input"
-                >
+                />
                 <label for="gundul" class="form-check-label">Gundul</label>
               </div>
               <div class="form-check">
                 <input
-                  type="radio"
+                  type="checkbox"
                   v-model="service.alasanlepas"
                   id="aus"
                   value="Aus / Tidak rata"
                   class="form-check-input"
-                >
+                />
                 <label for="aus" class="form-check-label">Aus / Tidak rata</label>
               </div>
               <div class="form-check">
                 <input
-                  type="radio"
+                  type="checkbox"
                   v-model="service.alasanlepas"
                   id="rusak"
                   value="Rusak / Bocor"
                   class="form-check-input"
-                >
+                />
                 <label for="rusak" class="form-check-label">Rusak / Bocor</label>
               </div>
               <div class="form-check">
                 <input
-                  type="radio"
+                  type="checkbox"
                   v-model="service.alasanlepas"
                   id="buang"
                   value="Vulkanisir / Buang"
                   class="form-check-input"
-                >
+                />
                 <label for="buang" class="form-check-label">Vulkanisir / Buang</label>
               </div>
               <div class="form-check">
                 <input
-                  type="radio"
+                  type="checkbox"
                   v-model="service.alasanlepas"
                   id="tukar"
                   value="Tukar posisi"
                   class="form-check-input"
-                >
+                />
                 <label for="tukar" class="form-check-label">Tukar posisi</label>
               </div>
             </div>
@@ -291,9 +292,9 @@ export default {
         posisi: "",
         jarakkm: "",
         catatan: "",
-        kelainan: "",
+        kelainan: [],
         lepasban: false,
-        alasanlepas: "",
+        alasanlepas: [],
         image: ""
       },
       error: [],
@@ -331,7 +332,7 @@ export default {
           formData.append(element, this.service[element] ? 1 : 0);
         else formData.append(element, this.service[element]);
       });
-      // console.log("formdata",[formData,this.service]);
+      console.log("formdata", [formData, this.service]);
       axios
         // .post("/api/v1/service/save", this.service)
         .post("api/v1/service/save", formData, {

@@ -135,7 +135,7 @@ class ServiceController extends Controller
             $filename = time() . "." . $image->getClientOriginalExtension();
             $path = $image->storeAs('public/service', $filename);
         }
-
+        // dd($request->all());
         $service = new Service();
         $service->tire_id = $request->input("tire_id");
         $service->user = $request->input("user");

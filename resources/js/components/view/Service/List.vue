@@ -15,7 +15,7 @@
             aria-controls="collapseExample"
           >
             Filter Data
-            <FilterIcon/>
+            <FilterIcon />
           </button>
           <button
             class="btn btn-warning"
@@ -24,7 +24,7 @@
             :disabled="printed==false"
             title="Cetak Data Pencarian"
           >
-            <PrinterIcon/>
+            <PrinterIcon />
           </button>
         </p>
         <div class="collapse" id="collapseExample">
@@ -37,7 +37,7 @@
               <p class="m-0">
                 <span v-for="(j,i) in filter.error" :key="i">
                   {{j[0]}}
-                  <br>
+                  <br />
                 </span>
               </p>
             </div>
@@ -71,7 +71,7 @@
                 </div>
                 <div class="col-md-2">
                   <button class="btn btn-primary btn-block" type="submit">
-                    <SearchIcon/>
+                    <SearchIcon />
                   </button>
                 </div>
               </div>
@@ -105,19 +105,22 @@
                 <p>
                   <strong>Tekanan Angin</strong>
                   : {{s.tekanan_angin}}
-                  <br>
+                  <br />
                   <strong>Tebal Tapak</strong>
                   : {{s.tebal_tapak}}
-                  <br>
+                  <br />
                   <strong>Posisi</strong>
                   : {{s.posisi}}
-                  <br>
+                  <br />
                   <strong>Jarak Km</strong>
                   : {{s.jarakkm}}
-                  <br>
+                  <br />
                   <strong>Tekanan Angin</strong>
                   : {{s.tekanan_angin}}
-                  <br>
+                  <br />
+                  <strong>Kelainan</strong>
+                  : {{s.kelainan}}
+                  <br />
                   <strong>Gambar</strong>
                   :
                   <a
@@ -129,13 +132,13 @@
               </td>
               <td>
                 {{s.create_at}}
-                <br>
+                <br />
                 <p>
                   <small>
                     dibuat oleh :
-                    <br>
+                    <br />
                     Nama : {{s.user.name}}
-                    <br>
+                    <br />
                     Jabatan : {{s.user.roles}}
                   </small>
                 </p>
