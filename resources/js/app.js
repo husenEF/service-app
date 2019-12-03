@@ -23,7 +23,7 @@ Vue.set(Vue.prototype, '_', _);
 const store = new Vuex.Store(StoreData)
 const router = new VueRouter({
     routes,
-    node: 'history'
+    mode: 'hash'
 })
 
 initialize(store, router)

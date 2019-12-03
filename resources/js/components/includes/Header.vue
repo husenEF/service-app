@@ -1,9 +1,9 @@
 <template>
   <nav class="navbar fixed-sticky mb-5 w-100 main-nav">
     <h1 class="text-center w-100 h4 mb-0">
-      <router-link :to="{path:back}" class="float-left btn btn-sm btn-default" v-if="isBack">
+      <a href="#" @click="$router.go(-1)" class="float-left btn btn-sm btn-default" v-if="isBack">
         <ArrowLeftIcon />
-      </router-link>
+      </a>
       {{title}}
       <button
         class="btn btn-sm btn-default float-right"
@@ -29,13 +29,16 @@ export default {
   },
   created() {
     this.isBack = this.back !== "" ? true : false;
+    this.url = this.back
+    console.log("back",this.back)
   },
   mounted() {
-    // console.log("this", this.isBack);
+    console.log("this", [this.isBack,this.back]);
   },
   data() {
     return {
-      isBack: true
+      isBack: true,
+      url:'/'
     };
   },
   computed: {
