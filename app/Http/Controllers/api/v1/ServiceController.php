@@ -61,23 +61,33 @@ class ServiceController extends Controller
         //     ['tire_id', '=', $re->tire['id']],
         //     ['kendaraan', '=', $re->vehicle['id']]
         // ])->with(['getUser', 'tire', 'vehicle'])->get();
+        // dd($re->all());
 
-        if ($re->tire !== null) {
+        if ($re->tire !== null && $re->vehicle !== null) {
+            $service = Service::where([
+                ['tire_id', '=', $re->tire['id']],
+                ['kendaraan', '=', $re->vehicle['id']]
+            ])->with(['getUser', 'tire', 'vehicle'])->get();
+        } else if ($re->tire !== null && $re->vehicle == null) {
             // echo "tire";
             // $service = Service::where([
             //     ['tire_id', '=', $re->tire['id']],
             //     // ['kendaraan', '=', $re->vehicle['id']]
             // ])->with(['getUser', 'tire', 'vehicle'])->get();
             $service = Service::where("tire_id", $re->tire['id'])->with(['getUser', 'tire', 'vehicle'])->get();
-        }
-        if ($re->vehicle !== null) {
+        } else if ($re->vehicle !== null && $re->tire == null) {
             // echo "vehicle";
             $service = Service::where([
                 // ['tire_id', '=', $re->tire['id']],
                 ['kendaraan', '=', $re->vehicle['id']]
-            ])->with(['getUser', 'tire', 'vehicle'])->get();
+            ])->groupBy('tire_id')->with(['getUser', 'tire', 'vehicle'])->get();
+        } else {
+            return  response()->json([
+                'success' => false,
+                'message' => 'Pilih Kendaraan atau Nama ban terlebih dahulu',
+                'data' => ""
+            ], 404);
         }
-
         // dd([$re->all(), $service]);
 
         // $service = Service::where([
