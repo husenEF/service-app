@@ -23,7 +23,7 @@ class ServiceExport implements FromCollection, WithHeadings, WithMapping
         return [
             'id',
             'Merek Ban',
-            'Pengguna',
+            'Waktu Beli Ban',
             "Kendaraan",
             "Tekanan Angin",
             "Tebal Tapak",
@@ -70,7 +70,7 @@ class ServiceExport implements FromCollection, WithHeadings, WithMapping
         return [
             $service->id,
             $service->tire->merek,
-            $service->getUser->name,
+            date("d-m-Y H:m:s", strtotime($service->tire->buy_date)),
             $service->vehicle->merek,
             $service->tekanan_angin,
             $service->tebal_tapak,
