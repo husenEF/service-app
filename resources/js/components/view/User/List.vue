@@ -25,7 +25,7 @@
             aria-controls="collapseExample"
           >
             Filter Data
-            <FilterIcon/>
+            <FilterIcon />
           </button>
         </p>
         <div class="collapse" id="collapseExample">
@@ -46,12 +46,12 @@
                 <div class="col-md-5">
                   <div class="form-group">
                     <label for>Kata Kunci</label>
-                    <input required type="text" class="form-control" v-model="filter.value">
+                    <input required type="text" class="form-control" v-model="filter.value" />
                   </div>
                 </div>
                 <div class="col-md-2">
                   <button class="btn btn-primary btn-block" type="submit">
-                    <SearchIcon/>
+                    <SearchIcon />
                   </button>
                 </div>
               </div>
@@ -71,30 +71,34 @@
           </thead>
           <tbody>
             <tr v-for="(u,i) in user" :key="i">
-              <td>
+              <td title="No">
                 <span
                   v-if="typeof meta.pagination !=='undefined'"
                 >{{(i+1)+(meta.pagination.per_page*(meta.pagination.current_page-1))}}</span>
                 <span v-else>{{i+1}}</span>
               </td>
-              <td>
-                {{u.name}}
-                <strong>({{u.username}})</strong>
+              <td title="Nama">
+                <span>
+                  {{u.name}}
+                  <strong>({{u.username}})</strong>
+                </span>
               </td>
-              <td>{{u.roles}}</td>
-              <td>
-                <div class="btn-group" role="group" aria-label="Button list">
+              <td title="Jabatan">
+                <span>{{u.roles}}</span>
+              </td>
+              <td title="Ubah">
+                <span class="btn-group" role="group" aria-label="Button list">
                   <router-link :to="'/user/'+u.id" class="btn btn-info btn-sm" title="Rubah User">
-                    <EyeIcon/>
+                    <EyeIcon />
                   </router-link>
                   <button
                     class="btn btn-danger btn-sm"
                     v-if="u.id!==1"
                     v-on:click="deleteUser(u.id)"
                   >
-                    <XIcon/>
+                    <XIcon />
                   </button>
-                </div>
+                </span>
               </td>
             </tr>
           </tbody>
@@ -208,66 +212,66 @@ export default {
   }
 }
 
-@media only screen and (max-width: 760px),
-  (min-device-width: 768px) and (max-device-width: 1024px) {
-  /* Force table to not be like tables anymore */
-  table,
-  thead,
-  tbody,
-  th,
-  td,
-  tr {
-    display: block;
-  }
+// @media only screen and (max-width: 760px),
+//   (min-device-width: 768px) and (max-device-width: 1024px) {
+//   /* Force table to not be like tables anymore */
+//   table,
+//   thead,
+//   tbody,
+//   th,
+//   td,
+//   tr {
+//     display: block;
+//   }
 
-  thead {
-    tr {
-      position: absolute;
-      top: -9999px;
-      left: -9999px;
-    }
-  }
-  tbody {
-    tr {
-      border-left: 1px #eee solid;
-      border-right: 1px #eee solid;
-      &:nth-child(odd) {
-        background-color: #dedede;
-      }
-    }
-    td {
-      /* Behave  like a "row" */
-      border: none;
-      border-bottom: 1px solid #eee;
-      position: relative;
-      padding-left: 40%;
-      &::before {
-        /* Now like a table header */
-        position: absolute;
-        /* Top/left values mimic padding */
-        top: 6px;
-        left: 6px;
-        width: 45%;
-        padding-right: 10px;
-        white-space: nowrap;
-      }
-    }
-  }
+//   thead {
+//     tr {
+//       position: absolute;
+//       top: -9999px;
+//       left: -9999px;
+//     }
+//   }
+//   tbody {
+//     tr {
+//       border-left: 1px #eee solid;
+//       border-right: 1px #eee solid;
+//       &:nth-child(odd) {
+//         background-color: #dedede;
+//       }
+//     }
+//     td {
+//       /* Behave  like a "row" */
+//       border: none;
+//       border-bottom: 1px solid #eee;
+//       position: relative;
+//       padding-left: 40%;
+//       &::before {
+//         /* Now like a table header */
+//         position: absolute;
+//         /* Top/left values mimic padding */
+//         top: 6px;
+//         left: 6px;
+//         width: 45%;
+//         padding-right: 10px;
+//         white-space: nowrap;
+//       }
+//     }
+//   }
 
-  td:nth-of-type(1):before {
-    content: "No";
-  }
-  td:nth-of-type(2):before {
-    content: "Nama";
-  }
-  td:nth-of-type(3):before {
-    content: "Jabatan";
-  }
-  td:nth-of-type(4):before {
-    content: "";
-  }
-  td:nth-of-type(5):before {
-    content: "";
-  }
-}
+// td:nth-of-type(1):before {
+//   content: "No";
+// }
+// td:nth-of-type(2):before {
+//   content: "Nama";
+// }
+// td:nth-of-type(3):before {
+//   content: "Jabatan";
+// }
+// td:nth-of-type(4):before {
+//   content: "";
+// }
+// td:nth-of-type(5):before {
+//   content: "";
+// }
+// }
 </style>

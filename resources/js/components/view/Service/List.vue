@@ -86,6 +86,7 @@
           <thead>
             <tr>
               <th>No</th>
+              <th>Kendaraan</th>
               <th>Ban</th>
               <th>Ketarangan</th>
               <th>Tanggal di buat</th>
@@ -94,15 +95,16 @@
           </thead>
           <tbody v-if="service.length>0">
             <tr v-for="(s,i) in service" :key="i">
-              <td>
+              <td title="No">
                 <span
                   v-if="typeof meta.pagination !=='undefined'"
                 >{{(i+1)+(meta.pagination.per_page*(meta.pagination.current_page-1))}}</span>
                 <span v-else>{{i+1}}</span>
               </td>
-              <td>{{s.tire.merek}}</td>
-              <td>
-                <p>
+              <td title="Kendaraan"><span>{{s.vehicle.merek}}</span></td>
+              <td title="Ban"><span>{{s.tire.merek}}</span></td>
+              <td title="Keterangan">
+                <p class="d-inline-block mt-3 mt-md-0">
                   <strong>Tekanan Angin</strong>
                   : {{s.tekanan_angin}}
                   <br />
@@ -133,10 +135,10 @@
                   >Foto</a>
                 </p>
               </td>
-              <td>
-                {{s.create_at}}
+              <td title="Tanggal di buat">
+                <span>{{s.create_at}}</span>
                 <br />
-                <p>
+                <p class="d-inline-block mt-3 mt-md-0">
                   <small>
                     dibuat oleh :
                     <br />
@@ -146,15 +148,15 @@
                   </small>
                 </p>
               </td>
-              <td>
-                {{(s.lepasban)?'Ya':'Tidak'}}
-                <p>Alasan : {{s.alasanlepas}}</p>
+              <td title="Lepas Ban?">
+                <span>{{(s.lepasban)?'Ya':'Tidak'}}</span><br/>
+                 <p class="d-inline-block mt-3 mt-md-0">Alasan : {{s.alasanlepas}}</p>
               </td>
             </tr>
           </tbody>
           <tbody v-else>
             <tr>
-              <td colspan="5">
+              <td colspan="6">
                 <div
                   class="alert alert-info"
                   role="alert"

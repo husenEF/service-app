@@ -1,14 +1,79 @@
-
 // Fonts
-@import url('https://fonts.googleapis.com/css?family=Nunito:400,700&display=swap');
+@import url("https://fonts.googleapis.com/css?family=Nunito:400,700&display=swap");
 
 // Variables
-@import 'variables';
+@import "variables";
 
 // Bootstrap
-@import '~bootstrap/scss/bootstrap';
+@import "~bootstrap/scss/bootstrap";
 
 .navbar-laravel {
-  background-color: #fff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+}
+
+@media only screen and (max-width: 760px),
+    (min-device-width: 768px) and (max-device-width: 1024px) {
+    /* Force table to not be like tables anymore */
+    table,
+    thead,
+    tbody,
+    th,
+    td,
+    tr {
+        display: block;
+    }
+
+    table {
+        thead {
+            tr {
+                position: absolute;
+                top: -9999px;
+                left: -9999px;
+            }
+        }
+        tbody {
+            tr {
+                border-left: 1px #eee solid;
+                border-right: 1px #eee solid;
+                margin-top: 10px;
+                margin-bottom: 10px;
+                border-radius: 8px;
+                &:nth-child(odd) {
+                    background-color: #dedede;
+                }
+                td {
+                    /* Behave  like a "row" */
+                    border: none;
+                    border-bottom: 1px solid #eee;
+                    position: relative;
+                    padding-left: 40%;
+                    &:last-child {
+                        border-bottom-right-radius: 8px;
+                        border-bottom-left-radius: 8px;
+                    }
+                    &:first-child {
+                        border-top-right-radius: 8px;
+                        border-top-left-radius: 8px;
+                    }
+
+                    &::before {
+                        content: attr(title) " : ";
+                        /* Now like a table header */
+                        position: absolute;
+                        /* Top/left values mimic padding */
+                        top: 6px;
+                        // left: 6px;
+                        width: 45%;
+                        padding-right: 10px;
+                        white-space: nowrap;
+                    }
+                    span {
+                        display: inline-block;
+                        margin-left: 50%;
+                    }
+                }
+            }
+        }
+    }
 }

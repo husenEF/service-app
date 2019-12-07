@@ -17,7 +17,7 @@
                 aria-controls="collapseExample"
               >
                 Filter Data
-                <FilterIcon/>
+                <FilterIcon />
               </button>
               <a
                 href="/export/ban"
@@ -25,10 +25,10 @@
                 rel="noopener noreferrer"
                 class="btn btn-warning"
               >
-                <PrinterIcon/>
+                <PrinterIcon />
               </a>
               <router-link to="/ban/add" class="btn btn-success float-right">
-                <PlusIcon/>Tambah Ban
+                <PlusIcon />Tambah Ban
               </router-link>
               <!-- <button type="button" class="btn btn-success float-right"><PlusIcon/> Tambah Ban</button> -->
             </div>
@@ -58,7 +58,7 @@
                           v-model="filter.value"
                           placeholder="Kata Kunci"
                           v-if="filter.key !=='datetime'"
-                        >
+                        />
                       </div>
                       <div class="form-group" v-else>
                         <label for>Pilih Tanggal</label>
@@ -71,7 +71,7 @@
                     </div>
                     <div class="col-md-2">
                       <button class="btn btn-primary btn-block" type="submit">
-                        <SearchIcon/>
+                        <SearchIcon />
                       </button>
                     </div>
                   </div>
@@ -81,7 +81,7 @@
           </div>
           <div class="col-md-6 text-md-right">
             <router-link to="/ban/trash">
-              <Trash2Icon/>
+              <Trash2Icon />
             </router-link>
           </div>
         </div>
@@ -98,16 +98,20 @@
           </thead>
           <tbody>
             <tr v-for="(tire, i) in list" :key="i">
-              <td>
+              <td title="No">
                 <span
                   v-if="typeof meta.pagination !=='undefined'"
                 >{{(i+1)+(meta.pagination.per_page*(meta.pagination.current_page-1))}}</span>
                 <span v-else>{{i+1}}</span>
               </td>
-              <td>{{tire.merek}}</td>
-              <td>{{tire.ukuran_ban}}</td>
-              <td>
-                {{tire.stempel_ban}}
+              <td title="Merek">
+                <span>{{tire.merek}}</span>
+              </td>
+              <td title="Ukuran">
+                <span>{{tire.ukuran_ban}}</span>
+              </td>
+              <td title="Stempel">
+                <span>{{tire.stempel_ban}}</span>
                 <!-- <pre>{{tire}}</pre> -->
                 <!-- <img
                   :src="tire.images_path"
@@ -116,9 +120,11 @@
                   v-if="tire.images_path"
                 >-->
               </td>
-              <td>{{tire.buy_date}}</td>
-              <td>
-                <div class="btn-group" role="group" aria-label="Tire Button">
+              <td title="Tangal Beli">
+                <span>{{tire.buy_date}}</span>
+              </td>
+              <td title="Action">
+                <span class="btn-group" role="group" aria-label="Tire Button">
                   <router-link class="btn btn-info btn-sm" :to="'/ban/edit/'+tire.id">Edit</router-link>
                   <button
                     class="btn btn-danger btn-sm"
@@ -138,7 +144,7 @@
                   >
                     <EyeIcon/>
                   </router-link>-->
-                </div>
+                </span>
               </td>
             </tr>
           </tbody>
@@ -289,69 +295,69 @@ export default {
   }
 }
 
-@media only screen and (max-width: 760px),
-  (min-device-width: 768px) and (max-device-width: 1024px) {
-  /* Force table to not be like tables anymore */
-  table,
-  thead,
-  tbody,
-  th,
-  td,
-  tr {
-    display: block;
-  }
+// @media only screen and (max-width: 760px),
+//   (min-device-width: 768px) and (max-device-width: 1024px) {
+//   /* Force table to not be like tables anymore */
+//   table,
+//   thead,
+//   tbody,
+//   th,
+//   td,
+//   tr {
+//     display: block;
+//   }
 
-  thead {
-    tr {
-      position: absolute;
-      top: -9999px;
-      left: -9999px;
-    }
-  }
-  tbody {
-    tr {
-      border-left: 1px #eee solid;
-      border-right: 1px #eee solid;
-      &:nth-child(odd) {
-        background-color: #dedede;
-      }
-    }
-    td {
-      /* Behave  like a "row" */
-      border: none;
-      border-bottom: 1px solid #eee;
-      position: relative;
-      padding-left: 40%;
-      &::before {
-        /* Now like a table header */
-        position: absolute;
-        /* Top/left values mimic padding */
-        top: 6px;
-        left: 6px;
-        width: 45%;
-        padding-right: 10px;
-        white-space: nowrap;
-      }
-    }
-  }
+//   thead {
+//     tr {
+//       position: absolute;
+//       top: -9999px;
+//       left: -9999px;
+//     }
+//   }
+//   tbody {
+//     tr {
+//       border-left: 1px #eee solid;
+//       border-right: 1px #eee solid;
+//       &:nth-child(odd) {
+//         background-color: #dedede;
+//       }
+//     }
+//     td {
+//       /* Behave  like a "row" */
+//       border: none;
+//       border-bottom: 1px solid #eee;
+//       position: relative;
+//       padding-left: 40%;
+//       &::before {
+//         /* Now like a table header */
+//         position: absolute;
+//         /* Top/left values mimic padding */
+//         top: 6px;
+//         left: 6px;
+//         width: 45%;
+//         padding-right: 10px;
+//         white-space: nowrap;
+//       }
+//     }
+//   }
 
-  td:nth-of-type(1):before {
-    content: "No";
-  }
-  td:nth-of-type(2):before {
-    content: "Merek";
-  }
-  td:nth-of-type(3):before {
-    content: "Ukuran";
-  }
-  td:nth-of-type(4):before {
-    content: "Kendaraan";
-  }
-  td:nth-of-type(5):before {
-    content: "Tanggal Beli";
-  }
-  td:nth-of-type(6):before {
-    content: "Action";
-  }
-}
+//   // td:nth-of-type(1):before {
+//   //   content: "No";
+//   // }
+//   // td:nth-of-type(2):before {
+//   //   content: "Merek";
+//   // }
+//   // td:nth-of-type(3):before {
+//   //   content: "Ukuran";
+//   // }
+//   // td:nth-of-type(4):before {
+//   //   content: "Kendaraan";
+//   // }
+//   // td:nth-of-type(5):before {
+//   //   content: "Tanggal Beli";
+//   // }
+//   // td:nth-of-type(6):before {
+//   //   content: "Action";
+//   // }
+// }
 </style>

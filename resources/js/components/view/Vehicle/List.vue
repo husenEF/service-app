@@ -4,7 +4,7 @@
       <h2>
         Daftar Kendaraan
         <router-link to="/vehicle/add" class="btn btn-info float-right btn-sm">
-          <PlusIcon/>Tambah Kendaraan
+          <PlusIcon />Tambah Kendaraan
         </router-link>
       </h2>
     </div>
@@ -25,13 +25,13 @@
             aria-controls="collapseExample"
           >
             Filter
-            <FilterIcon/>
+            <FilterIcon />
           </button>
           <button class="btn btn-success" title="Cetak Data" type="button" v-on:click="printData">
-            <PrinterIcon/>
+            <PrinterIcon />
           </button>
           <a href="/export/kendaraan" target="blank" class="btn btn-info" title="Cetak data 2">
-            <PrinterIcon/>
+            <PrinterIcon />
           </a>
         </div>
         <div class="collapse mb-3" id="collapseExample">
@@ -52,12 +52,12 @@
                 <div class="col-md-5">
                   <div class="form-group">
                     <label for>Kata Kunci</label>
-                    <input required type="text" class="form-control" v-model="filter.value">
+                    <input required type="text" class="form-control" v-model="filter.value" />
                   </div>
                 </div>
                 <div class="col-md-2">
                   <button class="btn btn-primary btn-block" type="submit">
-                    <SearchIcon/>
+                    <SearchIcon />
                   </button>
                 </div>
               </div>
@@ -78,17 +78,27 @@
           </thead>
           <tbody>
             <tr v-for="(item, index) in vehicle" :key="index">
-              <td>
-                <router-link :to="`/vehicle/${item.id}`">{{item.merek}}</router-link>
+              <td title="Merek">
+                <router-link :to="`/vehicle/${item.id}`">
+                  <span>{{item.merek}}</span>
+                </router-link>
               </td>
-              <td>{{item.platnumber}}</td>
-              <td>
-                {{Object.keys(item.tire).length}}
-                <router-link :to="`/vehicle/tire/${item.id}`">Lihat Ban</router-link>
+              <td title="Plat">
+                <span>{{item.platnumber}}</span>
               </td>
-              <td>{{item.size}}</td>
-              <td>
-                <router-link :to="`/vehicle/edit/${item.id}`">Edit</router-link>
+              <td title="Jumlah Ban">
+                <span>
+                  {{Object.keys(item.tire).length}}
+                  <router-link :to="`/vehicle/tire/${item.id}`">Lihat Ban</router-link>
+                </span>
+              </td>
+              <td title="Ukuran">
+                <span>{{item.size}}</span>
+              </td>
+              <td title="Action">
+                <router-link :to="`/vehicle/edit/${item.id}`">
+                  <span>Edit</span>
+                </router-link>
               </td>
             </tr>
           </tbody>
@@ -218,69 +228,6 @@ export default {
     button {
       margin-top: 28px;
     }
-  }
-}
-
-@media only screen and (max-width: 760px),
-  (min-device-width: 768px) and (max-device-width: 1024px) {
-  /* Force table to not be like tables anymore */
-  table,
-  thead,
-  tbody,
-  th,
-  td,
-  tr {
-    display: block;
-  }
-
-  thead {
-    tr {
-      position: absolute;
-      top: -9999px;
-      left: -9999px;
-    }
-  }
-  tbody {
-    tr {
-      border-left: 1px #eee solid;
-      border-right: 1px #eee solid;
-      &:nth-child(odd) {
-        background-color: #dedede;
-      }
-    }
-    td {
-      /* Behave  like a "row" */
-      border: none;
-      border-bottom: 1px solid #eee;
-      position: relative;
-      padding-left: 40%;
-      &::before {
-        /* Now like a table header */
-        position: absolute;
-        /* Top/left values mimic padding */
-        top: 6px;
-        left: 6px;
-        width: 45%;
-        padding-right: 10px;
-        white-space: nowrap;
-      }
-    }
-  }
-
-  td:nth-of-type(1):before {
-    content: "Merek";
-  }
-  td:nth-of-type(2):before {
-    content: "Plat Nomor";
-  }
-  td:nth-of-type(3):before {
-    content: "Jumlah Ban";
-  }
-  td:nth-of-type(4):before {
-    content: "UKuran";
-  }
-  td:nth-of-type(5):before {
-    content: "";
   }
 }
 </style>
