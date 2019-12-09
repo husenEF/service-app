@@ -1,0 +1,12 @@
+[16:37, 03/12/2019] Mas Yudhi Mbz: 1 menu back sing kadang2 gak kenek
+[16:37, 03/12/2019] Mas Yudhi Mbz: 2 no ban jadikan string ok
+[16:37, 03/12/2019] Mas Yudhi Mbz: 3 ukuran ban jadikan string ok
+[16:38, 03/12/2019] Mas Yudhi Mbz: 4 tebal telapak, itu ngitung ruas
+[16:38, 03/12/2019] Mas Yudhi Mbz: Maksimal 6 ruas
+[16:38, 03/12/2019] Mas Yudhi Mbz: Tipenya float. Bisa ada koma
+[16:39, 03/12/2019] Mas Yudhi Mbz: 5 form servis itu karepnya bukan radio button, tapu checkbox ok
+[16:39, 03/12/2019] Mas Yudhi Mbz: 6 untuk alasan lepas juga sama, checkbox ok
+[16:40, 03/12/2019] Mas Yudhi Mbz: 7 waktu tambah kendaraan ukuran ban jadi string ok
+[16:41, 03/12/2019] Mas Yudhi Mbz: 8 riwayat biza search bis pernah pakai ban apa aja Ok
+[16:42, 03/12/2019] Mas Yudhi Mbz: 9 bagian ekspor excel di filternya cuman rentang waktu pembelian sama pengecekan
+[16:42, 03/12/2019] Mas Yudhi Mbz: 10 layout agak kacau di mobile 😝 tak tambahi titik Ok

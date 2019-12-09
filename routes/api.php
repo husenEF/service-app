@@ -66,6 +66,7 @@ $router->group(['namespace' => 'v1', 'prefix' => '/v1'], function ($router) {
         $router->post('/save', "ServiceController@store");
         $router->get("/", "ServiceController@index");
         $router->post("/filter", "ServiceController@filter");
+        $router->post('/filterdate', "ServiceController@filterDate");
         $router->post("/export", "ServiceController@export");
     });
 });

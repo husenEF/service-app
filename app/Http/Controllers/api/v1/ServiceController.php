@@ -8,6 +8,7 @@ use App\Http\Transformers\ServiceTransformer;
 use App\Service;
 use App\Tire;
 use App\Exports\ServiceExport;
+use App\Exports\TireExport;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\File;
@@ -238,5 +239,55 @@ class ServiceController extends Controller
         // return Excel::download(new ServiceExport($where), 'service.xlsx');
         Excel::store(new ServiceExport($where), 'public/excel/service.xlsx');
         return url("/media/excel/service.xlsx");
+    }
+
+    public function filterDate(Request $re)
+    {
+        $val = '';
+        if ($re->value !== null)
+            $val = date('Y-m-d', strtotime($re->value));
+
+        if ($re->key == "buy_date") {
+            $tire = Tire::whereDate('buy_date', '=', $val)->get();
+            if ($tire->count()) {
+                Excel::store(new TireExport($val), 'public/excel/tire.xlsx');
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Dowload',
+                    'data' => url("/media/excel/tire.xlsx")
+                ], 201);
+            } else {
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Data tidak Ada, silahkan cari waktu lain',
+                    'data' => []
+                ], 404);
+            }
+        }
+
+        if ($re->key == "check_date") {
+            $service = Service::where(\DB::raw('DAY("created_at")'), $val)->get();
+            dd($service->count(), $service->getSql(), $service->getBindings());
+            if ($service->count()) {
+                Excel::store(new ServiceExport(['check_date' => $val]), 'public/excel/service.xlsx');
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Dowload',
+                    'data' => url("/media/excel/tire.xlsx")
+                ], 201);
+            } else {
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Data tidak Ada, silahkan cari waktu lain',
+                    'data' => []
+                ], 404);
+            }
+        }
+        // dd($re->value, $service);
+        return response()->json([
+            'success' => false,
+            'message' => 'Silahkan pilih jenis waktu',
+            'data' => ($re->key == "check_date")
+        ], 404);
     }
 }

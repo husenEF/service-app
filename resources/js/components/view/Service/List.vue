@@ -1,11 +1,11 @@
 <template>
   <div class="card">
     <div class="card-header">
-      <h2>Daftar Pengecekkan Ban</h2>
+      <h2>Unduh Pengecekkan Ban</h2>
     </div>
     <div class="card-body">
       <div class="clearfix filter">
-        <p>
+        <!-- <p>
           <button
             class="btn btn-info"
             type="button"
@@ -26,145 +26,48 @@
           >
             <PrinterIcon />
           </button>
-        </p>
-        <div class="collapse" id="collapseExample">
-          <div class="card card-body">
-            <div
-              class="alert alert-danger"
-              role="alert"
-              v-if="Object.keys(filter.error).length > 0"
-            >
-              <p class="m-0">
-                <span v-for="(j,i) in filter.error" :key="i">
-                  {{j[0]}}
-                  <br />
-                </span>
-              </p>
-            </div>
-            <form @submit.prevent="filterHandler">
-              <div class="row">
-                <div class="col-md-5">
-                  <div class="form-group">
-                    <label for="vehicle">Kendaraan</label>
-                    <multiselect
-                      v-model="filter.vehicle"
-                      :options="vehicle"
-                      label="name"
-                      placeholder="Select one"
-                      track-by="name"
-                      @select="selectVehicle"
-                      :allow-empty="true"
-                    ></multiselect>
-                  </div>
-                </div>
-                <div class="col-md-5">
-                  <div class="form-group">
-                    <label for>Pilih Ban</label>
-                    <multiselect
-                      v-model="filter.tire"
-                      :options="tire"
-                      label="name"
-                      placeholder="Select one"
-                      track-by="name"
-                    ></multiselect>
-                  </div>
-                </div>
-                <div class="col-md-2">
-                  <button class="btn btn-primary btn-block" type="submit">
-                    <SearchIcon />
-                  </button>
+        </p>-->
+        <!-- <div class="collapse" id="collapseExample"> -->
+        <div class="card card-body">
+          <div class="alert alert-danger" role="alert" v-if="Object.keys(filter.error).length > 0">
+            <p class="m-0">
+              <span v-for="(j,i) in filter.error" :key="i">
+                {{j[0]}}
+                <br />
+              </span>
+            </p>
+          </div>
+          <form @submit.prevent="filterHandler">
+            <div class="row">
+              <div class="col-md-5">
+                <div class="form-group">
+                  <label for="buydate">Waktu Beli</label>
+                  <select name="key" id v-model="filterDate.key" class="form-control">
+                    <option value="buy_date">Waktu Pembelian</option>
+                    <option value="check_date">Waktu Pengecekkan</option>
+                  </select>
                 </div>
               </div>
-            </form>
-          </div>
+              <div class="col-md-5">
+                <div class="form-group">
+                  <label for>Tanggal Cek Ban</label>
+                  <Datetime
+                    v-model="filterDate.value"
+                    input-class="form-control"
+                    value-zone="Asia/Jakarta"
+                    :max-datetime="today"
+                  ></Datetime>
+                </div>
+              </div>
+              <div class="col-md-2">
+                <button class="btn btn-primary btn-block" type="submit">
+                  <DownloadIcon />
+                </button>
+              </div>
+            </div>
+          </form>
         </div>
-      </div>
-
-      <div class="table-responsive">
-        <!-- <pre>{{service}}</pre> -->
-        <table class="table">
-          <thead>
-            <tr>
-              <th>No</th>
-              <th>Kendaraan</th>
-              <th>Ban</th>
-              <th>Ketarangan</th>
-              <th>Tanggal di buat</th>
-              <th>Lepas Ban?</th>
-            </tr>
-          </thead>
-          <tbody v-if="service.length>0">
-            <tr v-for="(s,i) in service" :key="i">
-              <td title="No">
-                <span
-                  v-if="typeof meta.pagination !=='undefined'"
-                >{{(i+1)+(meta.pagination.per_page*(meta.pagination.current_page-1))}}</span>
-                <span v-else>{{i+1}}</span>
-              </td>
-              <td title="Kendaraan"><span>{{s.vehicle.merek}}</span></td>
-              <td title="Ban"><span>{{s.tire.merek}}</span></td>
-              <td title="Keterangan">
-                <p class="d-inline-block mt-3 mt-md-0">
-                  <strong>Tekanan Angin</strong>
-                  : {{s.tekanan_angin}}
-                  <br />
-                  <strong>Tebal Tapak</strong>
-                  :
-                  <br />
-                  <ol>
-                  <li v-for="(e,i ) in s.tebal_tapak.split(',')" v-bind:key="i">Tebal Tapak {{i+1}}: {{e}}</li>
-                  </ol>
-                  <strong>Posisi</strong>
-                  : {{s.posisi}}
-                  <br />
-                  <strong>Jarak Km</strong>
-                  : {{s.jarakkm}}
-                  <br />
-                  <strong>Tekanan Angin</strong>
-                  : {{s.tekanan_angin}}
-                  <br />
-                  <strong>Kelainan</strong>
-                  : {{s.kelainan}}
-                  <br />
-                  <strong>Gambar</strong>
-                  :
-                  <a
-                    :href="s.image"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >Foto</a>
-                </p>
-              </td>
-              <td title="Tanggal di buat">
-                <span>{{s.create_at}}</span>
-                <br />
-                <p class="d-inline-block mt-3 mt-md-0">
-                  <small>
-                    dibuat oleh :
-                    <br />
-                    Nama : {{s.user.name}}
-                    <br />
-                    Jabatan : {{s.user.roles}}
-                  </small>
-                </p>
-              </td>
-              <td title="Lepas Ban?">
-                <span>{{(s.lepasban)?'Ya':'Tidak'}}</span><br/>
-                 <p class="d-inline-block mt-3 mt-md-0">Alasan : {{s.alasanlepas}}</p>
-              </td>
-            </tr>
-          </tbody>
-          <tbody v-else>
-            <tr>
-              <td colspan="6">
-                <div
-                  class="alert alert-info"
-                  role="alert"
-                >Silakan pilih Kendaraan dan Ban di tombol Filter</div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+        <!-- </div> -->
       </div>
     </div>
     <div class="card-footer" v-if="typeof meta.pagination !=='undefined'">
@@ -181,13 +84,18 @@
 
 <script>
 import Multiselect from "vue-multiselect";
+import { Datetime } from "vue-datetime";
+import moment from "moment";
+
 import {
   EyeIcon,
   SearchIcon,
   FilterIcon,
-  PrinterIcon
+  PrinterIcon,
+  DownloadIcon
 } from "vue-feather-icons";
 import "vue-multiselect/dist/vue-multiselect.min.css";
+import "vue-datetime/dist/vue-datetime.css";
 
 export default {
   name: "serviceList",
@@ -196,7 +104,9 @@ export default {
     SearchIcon,
     FilterIcon,
     Multiselect,
-    PrinterIcon
+    PrinterIcon,
+    DownloadIcon,
+    Datetime
   },
   data() {
     return {
@@ -207,12 +117,19 @@ export default {
         tire: null,
         error: {}
       },
+      filterDate: {
+        key: null,
+        value: new Date()
+      },
       vehicle: [],
       tire: [],
       raw: {
         vehicle: {}
       },
-      printed: false
+      printed: false,
+      today: moment(Date.now())
+        .add(1, "day")
+        .format("YYYY-MM-DD")
     };
   },
   created() {
@@ -267,17 +184,15 @@ export default {
       $("[download='service.xlsx']").remove();
 
       axios
-        .post("/api/v1/service/filter", this.filter)
+        .post("/api/v1/service/filterdate", this.filterDate)
         .then(res => {
           const { data } = res;
-          // console.log("data", data);
-          let listId = Object.keys(data.data).filter(i => i !== "meta");
-          // console.log("map tireId", listId);
-          this.service = listId.map(i => data.data[i]);
-          this.printed = true;
-          if (data.data.hasOwnProperty("meta")) {
-            this.meta = data.data.meta;
-          }
+          const url = data.url;
+          const link = document.createElement("a");
+          link.href = url;
+          link.setAttribute("download", "tire.xlsx"); //or any other extension
+          document.body.appendChild(link);
+          link.click();
         })
         .catch(err => {
           // console.log("errrr", err.response.data);

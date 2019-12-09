@@ -9,6 +9,12 @@ use Maatwebsite\Excel\Concerns\WithMapping;
 
 class TireExport implements FromCollection, WithHeadings, WithMapping
 {
+    private $where;
+
+    public function __construct($where)
+    {
+        $this->where = $where;
+    }
 
     public function headings(): array
     {
@@ -28,7 +34,7 @@ class TireExport implements FromCollection, WithHeadings, WithMapping
      */
     public function collection()
     {
-        return Tire::all();
+        return Tire::whereDate('buy_date', '=', $this->where)->get();
     }
     public function map($tire): array
     {
@@ -38,7 +44,7 @@ class TireExport implements FromCollection, WithHeadings, WithMapping
             $tire->ukuran,
             $tire->nomor,
             $tire->stempel,
-            $tire->buy_date,
+            date('d-m-Y', strtotime($tire->buy_date)),
             // url("/media/tires/" + $tire->images),
             $tire->getUser->name,
             // Date::dateTimeToExcel($vehicle->created_at),

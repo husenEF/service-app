@@ -43,22 +43,20 @@ class ServiceExport implements FromCollection, WithHeadings, WithMapping
      */
     public function collection()
     {
-        \DB::enableQueryLog();
         if (isset($this->where["tire_id"]) && !isset($this->where["kendaraan"])) {
             $returnData = Service::where("tire_id", $this->where["tire_id"])->get();
-            $this->debug = \DB::getQueryLog();
             return $returnData;
         } else if (!isset($this->where["tire_id"]) && isset($this->where["kendaraan"])) {
             $returnData = Service::where("kendaraan", $this->where["kendaraan"])->get();
-            $this->debug = \DB::getQueryLog();
             return $returnData;
         } else if (isset($this->where["tire_id"]) && isset($this->where["kendaraan"])) {
             $returnData = Service::where("kendaraan", "=", $this->where["kendaraan"])->where("tire_id", "=", $this->where["tire_id"])->get();
-            $this->debug = \DB::getQueryLog();
             return $returnData;
+        } else if (isset($this->where['check_date'])) {
+            // $returnData = Service::where('DAY(created_at)', $this->where['check_date'])->get();
+            $returnData = Service::where();
         } else {
-            $returnData = Service::all();
-            $this->debug = \DB::getQueryLog();
+            $returnData = Service::where();
             return $returnData;
         }
     }
