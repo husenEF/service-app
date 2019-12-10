@@ -70,7 +70,7 @@ export default {
   methods: {
     getList() {
       axios.get("/api/v1/history/list").then(res => {
-        console.log("ress", res.data);
+        // console.log("ress", res.data);
         if (res.data.success) {
           const histId = Object.keys(res.data.data).filter(e => e != "meta");
           this.list = histId.map(i => res.data.data[i]);

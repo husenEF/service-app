@@ -102,7 +102,7 @@ export default {
         })
         .then(res => {
           const { data } = res;
-          console.log("data", data);
+          // console.log("data", data);
           this.$swal(data.message).then(val => window.location.reload());
         })
         .catch(err => {

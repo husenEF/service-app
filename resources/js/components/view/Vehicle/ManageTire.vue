@@ -136,7 +136,7 @@ export default {
           }
         })
         .catch(err => {
-          console.log("err", err.response.data);
+          // console.log("err", err.response.data);
         });
     },
     getList() {
@@ -160,7 +160,7 @@ export default {
         )
         .catch(
           axios.spread(err => {
-            console.log("multi2", err);
+            // console.log("multi2", err);
           })
         );
     },

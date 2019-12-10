@@ -9,7 +9,7 @@ export function login(credentials) {
                 res(response.data);
             })
             .catch((err) => {
-                console.log("error login", err)
+                // console.log("error login", err)
                 rej("Email atau password Anda salah!")
             })
     })

@@ -58,7 +58,7 @@ export default {
         },
         updateUser(state, payload) {
             // state.currentUser = Object
-            console.log("update", payload)
+            // console.log("update", payload)
             state.currentUser = Object.assign({}, payload.data, { token: user.token })
             localStorage.setItem("user", JSON.stringify(state.currentUser))
         },

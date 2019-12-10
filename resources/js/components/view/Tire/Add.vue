@@ -99,12 +99,12 @@ export default {
     };
   },
   mounted() {
-    console.log("mounted", "mount");
+    // console.log("mounted", "mount");
   },
   created() {
     this.$emit("back", "/ban");
     this.tire.uid = this.user.id;
-    console.log("created", today);
+    // console.log("created", today);
   },
   computed: {
     user() {

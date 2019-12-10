@@ -341,7 +341,7 @@ export default {
           formData.append(element, this.service[element] ? 1 : 0);
         else formData.append(element, this.service[element]);
       });
-      console.log("formdata", [formData, this.service]);
+      // console.log("formdata", [formData, this.service]);
       axios
         // .post("/api/v1/service/save", this.service)
         .post("api/v1/service/save", formData, {
@@ -382,7 +382,7 @@ export default {
           service.lepasban = true;
           this.submitData();
         } else {
-          console.log("cancel");
+          // console.log("cancel");
         }
       });
     },

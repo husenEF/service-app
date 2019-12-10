@@ -160,6 +160,7 @@ class ServiceController extends Controller
         $service->lepasban = $request->input("lepasban");
         $service->alasanlepas = $request->input("alasanlepas");
         $service->image = $filename;
+        $service->create_date = date('Y-m-d');
         if ($service->save()) {
             if ($request->input('lepasban')) {
                 $tire = Tire::find($service->tire_id);
@@ -254,7 +255,10 @@ class ServiceController extends Controller
                 return response()->json([
                     'success' => true,
                     'message' => 'Dowload',
-                    'data' => url("/media/excel/tire.xlsx")
+                    'data' => [
+                        'url' => url("/media/excel/tire.xlsx"),
+                        'name' => 'tire'
+                    ]
                 ], 201);
             } else {
                 return response()->json([
@@ -266,14 +270,17 @@ class ServiceController extends Controller
         }
 
         if ($re->key == "check_date") {
-            $service = Service::where(\DB::raw('DAY("created_at")'), $val)->get();
-            dd($service->count(), $service->getSql(), $service->getBindings());
+            $service = Service::where('create_date', $val)->get();
+
             if ($service->count()) {
                 Excel::store(new ServiceExport(['check_date' => $val]), 'public/excel/service.xlsx');
                 return response()->json([
                     'success' => true,
                     'message' => 'Dowload',
-                    'data' => url("/media/excel/tire.xlsx")
+                    'data' => [
+                        'url' => url("/media/excel/service.xlsx"),
+                        'name' => 'service'
+                    ]
                 ], 201);
             } else {
                 return response()->json([

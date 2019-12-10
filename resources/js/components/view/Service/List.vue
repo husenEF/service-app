@@ -186,11 +186,15 @@ export default {
       axios
         .post("/api/v1/service/filterdate", this.filterDate)
         .then(res => {
-          const { data } = res;
-          const url = data.url;
+          const {
+            data: {
+              data: { url, name }
+            }
+          } = res;
+          // const url = data;
           const link = document.createElement("a");
           link.href = url;
-          link.setAttribute("download", "tire.xlsx"); //or any other extension
+          link.setAttribute("download", `${name}.xlsx`); //or any other extension
           document.body.appendChild(link);
           link.click();
         })
@@ -238,7 +242,7 @@ export default {
           link.click();
         })
         .catch(err => {
-          console.log("err", err);
+          // console.log("err", err);
         });
     }
   }

@@ -42,7 +42,7 @@ class ServiceExport implements FromCollection, WithHeadings, WithMapping
      * @return \Illuminate\Support\Collection
      */
     public function collection()
-    {
+    {        
         if (isset($this->where["tire_id"]) && !isset($this->where["kendaraan"])) {
             $returnData = Service::where("tire_id", $this->where["tire_id"])->get();
             return $returnData;
@@ -53,10 +53,12 @@ class ServiceExport implements FromCollection, WithHeadings, WithMapping
             $returnData = Service::where("kendaraan", "=", $this->where["kendaraan"])->where("tire_id", "=", $this->where["tire_id"])->get();
             return $returnData;
         } else if (isset($this->where['check_date'])) {
-            // $returnData = Service::where('DAY(created_at)', $this->where['check_date'])->get();
-            $returnData = Service::where();
+            $returnData = Service::where('create_date', $this->where['check_date'])
+            ->with(['getUser', 'tire', 'vehicle'])
+            ->get();
+            return $returnData;
         } else {
-            $returnData = Service::where();
+            $returnData = Service::all();
             return $returnData;
         }
     }
@@ -64,6 +66,7 @@ class ServiceExport implements FromCollection, WithHeadings, WithMapping
     public function map($service): array
     {
         $lepasBan = ($service->lepasban) ? "Ya" : "Tidak";
+        // dd($service);
 
         return [
             $service->id,

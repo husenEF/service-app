@@ -105,7 +105,7 @@ export default {
       }).then(res => {
         if (res.value) {
           axios.delete("/api/v1/tire/" + id).then(res => {
-            console.log("res", res);
+            // console.log("res", res);
           });
         } else {
           console.log("cancel");

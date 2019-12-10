@@ -30,10 +30,10 @@ export default {
   created() {
     this.isBack = this.back !== "" ? true : false;
     this.url = this.back
-    console.log("back",this.back)
+    // console.log("back",this.back)
   },
   mounted() {
-    console.log("this", [this.isBack,this.back]);
+    // console.log("this", [this.isBack,this.back]);
   },
   data() {
     return {

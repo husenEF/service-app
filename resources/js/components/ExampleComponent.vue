@@ -17,7 +17,7 @@
 <script>
     export default {
         mounted() {
-            console.log('Main Componen mounted.')
+            // console.log('Main Componen mounted.')
         }
     }
 </script>

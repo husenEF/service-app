@@ -60,10 +60,10 @@
                 axios
                     .post("/api/v1/user/check", {id, token})
                     .then(res => {
-                        console.log("res", res);
+                        // console.log("res", res);
                     })
                     .catch(err => {
-                        console.log(err.response.data);
+                        // console.log(err.response.data);
                     });
             }
         },
