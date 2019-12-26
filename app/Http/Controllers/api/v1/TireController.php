@@ -323,7 +323,7 @@ class TireController extends Controller
     {
         // dd($re->all());
         $this->validate($re, [
-            "merek" => 'required|unique:tires,merek',
+            "merek" => 'required',
             "ukuran_ban" => "required",
             // "position" => "required",
             "nomor_ban" => 'required',
