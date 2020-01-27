@@ -6,7 +6,7 @@
     <div class="card-body">
       <div class="table-responsive">
         <div class="row filter">
-          <div class="col-md-6">
+          <div class="col-md-8">
             <div class="btn-group mb-2">
               <button
                 class="btn btn-info"
@@ -79,7 +79,7 @@
               </div>
             </div>
           </div>
-          <div class="col-md-6 text-md-right">
+          <div class="col-md-4 text-md-right">
             <router-link to="/ban/trash">
               <Trash2Icon />
             </router-link>

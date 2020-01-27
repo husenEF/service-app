@@ -129,26 +129,6 @@ class TireController extends Controller
                 'data' => ""
             ], 404);
         }
-        // $tire = Tire::find($re->input('id'));
-        // $tire->merek = $re->input('merek');
-        // $tire->ukuran = $re->input("ukuran_ban");
-        // $tire->nomor = $re->input("nomor_ban");
-        // $tire->stempel = $re->input("stempel_ban");
-        // $tire->buy_date = date("Y-m-d H:m:s", strtotime($re->buy_date));
-        // $tire->images = $filename;
-        // if ($tire->save()) {
-        //     return response()->json([
-        //         'success' => true,
-        //         'message' => 'Update Data Success',
-        //         'data' => $tire
-        //     ], 200);
-        // } else {
-        //     return response()->json([
-        //         'success' => false,
-        //         'message' => 'Update Data failed',
-        //         'data' => ""
-        //     ], 404);
-        // }
     }
 
     public function filter(Request $re)
@@ -156,13 +136,6 @@ class TireController extends Controller
 
         $key = $re->key;
         $value = $re->value;
-
-        // dd([$name, $value]);
-        // if ($name !== 'datetime') {
-        //     $tire = Tire::where($name, 'LIKE', $value)->get();
-        // } else {
-        //     $tire = Tire::whereDate('buy_date', date('Y-m-d', strtotime($value)))->get();
-        // }
         \DB::enableQueryLog();
         $no = 0;
         if ($value === 'all') {
@@ -172,7 +145,7 @@ class TireController extends Controller
             $tire = Tire::whereDate('buy_date', date('Y-m-d', strtotime($value)))->get();
             $no = 2;
         } else {
-            $tire = Tire::where($key, $value)->get();
+            $tire = Tire::where($key,'like', "%$value%")->get();
             $no = 3;
         }
         $query = \DB::getQueryLog();
