@@ -39,7 +39,13 @@
                     <div class="col-md-5">
                       <div class="form-group">
                         <label for>Filter</label>
-                        <select class="form-control" required v-model="filter.key" name="key">
+                        <select
+                          class="form-control"
+                          required
+                          v-model="filter.key"
+                          name="key"
+                          @change="filterHandlerChange"
+                        >
                           <option value>Pilih</option>
                           <option value="merek">Merek</option>
                           <option value="ukuran">Ukuran</option>
@@ -58,6 +64,7 @@
                           v-model="filter.value"
                           placeholder="Kata Kunci"
                           v-if="filter.key !=='datetime'"
+                          @change="filterHandlerChange"
                         />
                       </div>
                       <div class="form-group" v-else>
@@ -66,12 +73,14 @@
                           v-model="filter.value"
                           input-class="form-control"
                           value-zone="Asia/Jakarta"
+                          @change="filterHandlerChange"
                         ></Datetime>
                       </div>
                     </div>
                     <div class="col-md-2">
                       <button class="btn btn-primary btn-block" type="submit">
-                        <SearchIcon />
+                        <SearchIcon v-if="!filter.loading" />
+                        <span class="spinner-border spinner-border-sm" v-else></span>
                       </button>
                     </div>
                   </div>
@@ -112,13 +121,6 @@
               </td>
               <td title="Stempel">
                 <span>{{tire.stempel_ban}}</span>
-                <!-- <pre>{{tire}}</pre> -->
-                <!-- <img
-                  :src="tire.images_path"
-                  :alt="tire.merek"
-                  class="img-fluid"
-                  v-if="tire.images_path"
-                >-->
               </td>
               <td title="Tangal Beli">
                 <span>{{tire.buy_date}}</span>
@@ -130,20 +132,6 @@
                     class="btn btn-danger btn-sm"
                     v-on:click="confirmAfkir(tire.id)"
                   >afkir/buang?</button>
-                  <!-- <router-link
-                    class="btn btn-info btn-sm"
-                    :to="'/history/tires/'+tire.id"
-                    title="Riwayat Ban"
-                  >
-                    <EyeIcon/>
-                  </router-link>-->
-                  <!-- <router-link
-                    class="btn btn-primary btn-sm"
-                    :to="'/history/position/'+tire.vehicle.id+`/`+tire.id"
-                    title="Riwayat berdasarkan Posisi"
-                  >
-                    <EyeIcon/>
-                  </router-link>-->
                 </span>
               </td>
             </tr>
@@ -174,7 +162,6 @@ import {
 } from "vue-feather-icons";
 import { Datetime } from "vue-datetime";
 import "vue-datetime/dist/vue-datetime.css";
-import { constants } from "crypto";
 
 export default {
   name: "tireList",
@@ -196,38 +183,62 @@ export default {
       meta: {},
       filter: {
         key: "",
-        value: ""
+        value: "",
+        loading: false
       }
     };
   },
   methods: {
     getList(uri) {
-      axios.get(uri).then(res => {
-        const { data } = res;
-        // console.log("d", data.data);
-        if (data.success) {
-          let tireId = Object.keys(data.data).filter(i => i !== "meta");
-          // console.log("map tireId", tireId);
-          this.list = tireId.map(i => data.data[i]);
-          if (data.data.hasOwnProperty("meta")) {
-            this.meta = data.data.meta;
+      axios
+        .get(uri)
+        .then(res => {
+          const { data } = res;
+          // console.log("d", data.data);
+          if (data.success) {
+            let tireId = Object.keys(data.data).filter(i => i !== "meta");
+            // console.log("map tireId", tireId);
+            this.list = tireId.map(i => data.data[i]);
+            if (data.data.hasOwnProperty("meta")) {
+              this.meta = data.data.meta;
+            }
           }
-        }
-      });
+        })
+        .catch(err => {
+          console.list("err", err);
+        });
     },
     filterHandler() {
-      axios.post("/api/v1/tire/filter", this.filter).then(res => {
-        const { data } = res;
-        if (data.success) {
-          const ListId = Object.keys(data.data).filter(e => e !== "meta");
-          this.list = ListId.map(e => data.data[e]);
-          if (data.data.hasOwnProperty("meta")) {
-            this.meta = data.data.meta;
-          } else {
-            this.meta = {};
+      this.filter.loading = true;
+      axios
+        .post("/api/v1/tire/filter", this.filter)
+        .then(res => {
+          const { data } = res;
+          if (data.success) {
+            const ListId = Object.keys(data.data).filter(e => e !== "meta");
+            this.list = ListId.map(e => data.data[e]);
+            if (data.data.hasOwnProperty("meta")) {
+              this.meta = data.data.meta;
+            } else {
+              this.meta = {};
+            }
+            this.filter.loading = false;
           }
-        }
-      });
+        })
+        .catch(err => {
+          this.filter.loading = false;
+          this.$swal({
+            icon: "error",
+            title: "Oops...",
+            text: err.response.data.message
+          });
+        });
+    },
+    filterHandlerChange() {
+      const { key, value } = this.filter;
+      if (key == "" && value == "") {
+        this.getList("/api/v1/tire/list");
+      }
     },
     confirmAfkir(id) {
       this.$swal({
@@ -275,9 +286,7 @@ export default {
                     path: "/vehicle/tire/" + res.data.get_vehicle.id
                   });
                 }
-                // console.log([val, res]);
               });
-              // console.log("err", error.response.data);
             });
         }
       });
@@ -294,70 +303,4 @@ export default {
     }
   }
 }
-
-// @media only screen and (max-width: 760px),
-//   (min-device-width: 768px) and (max-device-width: 1024px) {
-//   /* Force table to not be like tables anymore */
-//   table,
-//   thead,
-//   tbody,
-//   th,
-//   td,
-//   tr {
-//     display: block;
-//   }
-
-//   thead {
-//     tr {
-//       position: absolute;
-//       top: -9999px;
-//       left: -9999px;
-//     }
-//   }
-//   tbody {
-//     tr {
-//       border-left: 1px #eee solid;
-//       border-right: 1px #eee solid;
-//       &:nth-child(odd) {
-//         background-color: #dedede;
-//       }
-//     }
-//     td {
-//       /* Behave  like a "row" */
-//       border: none;
-//       border-bottom: 1px solid #eee;
-//       position: relative;
-//       padding-left: 40%;
-//       &::before {
-//         /* Now like a table header */
-//         position: absolute;
-//         /* Top/left values mimic padding */
-//         top: 6px;
-//         left: 6px;
-//         width: 45%;
-//         padding-right: 10px;
-//         white-space: nowrap;
-//       }
-//     }
-//   }
-
-//   // td:nth-of-type(1):before {
-//   //   content: "No";
-//   // }
-//   // td:nth-of-type(2):before {
-//   //   content: "Merek";
-//   // }
-//   // td:nth-of-type(3):before {
-//   //   content: "Ukuran";
-//   // }
-//   // td:nth-of-type(4):before {
-//   //   content: "Kendaraan";
-//   // }
-//   // td:nth-of-type(5):before {
-//   //   content: "Tanggal Beli";
-//   // }
-//   // td:nth-of-type(6):before {
-//   //   content: "Action";
-//   // }
-// }
 </style>

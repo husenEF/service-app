@@ -127,7 +127,7 @@ class TireController extends Controller
                 'success' => false,
                 'message' => $e->getMessage(),
                 'data' => ""
-            ], 404);
+            ], 400);
         }
     }
 
@@ -162,8 +162,8 @@ class TireController extends Controller
         } else {
             return response()->json([
                 'success' => false,
-                'message' => 'Get Data failed',
-                'data' => "",
+                'message' => 'Data Tidak Ada',
+                'data' => [],
                 'debug' => $debug
             ], 404);
         }
